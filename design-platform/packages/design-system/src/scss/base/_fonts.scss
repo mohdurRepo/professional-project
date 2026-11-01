@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Font Faces
+   ========================================================================== */
+
+// Paths are relative to this stylesheet.
+// Keep the original filenames and capitalization.
+//
+// Latin and Arabic use separate family names. The font stack selects
+// available glyphs without maintaining handwritten Unicode ranges.
+
+@mixin -face($family, $weight, $file, $format) {
+  @font-face {
+    font-family: $family;
+    src: url("../../assets/fonts/#{$file}") format($format);
+    font-style: normal;
+    font-weight: $weight;
+    font-display: swap;
+  }
+}
+
+/* ==========================================================================
+   Latin
+   ========================================================================== */
+
+@include -face("SEFont Latin", 400, "latin/Avenir-Roman.woff2", "woff2");
+
+@include -face("SEFont Latin", 500, "latin/Avenir-Medium.woff2", "woff2");
+
+@include -face("SEFont Latin", 800, "latin/Avenir-heavy.woff2", "woff2");
+
+@include -face("SEFont Latin", 900, "latin/Avenir-Black.woff2", "woff2");
+
+/* ==========================================================================
+   Arabic
+   ========================================================================== */
+
+@include -face(
+  "SEFont Arabic",
+  400,
+  "arabic/AvenirArabic-Book.otf",
+  "opentype"
+);
+
+@include -face("SEFont Arabic", 500, "arabic/AvenirArabic-Medium.woff", "woff");
+
+@include -face("SEFont Arabic", 800, "arabic/AvenirArabic-Heavy.woff", "woff");

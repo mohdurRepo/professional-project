@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Body
+   ========================================================================== */
+
+:where(body) {
+  font-size: var(--text-base);
+  line-height: var(--line-height-normal);
+}
+
+/* ==========================================================================
+   Headings
+   ========================================================================== */
+
+// Font weight remains configurable independently of the size scale.
+// We will confirm the default weight against the available font files.
+
+:root {
+  --heading-font-family: var(--font-sans);
+  --heading-font-weight: var(--font-weight-heavy);
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--heading-font-family);
+  font-weight: var(--heading-font-weight);
+  line-height: var(--line-height-tight);
+
+  color: var(--color-heading, var(--color-text, inherit));
+
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+:where(h1) {
+  font-size: var(--text-4xl);
+}
+
+:where(h2) {
+  font-size: var(--text-3xl);
+}
+
+:where(h3) {
+  font-size: var(--text-2xl);
+}
+
+:where(h4) {
+  font-size: var(--text-xl);
+}
+
+:where(h5) {
+  font-size: var(--text-lg);
+}
+
+:where(h6) {
+  font-size: var(--text-base);
+}
+
+/* ==========================================================================
+   Text
+   ========================================================================== */
+
+:where(p) {
+  line-height: var(--line-height-relaxed);
+}
+
+:where(small) {
+  font-size: var(--text-sm);
+}
+
+:where(strong, b) {
+  font-weight: var(--font-weight-heavy);
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+// Preserve native underlines and focus indicators.
+// Components may define their own link presentation.
+
+:where(a) {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.08em;
+}
+
+:where(a:hover) {
+  text-decoration-thickness: 0.12em;
+}
+
+/* ==========================================================================
+   Code
+   ========================================================================== */
+
+:where(code, kbd, samp, pre) {
+  font-family: var(--font-mono);
+}
+
+:where(code, kbd, samp) {
+  font-size: 0.9em;
+}
+
+:where(pre) {
+  max-inline-size: 100%;
+  overflow-x: auto;
+
+  font-size: var(--text-sm);
+  line-height: var(--line-height-normal);
+
+  tab-size: 2;
+}
+
+// Avoid shrinking code twice inside a preformatted block.
+
+:where(pre code, pre kbd, pre samp) {
+  font-size: inherit;
+}

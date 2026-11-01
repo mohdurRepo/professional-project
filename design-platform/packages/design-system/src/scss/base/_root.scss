@@ -1,0 +1,150 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Text-size Preferences
+   ========================================================================== */
+
+// Application-level text scaling.
+// This does not replace browser zoom or the browser's default font size.
+
+$-font-scales: (
+  "-2": 0.9,
+  "-1": 0.95,
+  "0": 1,
+  "1": 1.06,
+  "2": 1.12,
+);
+
+/* ==========================================================================
+   Runtime Tokens
+   ========================================================================== */
+
+:root {
+  /* Font families */
+
+  --font-sans:
+    "SEFont Latin", "SEFont Arabic", system-ui, -apple-system, "Segoe UI",
+    Tahoma, Arial, sans-serif;
+
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  --font-scale: 1;
+
+  /* Focus */
+
+  --focus-ring-width: 2px;
+
+  /* Primitive colors; semantic colors belong to themes */
+
+  @each $key, $value in ds.$brand-colors {
+    --palette-#{$key}: #{$value};
+  }
+
+  /* Spacing */
+
+  @each $key, $value in ds.$spaces {
+    --space-#{$key}: #{$value};
+  }
+
+  /* Border radii */
+
+  @each $key, $value in ds.$radii {
+    --radius-#{$key}: #{$value};
+  }
+
+  /* Shadows */
+
+  @each $key, $value in ds.$shadows {
+    --shadow-#{$key}: #{$value};
+  }
+
+  /* Typography */
+
+  @each $key, $value in ds.$font-sizes {
+    --text-#{$key}: calc(#{$value} * var(--font-scale));
+  }
+
+  @each $key, $value in ds.$font-weights {
+    --font-weight-#{$key}: #{$value};
+  }
+
+  @each $key, $value in ds.$line-heights {
+    --line-height-#{$key}: #{$value};
+  }
+
+  /* Motion durations */
+
+  @each $key, $value in ds.$motions {
+    --transition-#{$key}: #{$value};
+  }
+
+  /* Stacking levels */
+
+  @each $key, $value in ds.$z-indexes {
+    --z-#{$key}: #{$value};
+  }
+}
+
+/* ==========================================================================
+   Document Defaults
+   ========================================================================== */
+
+:where(html) {
+  font-family: var(--font-sans);
+
+  background-color: var(--color-bg, Canvas);
+  color: var(--color-text, CanvasText);
+}
+
+:where(body) {
+  min-block-size: 100vh;
+  min-block-size: 100dvh;
+}
+
+/* ==========================================================================
+   Text-size Preference
+   ========================================================================== */
+
+@each $step, $scale in $-font-scales {
+  :root[data-font-size="#{$step}"] {
+    --font-scale: #{$scale};
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@mixin -reduce-motion-tokens {
+  @each $key, $value in ds.$motions {
+    --transition-#{$key}: 0ms;
+  }
+
+  scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    @include -reduce-motion-tokens;
+  }
+}
+
+:root[data-motion-preference="reduce"] {
+  @include -reduce-motion-tokens;
+}
+
+/* ==========================================================================
+   Contrast Preference
+   ========================================================================== */
+
+@media (prefers-contrast: more) {
+  :root {
+    --focus-ring-width: 4px;
+  }
+}
+
+:root[data-contrast="high"] {
+  --focus-ring-width: 4px;
+}

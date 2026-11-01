@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Box Sizing
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Document
+   ========================================================================== */
+
+:where(html) {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+:where(body) {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+:where(h1, h2, h3, h4, h5, h6, p, blockquote, figure) {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Media
+   ========================================================================== */
+
+:where(img, picture, video, canvas, svg) {
+  display: block;
+  max-inline-size: 100%;
+}
+
+:where(img, video) {
+  block-size: auto;
+}
+
+/* ==========================================================================
+   Form Controls
+   ========================================================================== */
+
+:where(button, input, select, textarea) {
+  font: inherit;
+  color: inherit;
+}
+
+:where(button:not(:disabled)) {
+  cursor: pointer;
+}
+
+:where(button:disabled, [aria-disabled="true"]) {
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+:where(a) {
+  color: inherit;
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+:where(table) {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ==========================================================================
+   Hidden Content
+   ========================================================================== */
+
+// Preserve the browser's reveal behavior for hidden="until-found".
+// The important declaration prevents component display rules from
+// accidentally revealing ordinary hidden elements.
+
+[hidden]:not([hidden="until-found"]) {
+  display: none !important;
+}
