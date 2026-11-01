@@ -1,0 +1,12 @@
+// Responsive thresholds.
+// Keep values in ascending order. The zero entry is unitless.
+// Consumers may replace this map before its first use.
+
+$breakpoints: (
+  "xs": 0,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px,
+) !default;

@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Container Configuration
+   ========================================================================== */
+
+// Maximum container widths, excluding any external page margins.
+// Layout styles will consume these values later.
+//
+// Names identify container sizes; they do not automatically bind a
+// container to a breakpoint.
+//
+// Replacing this configuration replaces the entire map.
+
+$container-widths: (
+  "sm": 540px,
+  "md": 720px,
+  "lg": 960px,
+  "xl": 1140px,
+  "xxl": 1320px,
+  "xxxl": 1480px,
+) !default;

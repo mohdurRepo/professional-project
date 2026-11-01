@@ -1,0 +1,68 @@
+@use "sass:map";
+@use "breakpoints";
+@use "maps";
+
+/* ==========================================================================
+   Internal Token Lookup
+   ========================================================================== */
+
+@function _get-token($tokens, $key, $type) {
+  @if not map.has-key($tokens, $key) {
+    @error "Unknown #{$type} token `#{$key}`. Available: #{map.keys($tokens)}.";
+  }
+
+  @return map.get($tokens, $key);
+}
+
+/* ==========================================================================
+   Build-time Tokens
+   ========================================================================== */
+
+@function brand($key) {
+  @return _get-token(maps.$brand-colors, $key, "brand color");
+}
+
+@function space($key) {
+  @return _get-token(maps.$spaces, $key, "spacing");
+}
+
+@function radius($key) {
+  @return _get-token(maps.$radii, $key, "radius");
+}
+
+@function shadow($key) {
+  @return _get-token(maps.$shadows, $key, "shadow");
+}
+
+@function font-weight($key) {
+  @return _get-token(maps.$font-weights, $key, "font weight");
+}
+
+@function line-height($key) {
+  @return _get-token(maps.$line-heights, $key, "line height");
+}
+
+@function z($key) {
+  @return _get-token(maps.$z-indexes, $key, "z-index");
+}
+
+@function motion($key) {
+  @return _get-token(maps.$motions, $key, "motion");
+}
+
+@function breakpoint($key) {
+  @return _get-token(breakpoints.$breakpoints, $key, "breakpoint");
+}
+
+/* ==========================================================================
+   Runtime Tokens
+   ========================================================================== */
+
+// Validate the key at build time, then reference its CSS custom property.
+// The typography stylesheet must generate the matching --text-* properties.
+
+@function font-size($key) {
+  $value: _get-token(maps.$font-sizes, $key, "font size");
+
+  @return var(--text-#{$key});
+}

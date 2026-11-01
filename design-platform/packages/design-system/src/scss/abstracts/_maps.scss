@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Token Maps
+   ========================================================================== */
+
+// Build-time token definitions. This module emits no CSS.
+// Each !default map can be replaced through Sass configuration.
+// Replacing a map replaces the entire map; overrides are not merged.
+
+/* ==========================================================================
+   Color Palette
+   ========================================================================== */
+
+$brand-colors: (
+  "navy": #001f33,
+  "navy-800": #0b2233,
+  "navy-700": #1e3d52,
+  "teal": #00c7a3,
+  "blue": #0044e3,
+  "cool-grey": #a7b2b8,
+  "off-white": #f5f6f8,
+  "white": #ffffff,
+  "black": #000000,
+) !default;
+
+/* ==========================================================================
+   Spacing
+   ========================================================================== */
+
+$spaces: (
+  0: 0,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  5: 1.25rem,
+  6: 1.5rem,
+  8: 2rem,
+  10: 2.5rem,
+  12: 3rem,
+  16: 4rem,
+  20: 5rem,
+  24: 6rem,
+) !default;
+
+/* ==========================================================================
+   Border Radii
+   ========================================================================== */
+
+$radii: (
+  "none": 0,
+  "sm": 0.375rem,
+  "md": 0.75rem,
+  "lg": 1rem,
+  "xl": 1.25rem,
+  "2xl": 1.5rem,
+  "pill": 999px,
+) !default;
+
+/* ==========================================================================
+   Shadows
+   ========================================================================== */
+
+$shadows: (
+  "none": none,
+  "sm": 0 1px 2px rgb(0 0 0 / 0.05),
+  "md": 0 8px 24px rgb(0 0 0 / 0.08),
+  "lg": 0 16px 48px rgb(0 0 0 / 0.12),
+  "xl": 0 24px 64px rgb(0 0 0 / 0.18),
+) !default;
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+$font-weights: (
+  "light": 300,
+  "regular": 400,
+  "medium": 500,
+  "semibold": 600,
+  "bold": 700,
+  "heavy": 800,
+  "black": 900,
+) !default;
+
+// Fluid sizes: minimum, viewport-dependent preferred size, maximum.
+// Runtime custom properties will be generated in the base styles.
+
+$font-sizes: (
+  "xs": clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem),
+  "sm": clamp(0.875rem, 0.84rem + 0.2vw, 0.9375rem),
+  "base": clamp(1rem, 0.95rem + 0.25vw, 1.0625rem),
+  "lg": clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem),
+  "xl": clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem),
+  "2xl": clamp(1.5rem, 1.25rem + 1vw, 2rem),
+  "3xl": clamp(1.875rem, 1.45rem + 1.6vw, 2.75rem),
+  "4xl": clamp(2.25rem, 1.7rem + 2.2vw, 3.5rem),
+) !default;
+
+$line-heights: (
+  "tight": 1.2,
+  "normal": 1.5,
+  "relaxed": 1.75,
+) !default;
+
+/* ==========================================================================
+   Layering
+   ========================================================================== */
+
+// Shared stacking levels.
+// These values do not escape ancestor stacking contexts.
+
+$z-indexes: (
+  "base": 1,
+  "dropdown": 1000,
+  "sticky": 1020,
+  "fixed": 1030,
+  "overlay": 1040,
+  "modal": 1050,
+  "popover": 1060,
+  "tooltip": 1070,
+  "toast": 1080,
+) !default;
+
+/* ==========================================================================
+   Motion Durations
+   ========================================================================== */
+
+// Durations only. Easing is supplied separately.
+// Runtime --transition-* properties will be generated in the base styles.
+
+$motions: (
+  "fast": 150ms,
+  "normal": 200ms,
+  "slow": 300ms,
+) !default;
