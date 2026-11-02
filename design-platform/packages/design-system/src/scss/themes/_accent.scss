@@ -1,0 +1,120 @@
+@use "sass:list";
+@use "sass:map";
+
+/* ==========================================================================
+   Accent Palettes
+   ========================================================================== */
+
+// Each entry contains:
+// 1. Primary fill
+// 2. Primary hover fill
+// 3. Text on primary fills
+// 4. Link color
+// 5. Link hover color
+//
+// Supporting accent and status colors remain unchanged.
+
+$-light: (
+  "blue": (
+    #0044e3,
+    #0038bb,
+    #ffffff,
+    #0044e3,
+    #0038bb,
+  ),
+  "navy": (
+    #001f33,
+    #003652,
+    #ffffff,
+    #001f33,
+    #003652,
+  ),
+  "teal": (
+    #00705d,
+    #005a4b,
+    #ffffff,
+    #00705d,
+    #005a4b,
+  ),
+  "gold": (
+    #805800,
+    #654500,
+    #ffffff,
+    #805800,
+    #654500,
+  ),
+);
+
+$-dark: (
+  "blue": (
+    #91acff,
+    #b0c2ff,
+    #001f33,
+    #a8bdff,
+    #c5d3ff,
+  ),
+  "navy": (
+    #a7b2b8,
+    #c3ccd1,
+    #001f33,
+    #c3ccd1,
+    #e0e6ea,
+  ),
+  "teal": (
+    #00c7a3,
+    #31d8b6,
+    #001f33,
+    #5eead4,
+    #99f6e4,
+  ),
+  "gold": (
+    #f4cd75,
+    #ffe0a0,
+    #001f33,
+    #f4cd75,
+    #ffe0a0,
+  ),
+);
+
+/* ==========================================================================
+   Token Assignment
+   ========================================================================== */
+
+@mixin -tokens($palette) {
+  --color-primary: #{list.nth($palette, 1)};
+  --color-primary-hover: #{list.nth($palette, 2)};
+  --color-on-primary: #{list.nth($palette, 3)};
+
+  --color-link: #{list.nth($palette, 4)};
+  --color-link-hover: #{list.nth($palette, 5)};
+
+  --focus-ring: #{list.nth($palette, 4)};
+}
+
+/* ==========================================================================
+   Accent Variants
+   ========================================================================== */
+
+@each $name, $light-palette in $-light {
+  $dark-palette: map.get($-dark, $name);
+
+  // Light appearance, including the default fallback.
+  :where(:root[data-accent="#{$name}"]) {
+    @include -tokens($light-palette);
+  }
+
+  // System-controlled dark appearance.
+  @media (prefers-color-scheme: dark) {
+    :where(
+      :root:not([data-theme])[data-accent="#{$name}"],
+      :root[data-theme="system"][data-accent="#{$name}"]
+    ) {
+      @include -tokens($dark-palette);
+    }
+  }
+
+  // Explicit dark appearance.
+  :where(:root[data-theme="dark"][data-accent="#{$name}"]) {
+    @include -tokens($dark-palette);
+  }
+}

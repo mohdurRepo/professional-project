@@ -1,0 +1,156 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Dark Theme Tokens
+   ========================================================================== */
+
+// Private mixin lets explicit dark mode and system dark mode share
+// exactly the same token definitions.
+
+@mixin -tokens {
+  color-scheme: dark;
+
+  /* Backgrounds and surfaces */
+
+  --color-bg: #{ds.brand("navy")};
+
+  --color-surface: #{ds.brand("navy-800")};
+  --color-surface-alt: #102f45;
+
+  --color-surface-hover: #12364e;
+  --color-surface-active: #173f59;
+  --color-surface-selected: #183b5f;
+  --color-on-surface-selected: #ffffff;
+
+  /* Text */
+
+  --color-text: #{ds.brand("off-white")};
+  --color-heading: #{ds.brand("white")};
+  --color-text-muted: #b8c4cc;
+
+  /* Primary actions */
+
+  --color-primary: #91acff;
+  --color-primary-hover: #b0c2ff;
+  --color-on-primary: #{ds.brand("navy")};
+
+  /* Secondary actions */
+
+  --color-secondary: #{ds.brand("cool-grey")};
+  --color-secondary-hover: #c3ccd1;
+  --color-on-secondary: #{ds.brand("navy")};
+
+  /* Supporting accent */
+
+  --color-accent: #{ds.brand("teal")};
+  --color-accent-hover: #31d8b6;
+  --color-on-accent: #{ds.brand("navy")};
+
+  /* Success */
+
+  --color-success: #86efac;
+  --color-success-hover: #bbf7d0;
+  --color-on-success: #{ds.brand("navy")};
+
+  --color-success-subtle: #103b2b;
+  --color-success-text: #a7f3c0;
+
+  /* Information */
+
+  --color-info: #7dd3fc;
+  --color-info-hover: #bae6fd;
+  --color-on-info: #{ds.brand("navy")};
+
+  --color-info-subtle: #10364b;
+  --color-info-text: #bae6fd;
+
+  /* Attention */
+
+  --color-attention: #fde68a;
+  --color-attention-hover: #fef3c7;
+  --color-on-attention: #{ds.brand("navy")};
+
+  --color-attention-subtle: #3b321b;
+  --color-attention-text: #fef3c7;
+
+  /* Warning */
+
+  --color-warning: #fbbf24;
+  --color-warning-hover: #fde68a;
+  --color-on-warning: #{ds.brand("navy")};
+
+  --color-warning-subtle: #402c18;
+  --color-warning-text: #fed7aa;
+
+  /* Danger */
+
+  --color-danger: #fca5a5;
+  --color-danger-hover: #fecaca;
+  --color-on-danger: #{ds.brand("navy")};
+
+  --color-danger-subtle: #451f2b;
+  --color-danger-text: #fecaca;
+
+  /* Neutral actions */
+
+  --color-light: #{ds.brand("white")};
+  --color-light-hover: #e2e8ee;
+  --color-on-light: #{ds.brand("navy")};
+
+  --color-dark: #{ds.brand("navy")};
+  --color-dark-hover: #002b47;
+  --color-on-dark: #{ds.brand("white")};
+
+  /* Borders */
+
+  --color-border: #{ds.brand("navy-700")};
+  --color-border-strong: #46657a;
+
+  --color-border-control: #8a9eac;
+  --color-border-control-hover: #b8c4cc;
+
+  /* Links */
+
+  --color-link: #a8bdff;
+  --color-link-hover: #c5d3ff;
+
+  /* Disabled controls */
+
+  --color-disabled: #263e50;
+  --color-on-disabled: #a7b2b8;
+  --color-border-disabled: #46657a;
+
+  /* Overlay */
+
+  --color-overlay: rgb(0 0 0 / 0.7);
+
+  /* Focus */
+
+  --focus-ring: #a8bdff;
+
+  /* Selection */
+
+  --color-selection-bg: #a8bdff;
+  --color-selection-text: #{ds.brand("navy")};
+}
+
+/* ==========================================================================
+   System Preference
+   ========================================================================== */
+
+// Missing data-theme or data-theme="system" follows the operating system.
+// Explicit light mode is excluded.
+
+@media (prefers-color-scheme: dark) {
+  :where(:root:not([data-theme]), :root[data-theme="system"]) {
+    @include -tokens;
+  }
+}
+
+/* ==========================================================================
+   Explicit Preference
+   ========================================================================== */
+
+:where(:root[data-theme="dark"]) {
+  @include -tokens;
+}

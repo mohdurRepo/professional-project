@@ -1,9 +1,48 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-accent="gold" data-contrast="standard">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Design System Playground</title>
+    <style>
+      .playground-link {
+        color: var(--color-link);
+      }
+
+      .playground-link:hover {
+        color: var(--color-link-hover);
+      }
+
+      .playground-link:focus-visible {
+        outline: var(--focus-ring-width) solid var(--focus-ring);
+        outline-offset: 3px;
+      }
+
+      .contrast-preview {
+        margin: 2rem;
+        padding: 1.5rem;
+        background: var(--color-surface);
+        color: var(--color-text);
+        border: 2px solid var(--color-border-control);
+      }
+
+      .contrast-preview__muted {
+        color: var(--color-text-muted);
+      }
+
+      .contrast-preview button {
+        margin-block-start: 1rem;
+        padding: 0.75rem 1rem;
+        background: var(--color-primary);
+        color: var(--color-on-primary);
+        border: 2px solid var(--color-border-control);
+      }
+
+      .contrast-preview button:focus-visible {
+        outline: var(--focus-ring-width) solid var(--focus-ring);
+        outline-offset: 3px;
+      }
+    </style>
   </head>
   <body>
     <main>
@@ -20,6 +59,22 @@
         <p><strong>معلومات مهمة عن السوق</strong></p>
         <p>السوق السعودي — Market overview — 12345</p>
       </section>
+
+      <p>
+        <a class="playground-link" href="#theme-sample">
+          Explore the selected accent
+        </a>
+      </p>
+
+      <section id="theme-sample">
+        <h2>Theme sample</h2>
+      </section>
+
+      <div class="contrast-preview">
+        <p>Default text</p>
+        <p class="contrast-preview__muted">Secondary information</p>
+        <button type="button">Focus this button using Tab</button>
+      </div>
     </main>
 
     <script type="module" src="/src/main.js"></script>

@@ -1,0 +1,218 @@
+@use "sass:list";
+@use "sass:map";
+
+/* ==========================================================================
+   High-Contrast Accent Palettes
+   ========================================================================== */
+
+// Each entry contains:
+// 1. Primary fill
+// 2. Primary hover fill
+// 3. Text on primary fills
+//
+// Links and focus use the primary color in this variant.
+
+$-light-accents: (
+  "blue": (
+    #002fa3,
+    #002580,
+    #ffffff,
+  ),
+  "navy": (
+    #001524,
+    #00283e,
+    #ffffff,
+  ),
+  "teal": (
+    #004c40,
+    #003b32,
+    #ffffff,
+  ),
+  "gold": (
+    #563900,
+    #422c00,
+    #ffffff,
+  ),
+);
+
+$-dark-accents: (
+  "blue": (
+    #b8cbff,
+    #d6e1ff,
+    #001524,
+  ),
+  "navy": (
+    #d5dfe6,
+    #edf2f6,
+    #001524,
+  ),
+  "teal": (
+    #8cf3df,
+    #b8fff0,
+    #001524,
+  ),
+  "gold": (
+    #ffe0a0,
+    #ffedc7,
+    #001524,
+  ),
+);
+
+/* ==========================================================================
+   Accent Assignment
+   ========================================================================== */
+
+@mixin -accent($palette) {
+  --color-primary: #{list.nth($palette, 1)};
+  --color-primary-hover: #{list.nth($palette, 2)};
+  --color-on-primary: #{list.nth($palette, 3)};
+
+  --color-link: #{list.nth($palette, 1)};
+  --color-link-hover: #{list.nth($palette, 2)};
+
+  --focus-ring: #{list.nth($palette, 1)};
+}
+
+/* ==========================================================================
+   High-Contrast Tokens
+   ========================================================================== */
+
+// Override roles that need greater separation.
+// Other roles inherit from the selected light or dark theme.
+
+@mixin -tokens($dark: false) {
+  $accents: $-light-accents;
+
+  --focus-ring-width: 4px;
+
+  @if $dark {
+    $accents: $-dark-accents;
+
+    color-scheme: dark;
+
+    /* Surfaces */
+
+    --color-bg: #001524;
+    --color-surface: #062235;
+    --color-surface-alt: #0b2b40;
+
+    --color-surface-hover: #12384f;
+    --color-surface-active: #19445d;
+    --color-surface-selected: #203e64;
+    --color-on-surface-selected: #ffffff;
+
+    /* Text */
+
+    --color-text: #ffffff;
+    --color-heading: #ffffff;
+    --color-text-muted: #d5dfe6;
+
+    /* Boundaries */
+
+    --color-border: #8a9eac;
+    --color-border-strong: #b8c7d2;
+    --color-border-control: #b8c7d2;
+    --color-border-control-hover: #edf2f6;
+
+    /* Disabled controls */
+
+    --color-disabled: #263e50;
+    --color-on-disabled: #d5dfe6;
+    --color-border-disabled: #8a9eac;
+
+    /* Selection */
+
+    --color-selection-bg: #d6e1ff;
+    --color-selection-text: #001524;
+  } @else {
+    color-scheme: light;
+
+    /* Surfaces */
+
+    --color-bg: #f8fafc;
+    --color-surface: #ffffff;
+    --color-surface-alt: #edf2f6;
+
+    --color-surface-hover: #e2eaf1;
+    --color-surface-active: #d5e0e9;
+    --color-surface-selected: #dce7ff;
+    --color-on-surface-selected: #001524;
+
+    /* Text */
+
+    --color-text: #001524;
+    --color-heading: #001524;
+    --color-text-muted: #314554;
+
+    /* Boundaries */
+
+    --color-border: #647583;
+    --color-border-strong: #314554;
+    --color-border-control: #314554;
+    --color-border-control-hover: #001524;
+
+    /* Disabled controls */
+
+    --color-disabled: #e2e8ee;
+    --color-on-disabled: #314554;
+    --color-border-disabled: #647583;
+
+    /* Selection */
+
+    --color-selection-bg: #002fa3;
+    --color-selection-text: #ffffff;
+  }
+
+  // Default accent when no recognized accent is selected.
+  @include -accent(map.get($accents, "blue"));
+
+  // Preserve a recognized selected accent.
+  @each $name, $palette in $accents {
+    &:where([data-accent="#{$name}"]) {
+      @include -accent($palette);
+    }
+  }
+}
+
+/* ==========================================================================
+   Appearance Resolution
+   ========================================================================== */
+
+// Light is the fallback.
+// Missing data-theme or "system" follows the operating system.
+// Explicit light and dark choices override the system appearance.
+
+@mixin -appearance {
+  @include -tokens;
+
+  @media (prefers-color-scheme: dark) {
+    &:where(:not([data-theme]), [data-theme="system"]) {
+      @include -tokens($dark: true);
+    }
+  }
+
+  &:where([data-theme="dark"]) {
+    @include -tokens($dark: true);
+  }
+}
+
+/* ==========================================================================
+   System Contrast Preference
+   ========================================================================== */
+
+// Only follow the system when there is no explicit contrast choice.
+// data-contrast="standard" opts out of this enhancement.
+
+@media (prefers-contrast: more) {
+  :where(:root:not([data-contrast]), :root[data-contrast="system"]) {
+    @include -appearance;
+  }
+}
+
+/* ==========================================================================
+   Explicit High Contrast
+   ========================================================================== */
+
+:where(:root[data-contrast="high"]) {
+  @include -appearance;
+}

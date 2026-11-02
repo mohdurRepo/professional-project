@@ -1,0 +1,176 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Light Theme
+   ========================================================================== */
+
+// Default appearance.
+// All theme selectors will use :where() to keep specificity at zero.
+// Later theme modules override these defaults through source order.
+
+:where(:root) {
+  color-scheme: light;
+
+  /* ==========================================================================
+     Backgrounds and Surfaces
+     ========================================================================== */
+
+  --color-bg: #{ds.brand("off-white")};
+
+  --color-surface: #{ds.brand("white")};
+  --color-surface-alt: #eef2f5;
+
+  --color-surface-hover: #e8eef3;
+  --color-surface-active: #dce5ed;
+  --color-surface-selected: #eaf0ff;
+  --color-on-surface-selected: #001f33;
+
+  /* ==========================================================================
+     Text
+     ========================================================================== */
+
+  --color-text: #{ds.brand("navy")};
+  --color-heading: var(--color-text);
+  --color-text-muted: #52616d;
+
+  /* ==========================================================================
+     Primary Actions
+     ========================================================================== */
+
+  --color-primary: #{ds.brand("blue")};
+  --color-primary-hover: #0038bb;
+  --color-on-primary: #{ds.brand("white")};
+
+  /* ==========================================================================
+     Secondary Actions
+     ========================================================================== */
+
+  --color-secondary: #{ds.brand("cool-grey")};
+  --color-secondary-hover: #8f9ba3;
+  --color-on-secondary: #{ds.brand("navy")};
+
+  /* ==========================================================================
+     Supporting Accent
+     ========================================================================== */
+
+  // Supporting accent is distinct from the visitor's primary-accent choice.
+  // This bright teal is a fill color, not a general-purpose text color.
+
+  --color-accent: #{ds.brand("teal")};
+  --color-accent-hover: #00a889;
+  --color-on-accent: #{ds.brand("navy")};
+
+  /* ==========================================================================
+     Success
+     ========================================================================== */
+
+  --color-success: #166534;
+  --color-success-hover: #14532d;
+  --color-on-success: #{ds.brand("white")};
+
+  --color-success-subtle: #edf7ef;
+  --color-success-text: #14532d;
+
+  /* ==========================================================================
+     Information
+     ========================================================================== */
+
+  --color-info: #075985;
+  --color-info-hover: #0c4a6e;
+  --color-on-info: #{ds.brand("white")};
+
+  --color-info-subtle: #edf6fc;
+  --color-info-text: #0c4a6e;
+
+  /* ==========================================================================
+     Attention
+     ========================================================================== */
+
+  --color-attention: #f8d983;
+  --color-attention-hover: #f5c95c;
+  --color-on-attention: #{ds.brand("navy")};
+
+  --color-attention-subtle: #fff8e6;
+  --color-attention-text: #713f12;
+
+  /* ==========================================================================
+     Warning
+     ========================================================================== */
+
+  --color-warning: #f59e0b;
+  --color-warning-hover: #d97706;
+  --color-on-warning: #{ds.brand("navy")};
+
+  --color-warning-subtle: #fff4e5;
+  --color-warning-text: #78350f;
+
+  /* ==========================================================================
+     Danger
+     ========================================================================== */
+
+  --color-danger: #b91c1c;
+  --color-danger-hover: #991b1b;
+  --color-on-danger: #{ds.brand("white")};
+
+  --color-danger-subtle: #fef0f0;
+  --color-danger-text: #991b1b;
+
+  /* ==========================================================================
+     Neutral Actions
+     ========================================================================== */
+
+  --color-light: #{ds.brand("white")};
+  --color-light-hover: #eef2f5;
+  --color-on-light: #{ds.brand("navy")};
+
+  --color-dark: #{ds.brand("navy")};
+  --color-dark-hover: #001524;
+  --color-on-dark: #{ds.brand("white")};
+
+  /* ==========================================================================
+     Borders
+     ========================================================================== */
+
+  // Decorative separation.
+  --color-border: #d7dde3;
+  --color-border-strong: #b7c1c9;
+
+  // Controls that need a visible boundary.
+  --color-border-control: #73818c;
+  --color-border-control-hover: #52616d;
+
+  /* ==========================================================================
+     Links
+     ========================================================================== */
+
+  // Independent roles allow link colors to diverge from action fills later.
+  --color-link: #0044e3;
+  --color-link-hover: #0038bb;
+
+  /* ==========================================================================
+     Disabled Controls
+     ========================================================================== */
+
+  --color-disabled: #e2e8ee;
+  --color-on-disabled: #52616d;
+  --color-border-disabled: #b7c1c9;
+
+  /* ==========================================================================
+     Overlay
+     ========================================================================== */
+
+  --color-overlay: rgb(0 0 0 / 0.55);
+
+  /* ==========================================================================
+     Focus
+     ========================================================================== */
+
+  --focus-ring: #0044e3;
+
+  /* ==========================================================================
+     Selection
+     ========================================================================== */
+
+  --color-selection-bg: #cdddff;
+  --color-selection-text: #{ds.brand("navy")};
+}
