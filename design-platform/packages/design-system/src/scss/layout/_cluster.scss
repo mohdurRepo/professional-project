@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Cluster
+   ========================================================================== */
+
+// Horizontal flow that wraps when space is limited.
+// Customize locally using --cluster-space.
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-space, var(--space-3));
+
+  min-inline-size: 0;
+}
+
+:where(.cluster) > * {
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Spacing
+   ========================================================================== */
+
+.cluster--xs {
+  --cluster-space: var(--space-1);
+}
+
+.cluster--sm {
+  --cluster-space: var(--space-2);
+}
+
+.cluster--md {
+  --cluster-space: var(--space-3);
+}
+
+.cluster--lg {
+  --cluster-space: var(--space-4);
+}
+
+.cluster--xl {
+  --cluster-space: var(--space-6);
+}
+
+/* ==========================================================================
+   Inline Distribution
+   ========================================================================== */
+
+.cluster--start {
+  justify-content: flex-start;
+}
+
+.cluster--center {
+  justify-content: center;
+}
+
+.cluster--end {
+  justify-content: flex-end;
+}
+
+.cluster--between {
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   Block Alignment
+   ========================================================================== */
+
+.cluster--align-start {
+  align-items: flex-start;
+}
+
+.cluster--align-center {
+  align-items: center;
+}
+
+.cluster--align-end {
+  align-items: flex-end;
+}
+
+.cluster--align-baseline {
+  align-items: baseline;
+}
+
+.cluster--stretch {
+  align-items: stretch;
+}
+
+/* ==========================================================================
+   Wrapping
+   ========================================================================== */
+
+// Use only when the contents can fit or have their own overflow strategy.
+
+.cluster--nowrap {
+  flex-wrap: nowrap;
+}
+
+/* ==========================================================================
+   Sizing
+   ========================================================================== */
+
+.cluster--fill {
+  inline-size: 100%;
+}

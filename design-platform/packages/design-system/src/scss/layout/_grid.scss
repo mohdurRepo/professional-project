@@ -1,0 +1,52 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Grid
+   ========================================================================== */
+
+// Equal-width columns.
+// Starts with one column; modifiers activate at the md breakpoint.
+//
+// Local customization:
+// --grid-gap: spacing between items
+// --grid-min: minimum item width in automatic mode
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--grid-gap, var(--space-4));
+
+  min-inline-size: 0;
+}
+
+:where(.grid) > * {
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Automatic Columns
+   ========================================================================== */
+
+// Fits as many columns as available space allows.
+// min(100%, ...) keeps a single item within a narrow container.
+
+.grid--auto {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--grid-min, 17.5rem)), 1fr)
+  );
+}
+
+/* ==========================================================================
+   Fixed Column Counts
+   ========================================================================== */
+
+// Mobile-first: these remain single-column below md.
+
+@include ds.respond-up("md") {
+  @for $columns from 2 through 4 {
+    .grid--#{$columns} {
+      grid-template-columns: repeat(#{$columns}, minmax(0, 1fr));
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@use "sass:map";
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+// Centered, full-width region with an optional maximum width.
+// Maximum width includes padding because the reset uses border-box.
+//
+// Local customization:
+// --container-max: maximum outer width
+// --container-gutter: padding on each inline side
+//
+// Size modifiers must be used alongside .container.
+
+.container {
+  inline-size: 100%;
+  max-inline-size: var(
+    --container-max,
+    #{map.get(ds.$container-widths, "xxxl")}
+  );
+
+  min-inline-size: 0;
+  margin-inline: auto;
+  padding-inline: var(--container-gutter, var(--space-4));
+}
+
+/* ==========================================================================
+   Size Variants
+   ========================================================================== */
+
+@each $name, $width in ds.$container-widths {
+  .container--#{$name} {
+    --container-max: #{$width};
+  }
+}
+
+/* ==========================================================================
+   Fluid Variant
+   ========================================================================== */
+
+.container--fluid {
+  --container-max: none;
+}
+
+/* ==========================================================================
+   Responsive Gutters
+   ========================================================================== */
+
+@include ds.respond-up("sm") {
+  .container {
+    padding-inline: var(--container-gutter, var(--space-8));
+  }
+}

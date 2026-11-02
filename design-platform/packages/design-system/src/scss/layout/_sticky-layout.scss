@@ -1,0 +1,24 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Sticky Supporting Region
+   ========================================================================== */
+
+// Use with .sidebar-layout.
+//
+// Local customization:
+// --sticky-offset: distance from the viewport's block-start edge
+//
+// Below lg, the region stays in normal flow.
+
+.sticky-layout__region {
+  min-inline-size: 0;
+}
+
+@include ds.respond-up("lg") {
+  .sticky-layout__region {
+    position: sticky;
+    inset-block-start: var(--sticky-offset, var(--space-8));
+    align-self: start;
+  }
+}

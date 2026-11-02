@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Stack
+   ========================================================================== */
+
+// Vertical flow with consistent spacing.
+// Customize locally using --stack-space.
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-space, var(--space-4));
+
+  min-inline-size: 0;
+}
+
+:where(.stack) > * {
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Spacing
+   ========================================================================== */
+
+.stack--xs {
+  --stack-space: var(--space-2);
+}
+
+.stack--sm {
+  --stack-space: var(--space-3);
+}
+
+.stack--md {
+  --stack-space: var(--space-4);
+}
+
+.stack--lg {
+  --stack-space: var(--space-6);
+}
+
+.stack--xl {
+  --stack-space: var(--space-8);
+}
+
+.stack--2xl {
+  --stack-space: var(--space-12);
+}
+
+/* ==========================================================================
+   Inline Alignment
+   ========================================================================== */
+
+.stack--start {
+  align-items: flex-start;
+}
+
+.stack--center {
+  align-items: center;
+}
+
+.stack--end {
+  align-items: flex-end;
+}
+
+.stack--stretch {
+  align-items: stretch;
+}
+
+/* ==========================================================================
+   Block Distribution
+   ========================================================================== */
+
+// These require available block space to produce a visible effect.
+
+.stack--between {
+  justify-content: space-between;
+}
+
+.stack--center-content {
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Sizing
+   ========================================================================== */
+
+// Percentage sizing requires a containing block with a definite block size.
+
+.stack--fill {
+  min-block-size: 100%;
+}

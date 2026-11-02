@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Cover Layout
+   ========================================================================== */
+
+// Minimum viewport-height layout that grows with its content.
+// The page scrolls normally when content exceeds the available height.
+//
+// Local customization:
+// --cover-min-size: minimum block size
+// --cover-space: gap between regions
+// --cover-padding: padding at the block edges
+
+.cover-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cover-space, var(--space-6));
+
+  min-inline-size: 0;
+  min-block-size: var(--cover-min-size, 100vh);
+
+  padding-block: var(--cover-padding, 0);
+}
+
+@supports (min-block-size: 100dvh) {
+  .cover-layout {
+    min-block-size: var(--cover-min-size, 100dvh);
+  }
+}
+
+/* ==========================================================================
+   Regions
+   ========================================================================== */
+
+:where(.cover-layout) > * {
+  min-inline-size: 0;
+}
+
+.cover-layout__header,
+.cover-layout__footer {
+  flex: 0 0 auto;
+}
+
+.cover-layout__content {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  justify-content: center;
+
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Content Alignment
+   ========================================================================== */
+
+.cover-layout--top > .cover-layout__content {
+  justify-content: flex-start;
+}
+
+.cover-layout--center > .cover-layout__content {
+  justify-content: center;
+}
+
+.cover-layout--bottom > .cover-layout__content {
+  justify-content: flex-end;
+}
+
+/* ==========================================================================
+   Block Padding
+   ========================================================================== */
+
+.cover-layout--sm {
+  --cover-padding: var(--space-6);
+}
+
+.cover-layout--md {
+  --cover-padding: var(--space-8);
+}
+
+.cover-layout--lg {
+  --cover-padding: var(--space-12);
+}

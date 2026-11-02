@@ -42,6 +42,55 @@
         outline: var(--focus-ring-width) solid var(--focus-ring);
         outline-offset: 3px;
       }
+      .grid-preview {
+        padding: var(--space-4);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+      }
+
+      .grid-preview p {
+        margin-block-start: var(--space-3);
+      }
+      .shell-preview-region {
+        padding-block: var(--space-4);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+      }
+
+      .shell-preview-content {
+        padding-block: var(--space-8);
+      }
+
+      .shell-preview-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-4);
+
+        margin: 0;
+        padding: var(--space-4);
+        list-style: none;
+      }
+
+      .shell-preview-links a {
+        color: var(--color-link);
+      }
+
+      .shell-preview-links a:hover {
+        color: var(--color-link-hover);
+      }
+
+      .shell-preview-links a:focus-visible {
+        outline: var(--focus-ring-width) solid var(--focus-ring);
+        outline-offset: 3px;
+      }
+
+      @media (width >= 992px) {
+        :where(.shell--vertical, .shell--combined)
+          > .shell__navigation
+          > .shell-preview-links {
+          flex-direction: column;
+        }
+      }
     </style>
   </head>
   <body>
@@ -75,7 +124,195 @@
         <p class="contrast-preview__muted">Secondary information</p>
         <button type="button">Focus this button using Tab</button>
       </div>
+
+      <section class="stack stack--lg">
+        <h2>Layout primitives</h2>
+
+        <div class="stack stack--sm">
+          <h3>Stack</h3>
+          <p>These elements follow a vertical flow.</p>
+          <p>The stack controls the gap between them.</p>
+        </div>
+
+        <div class="cluster">
+          <button type="button">First action</button>
+          <button type="button">Second action</button>
+          <button type="button">Third action</button>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h2>Automatic grid</h2>
+
+        <div class="grid grid--auto">
+          <article class="grid-preview">
+            <h3>First item</h3>
+            <p>Columns adapt to the available space.</p>
+          </article>
+
+          <article class="grid-preview">
+            <h3>Second item</h3>
+            <p>Items wrap without a fixed viewport breakpoint.</p>
+          </article>
+
+          <article class="grid-preview">
+            <h3>Third item</h3>
+            <p>A narrow container becomes one column.</p>
+          </article>
+        </div>
+      </section>
+      <section class="stack">
+        <h2>Twelve-column layout</h2>
+
+        <div class="columns">
+          <article class="grid-preview columns__item--md-6 columns__item--lg-8">
+            <h3>Primary content</h3>
+            <p>Full width, then half width, then eight columns.</p>
+          </article>
+
+          <aside class="grid-preview columns__item--md-6 columns__item--lg-4">
+            <h3>Supporting content</h3>
+            <p>Full width, then half width, then four columns.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="stack">
+        <h2>Constrained content</h2>
+
+        <article class="content-layout content-layout--reading stack">
+          <h3>A readable content region</h3>
+
+          <p>
+            This region is centered within its parent. Its maximum width follows
+            a reading measure, while the outer container supplies the page
+            gutters.
+          </p>
+
+          <p>
+            On narrow screens, it uses the available width rather than
+            overflowing its parent.
+          </p>
+        </article>
+      </section>
+      <div class="cover-layout cover-layout--md">
+        <header class="cover-layout__header">
+          <div class="container">
+            <p>Example header</p>
+          </div>
+        </header>
+
+        <main class="cover-layout__content">
+          <div class="container">
+            <section class="content-layout content-layout--sm stack">
+              <h1>Centered content</h1>
+              <p>
+                This content uses the remaining space between the header and
+                footer.
+              </p>
+            </section>
+          </div>
+        </main>
+
+        <footer class="cover-layout__footer">
+          <div class="container">
+            <p>Example footer</p>
+          </div>
+        </footer>
+      </div>
     </main>
+    <main class="container container--xl">
+      <div class="split-layout split-layout--equal">
+        <section class="split-layout__primary grid-preview stack">
+          <h2>Primary content</h2>
+          <p>This region receives two shares of the available column space.</p>
+        </section>
+
+        <aside class="split-layout__secondary grid-preview stack">
+          <h2>Supporting content</h2>
+          <p>This region receives one share.</p>
+        </aside>
+      </div>
+      <main class="container container--xl">
+        <div class="sidebar-layout">
+          <aside class="sidebar-layout__sidebar grid-preview stack">
+            <h2>Filters</h2>
+            <p>Supporting controls or navigation.</p>
+          </aside>
+
+          <section class="sidebar-layout__content grid-preview stack">
+            <h1>Results</h1>
+            <p>Main content uses the remaining width.</p>
+          </section>
+        </div>
+      </main>
+    </main>
+    <main class="container container--xl">
+      <div class="sidebar-layout sidebar-layout--reverse">
+        <aside
+          class="sidebar-layout__sidebar sticky-layout__region grid-preview stack"
+        >
+          <h2>On this page</h2>
+          <a href="#section-one">First section</a>
+          <a href="#section-two">Second section</a>
+        </aside>
+
+        <article class="sidebar-layout__content stack stack--xl">
+          <section id="section-one" class="sticky-preview-section stack">
+            <h1>First section</h1>
+            <p>Scroll to check the supporting region.</p>
+          </section>
+
+          <section id="section-two" class="sticky-preview-section stack">
+            <h2>Second section</h2>
+            <p>The supporting region stays within its parent layout.</p>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <div class="shell shell--horizontal">
+      <header class="shell__header shell-preview-region">
+        <div class="container">
+          <p><strong>Design system playground</strong></p>
+        </div>
+      </header>
+
+      <nav class="shell__navigation shell-preview-region" aria-label="Primary">
+        <ul class="shell-preview-links">
+          <li>
+            <a href="#overview" aria-current="page">Overview</a>
+          </li>
+          <li>
+            <a href="#details">Details</a>
+          </li>
+        </ul>
+      </nav>
+
+      <main id="main-content" class="shell__main">
+        <div class="container shell-preview-content">
+          <div class="stack stack--xl">
+            <section id="overview" class="stack">
+              <h1>Application shell</h1>
+              <p>Change the arrangement modifier to inspect each layout.</p>
+            </section>
+
+            <section id="details" class="stack">
+              <h2>Content region</h2>
+              <p>
+                The shell supplies structure. Website components supply the
+                actual navigation and page content.
+              </p>
+            </section>
+          </div>
+        </div>
+      </main>
+
+      <footer class="shell__footer shell-preview-region">
+        <div class="container">
+          <p>Example footer</p>
+        </div>
+      </footer>
+    </div>
 
     <script type="module" src="/src/main.js"></script>
   </body>

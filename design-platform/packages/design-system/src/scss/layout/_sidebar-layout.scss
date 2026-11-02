@@ -1,0 +1,93 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Sidebar Layout
+   ========================================================================== */
+
+// Mobile-first: sidebar and content follow DOM order.
+//
+// Local customization:
+// --sidebar-width: sidebar track width
+// --sidebar-gap: spacing between regions
+
+.sidebar-layout {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "sidebar"
+    "content";
+
+  align-items: start;
+  gap: var(--sidebar-gap, var(--space-4));
+
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Regions
+   ========================================================================== */
+
+.sidebar-layout > .sidebar-layout__sidebar {
+  grid-area: sidebar;
+  min-inline-size: 0;
+}
+
+.sidebar-layout > .sidebar-layout__content {
+  grid-area: content;
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Sidebar Width
+   ========================================================================== */
+
+.sidebar-layout--compact {
+  --sidebar-width: 16rem;
+}
+
+.sidebar-layout--wide {
+  --sidebar-width: 22rem;
+}
+
+/* ==========================================================================
+   Alignment
+   ========================================================================== */
+
+.sidebar-layout--center {
+  align-items: center;
+}
+
+.sidebar-layout--stretch {
+  align-items: stretch;
+}
+
+/* ==========================================================================
+   Responsive Arrangement
+   ========================================================================== */
+
+@include ds.respond-up("md") {
+  .sidebar-layout {
+    gap: var(--sidebar-gap, var(--space-6));
+  }
+}
+
+@include ds.respond-up("lg") {
+  .sidebar-layout {
+    grid-template-columns:
+      minmax(0, var(--sidebar-width, 18rem))
+      minmax(0, 1fr);
+
+    grid-template-areas: "sidebar content";
+
+    gap: var(--sidebar-gap, var(--space-8));
+  }
+
+  .sidebar-layout--reverse {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, var(--sidebar-width, 18rem));
+
+    grid-template-areas: "content sidebar";
+  }
+}

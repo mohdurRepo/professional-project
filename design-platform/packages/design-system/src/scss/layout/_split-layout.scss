@@ -1,0 +1,105 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Split Layout
+   ========================================================================== */
+
+// Mobile-first: regions follow DOM order in a single column.
+//
+// Local customization:
+// --split-gap: spacing between regions
+// --split-primary: primary column proportion
+// --split-secondary: secondary column proportion
+//
+// Column proportions accept positive fr values.
+
+.split-layout {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "primary"
+    "secondary";
+
+  align-items: stretch;
+  gap: var(--split-gap, var(--space-4));
+
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Regions
+   ========================================================================== */
+
+.split-layout > .split-layout__primary {
+  grid-area: primary;
+  min-inline-size: 0;
+}
+
+.split-layout > .split-layout__secondary {
+  grid-area: secondary;
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Proportions
+   ========================================================================== */
+
+// Default proportions are 2:1.
+
+.split-layout--equal {
+  --split-primary: 1fr;
+  --split-secondary: 1fr;
+}
+
+.split-layout--wide-primary {
+  --split-primary: 3fr;
+  --split-secondary: 1fr;
+}
+
+.split-layout--compact-secondary {
+  --split-primary: 4fr;
+  --split-secondary: 1fr;
+}
+
+/* ==========================================================================
+   Alignment
+   ========================================================================== */
+
+.split-layout--start {
+  align-items: start;
+}
+
+.split-layout--center {
+  align-items: center;
+}
+
+/* ==========================================================================
+   Responsive Arrangement
+   ========================================================================== */
+
+@include ds.respond-up("md") {
+  .split-layout {
+    gap: var(--split-gap, var(--space-6));
+  }
+}
+
+@include ds.respond-up("lg") {
+  .split-layout {
+    grid-template-columns:
+      minmax(0, var(--split-primary, 2fr))
+      minmax(0, var(--split-secondary, 1fr));
+
+    grid-template-areas: "primary secondary";
+
+    gap: var(--split-gap, var(--space-8));
+  }
+
+  .split-layout--reverse {
+    grid-template-columns:
+      minmax(0, var(--split-secondary, 1fr))
+      minmax(0, var(--split-primary, 2fr));
+
+    grid-template-areas: "secondary primary";
+  }
+}

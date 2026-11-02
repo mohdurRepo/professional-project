@@ -1,0 +1,74 @@
+/* ==========================================================================
+   Content Layout
+   ========================================================================== */
+
+// Constrains a content region within its parent.
+// Does not add padding, typography, or vertical alignment.
+//
+// Local customization:
+// --content-width: maximum width of the region
+
+.content-layout {
+  inline-size: 100%;
+  max-inline-size: var(--content-width, 75rem);
+  min-inline-size: 0;
+
+  margin-inline: auto;
+}
+
+:where(.content-layout) > * {
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Width Variants
+   ========================================================================== */
+
+.content-layout--xs {
+  --content-width: 28rem;
+}
+
+.content-layout--sm {
+  --content-width: 40rem;
+}
+
+.content-layout--md {
+  --content-width: 56rem;
+}
+
+.content-layout--lg {
+  --content-width: 75rem;
+}
+
+.content-layout--xl {
+  --content-width: 90rem;
+}
+
+// Reading measure rather than a general page-content width.
+// The actual width depends on the current font.
+
+.content-layout--reading {
+  --content-width: 65ch;
+}
+
+.content-layout--full {
+  --content-width: 100%;
+}
+
+/* ==========================================================================
+   Inline Alignment
+   ========================================================================== */
+
+// Start and end follow the document's writing direction.
+
+.content-layout--start {
+  margin-inline: 0 auto;
+}
+
+.content-layout--center {
+  margin-inline: auto;
+}
+
+.content-layout--end {
+  margin-inline: auto 0;
+}

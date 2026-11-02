@@ -1,0 +1,54 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Twelve-column Layout
+   ========================================================================== */
+
+// Local customization:
+// --columns-gap: spacing between columns and rows
+//
+// Children occupy all twelve tracks unless a span modifier applies.
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--columns-gap, var(--space-6));
+
+  min-inline-size: 0;
+}
+
+:where(.columns) > * {
+  grid-column: span 12;
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Unconditional Spans
+   ========================================================================== */
+
+// These apply at every viewport width.
+
+@for $span from 1 through 12 {
+  .columns__item--span-#{$span} {
+    grid-column: span #{$span};
+  }
+}
+
+/* ==========================================================================
+   Responsive Spans
+   ========================================================================== */
+
+// Breakpoints must remain in ascending order.
+// Later breakpoint rules override earlier ones when both match.
+
+@each $name, $width in ds.$breakpoints {
+  @if $width != 0 {
+    @include ds.respond-up($name) {
+      @for $span from 1 through 12 {
+        .columns__item--#{$name}-#{$span} {
+          grid-column: span #{$span};
+        }
+      }
+    }
+  }
+}

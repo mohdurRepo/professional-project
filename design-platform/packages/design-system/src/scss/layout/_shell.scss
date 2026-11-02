@@ -1,0 +1,99 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Application Shell
+   ========================================================================== */
+
+// Default: horizontal arrangement.
+//
+// Local customization:
+// --shell-min-size: minimum block size
+// --shell-navigation-width: desktop sidebar width
+//
+// Use at most one arrangement modifier:
+// --horizontal, --vertical, or --combined.
+//
+// The shell controls structure only.
+// Regions and their components own padding, borders, and appearance.
+
+.shell {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr auto;
+
+  grid-template-areas:
+    "header"
+    "navigation"
+    "main"
+    "footer";
+
+  min-inline-size: 0;
+  min-block-size: var(--shell-min-size, 100vh);
+}
+
+@supports (min-block-size: 100dvh) {
+  .shell {
+    min-block-size: var(--shell-min-size, 100dvh);
+  }
+}
+
+/* ==========================================================================
+   Regions
+   ========================================================================== */
+
+.shell > .shell__header {
+  grid-area: header;
+  min-inline-size: 0;
+}
+
+.shell > .shell__navigation {
+  grid-area: navigation;
+  min-inline-size: 0;
+}
+
+.shell > .shell__main {
+  grid-area: main;
+  min-inline-size: 0;
+}
+
+.shell > .shell__footer {
+  grid-area: footer;
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Desktop Arrangements
+   ========================================================================== */
+
+// Horizontal uses the default arrangement at all widths.
+// Vertical and combined become two-column layouts at lg.
+
+@include ds.respond-up("lg") {
+  .shell--vertical,
+  .shell--combined {
+    grid-template-columns:
+      minmax(0, var(--shell-navigation-width, 18rem))
+      minmax(0, 1fr);
+
+    grid-template-rows: auto 1fr auto;
+  }
+
+  // Sidebar spans the full shell height.
+  // Header and footer belong to the content column.
+  .shell--vertical {
+    grid-template-areas:
+      "navigation header"
+      "navigation main"
+      "navigation footer";
+  }
+
+  // Header and footer span both columns.
+  // Sidebar sits beside the main region.
+  .shell--combined {
+    grid-template-areas:
+      "header header"
+      "navigation main"
+      "footer footer";
+  }
+}
