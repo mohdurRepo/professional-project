@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Background Colors
+   ========================================================================== */
+
+$-backgrounds: (
+  "body": "color-bg",
+  "surface": "color-surface",
+  "surface-alt": "color-surface-alt",
+  "surface-selected": "color-surface-selected",
+
+  "primary": "color-primary",
+  "secondary": "color-secondary",
+  "accent": "color-accent",
+
+  "success": "color-success",
+  "info": "color-info",
+  "attention": "color-attention",
+  "warning": "color-warning",
+  "danger": "color-danger",
+
+  "success-subtle": "color-success-subtle",
+  "info-subtle": "color-info-subtle",
+  "attention-subtle": "color-attention-subtle",
+  "warning-subtle": "color-warning-subtle",
+  "danger-subtle": "color-danger-subtle",
+
+  "light": "color-light",
+  "dark": "color-dark",
+);
+
+@each $name, $token in $-backgrounds {
+  .bg-#{$name} {
+    background-color: var(--#{$token}) !important;
+  }
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}

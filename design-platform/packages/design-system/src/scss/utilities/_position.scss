@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Position
+   ========================================================================== */
+
+$-positions: (
+  "static": static,
+  "relative": relative,
+  "absolute": absolute,
+  "fixed": fixed,
+  "sticky": sticky,
+);
+
+@each $name, $value in $-positions {
+  .position-#{$name} {
+    position: $value !important;
+  }
+}
+
+/* ==========================================================================
+   Insets
+   ========================================================================== */
+
+.inset-0 {
+  inset: 0 !important;
+}
+
+.inset-bs-0 {
+  inset-block-start: 0 !important;
+}
+
+.inset-be-0 {
+  inset-block-end: 0 !important;
+}
+
+.inset-is-0 {
+  inset-inline-start: 0 !important;
+}
+
+.inset-ie-0 {
+  inset-inline-end: 0 !important;
+}
+
+/* ==========================================================================
+   Automatic Insets
+   ========================================================================== */
+
+.inset-auto {
+  inset: auto !important;
+}

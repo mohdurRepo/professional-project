@@ -1,0 +1,21 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Border Radius
+   ========================================================================== */
+
+@each $key, $value in ds.$radii {
+  .rounded-#{$key} {
+    border-radius: var(--radius-#{$key}) !important;
+  }
+}
+
+/* ==========================================================================
+   Circle
+   ========================================================================== */
+
+// Produces a circle only when the element has equal inline and block sizes.
+
+.rounded-circle {
+  border-radius: 50% !important;
+}

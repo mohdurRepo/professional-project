@@ -2,59 +2,78 @@
 @use "sass:map";
 
 /* ==========================================================================
-   High-Contrast Accent Palettes
+   Accent Palettes
    ========================================================================== */
 
 // Each entry contains:
 // 1. Primary fill
 // 2. Primary hover fill
 // 3. Text on primary fills
+// 4. Link color
+// 5. Link hover color
 //
-// Links and focus use the primary color in this variant.
+// Primary fills match the standard accent palettes.
+// Increased contrast must not silently redefine those action colors.
 
 $-light-accents: (
   "blue": (
+    #0044e3,
+    #0038bb,
+    #ffffff,
     #002fa3,
     #002580,
-    #ffffff,
   ),
   "navy": (
+    #001f33,
+    #003652,
+    #ffffff,
     #001524,
     #00283e,
-    #ffffff,
   ),
   "teal": (
+    #00705d,
+    #005a4b,
+    #ffffff,
     #004c40,
     #003b32,
-    #ffffff,
   ),
   "gold": (
+    #805800,
+    #654500,
+    #ffffff,
     #563900,
     #422c00,
-    #ffffff,
   ),
 );
 
 $-dark-accents: (
   "blue": (
+    #91acff,
+    #b0c2ff,
+    #001f33,
     #b8cbff,
     #d6e1ff,
-    #001524,
   ),
   "navy": (
+    #a7b2b8,
+    #c3ccd1,
+    #001f33,
     #d5dfe6,
     #edf2f6,
-    #001524,
   ),
   "teal": (
+    #00c7a3,
+    #31d8b6,
+    #001f33,
     #8cf3df,
     #b8fff0,
-    #001524,
   ),
   "gold": (
+    #f4cd75,
+    #ffe0a0,
+    #001f33,
     #ffe0a0,
     #ffedc7,
-    #001524,
   ),
 );
 
@@ -67,18 +86,18 @@ $-dark-accents: (
   --color-primary-hover: #{list.nth($palette, 2)};
   --color-on-primary: #{list.nth($palette, 3)};
 
-  --color-link: #{list.nth($palette, 1)};
-  --color-link-hover: #{list.nth($palette, 2)};
+  --color-link: #{list.nth($palette, 4)};
+  --color-link-hover: #{list.nth($palette, 5)};
 
-  --focus-ring: #{list.nth($palette, 1)};
+  --focus-ring: #{list.nth($palette, 4)};
 }
 
 /* ==========================================================================
-   High-Contrast Tokens
+   Increased-Contrast Tokens
    ========================================================================== */
 
-// Override roles that need greater separation.
-// Other roles inherit from the selected light or dark theme.
+// Status and supporting-action roles inherit from the appearance theme.
+// Their rendered combinations still require component-level verification.
 
 @mixin -tokens($dark: false) {
   $accents: $-light-accents;
@@ -163,10 +182,10 @@ $-dark-accents: (
     --color-selection-text: #ffffff;
   }
 
-  // Default accent when no recognized accent is selected.
+  // Blue remains the default primary family.
   @include -accent(map.get($accents, "blue"));
 
-  // Preserve a recognized selected accent.
+  // A recognized explicit accent remains authoritative.
   @each $name, $palette in $accents {
     &:where([data-accent="#{$name}"]) {
       @include -accent($palette);
@@ -177,10 +196,6 @@ $-dark-accents: (
 /* ==========================================================================
    Appearance Resolution
    ========================================================================== */
-
-// Light is the fallback.
-// Missing data-theme or "system" follows the operating system.
-// Explicit light and dark choices override the system appearance.
 
 @mixin -appearance {
   @include -tokens;
@@ -200,8 +215,7 @@ $-dark-accents: (
    System Contrast Preference
    ========================================================================== */
 
-// Only follow the system when there is no explicit contrast choice.
-// data-contrast="standard" opts out of this enhancement.
+// Explicit standard contrast opts out of this enhancement.
 
 @media (prefers-contrast: more) {
   :where(:root:not([data-contrast]), :root[data-contrast="system"]) {
@@ -210,7 +224,7 @@ $-dark-accents: (
 }
 
 /* ==========================================================================
-   Explicit High Contrast
+   Explicit Increased Contrast
    ========================================================================== */
 
 :where(:root[data-contrast="high"]) {

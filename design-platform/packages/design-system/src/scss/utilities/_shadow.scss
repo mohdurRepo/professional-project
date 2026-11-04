@@ -1,0 +1,14 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Box Shadow
+   ========================================================================== */
+
+// Shadows provide visual depth.
+// Do not rely on a shadow as the only necessary control boundary.
+
+@each $key, $value in ds.$shadows {
+  .shadow-#{$key} {
+    box-shadow: var(--shadow-#{$key}) !important;
+  }
+}

@@ -1,0 +1,34 @@
+/* ==========================================================================
+   Surface
+   ========================================================================== */
+
+// A theme-aware background with its default text color.
+//
+// Controls appearance only:
+// no padding, border, radius, shadow, or layout.
+//
+// Local customization:
+// --surface-background
+// --surface-foreground
+//
+// Custom colors require appropriate foreground/background pairing.
+
+.surface {
+  background-color: var(--surface-background, var(--color-surface));
+
+  color: var(--surface-foreground, var(--color-text));
+}
+
+/* ==========================================================================
+   Surface Variants
+   ========================================================================== */
+
+// Use alongside .surface.
+
+.surface--body {
+  --surface-background: var(--color-bg);
+}
+
+.surface--alt {
+  --surface-background: var(--color-surface-alt);
+}

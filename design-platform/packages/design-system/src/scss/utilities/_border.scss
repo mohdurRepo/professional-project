@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Border Edges
+   ========================================================================== */
+
+// Default borders are decorative.
+// Use border-control when a visible control boundary is required.
+
+$-edges: (
+  "": border,
+  "-block": border-block,
+  "-inline": border-inline,
+  "-bs": border-block-start,
+  "-be": border-block-end,
+  "-is": border-inline-start,
+  "-ie": border-inline-end,
+);
+
+@each $suffix, $property in $-edges {
+  .border#{$suffix} {
+    #{$property}: 1px solid var(--color-border) !important;
+  }
+}
+
+/* ==========================================================================
+   Border Colors
+   ========================================================================== */
+
+// Color modifiers require an existing border.
+
+.border-strong {
+  border-color: var(--color-border-strong) !important;
+}
+
+.border-control {
+  border-color: var(--color-border-control) !important;
+}
+
+/* ==========================================================================
+   Border Width
+   ========================================================================== */
+
+// Width modifiers require an existing border style.
+
+.border-2 {
+  border-width: 2px !important;
+}
+
+.border-4 {
+  border-width: 4px !important;
+}
+
+/* ==========================================================================
+   Border Removal
+   ========================================================================== */
+
+.border-0 {
+  border: 0 !important;
+}

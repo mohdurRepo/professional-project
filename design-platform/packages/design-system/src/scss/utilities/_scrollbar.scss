@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Custom Scrollbar
+   ========================================================================== */
+
+// Opt-in styling for scrollable regions.
+//
+// Local customization:
+// --scrollbar-thumb: thumb color
+// --scrollbar-track: track color
+//
+// Browsers without support retain their native scrollbar.
+
+.custom-scrollbar {
+  scrollbar-color: var(--scrollbar-thumb, var(--color-text-muted))
+    var(--scrollbar-track, var(--color-surface));
+
+  scrollbar-width: auto;
+}
+
+/* ==========================================================================
+   Compact Variant
+   ========================================================================== */
+
+// Use deliberately: thinner scrollbars can be harder to operate.
+
+.custom-scrollbar--thin {
+  scrollbar-width: thin;
+}
+
+/* ==========================================================================
+   Forced Colors
+   ========================================================================== */
+
+// Leave scrollbar colors and sizing to the browser in forced-colors mode.
+
+@media (forced-colors: active) {
+  .custom-scrollbar {
+    scrollbar-color: auto;
+    scrollbar-width: auto;
+  }
+}

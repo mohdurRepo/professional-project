@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark" data-accent="gold" data-contrast="standard">
+<html lang="en" data-theme="light" data-accent="blue" data-contrast="standard">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -90,6 +90,10 @@
           > .shell-preview-links {
           flex-direction: column;
         }
+      }
+
+      .scrollbar-preview {
+        max-block-size: 12rem;
       }
     </style>
   </head>
@@ -313,7 +317,143 @@
         </div>
       </footer>
     </div>
+    <div class="d-flex flex-wrap align-center justify-between gap-4 p-4">
+      <p>Group description</p>
 
+      <div class="d-flex flex-wrap gap-2">
+        <button type="button">First action</button>
+        <button type="button">Second action</button>
+      </div>
+    </div>
+    <div class="d-flex gap-4">
+      <div class="flex-1 min-inline-0">
+        <p>Flexible content region.</p>
+      </div>
+
+      <button type="button" class="flex-none">Action</button>
+    </div>
+    <section class="stack p-4">
+      <h2>Text utilities</h2>
+
+      <p class="text-muted">Secondary information</p>
+      <p class="text-success">Changes saved successfully.</p>
+      <p class="text-warning">Review the supplied information.</p>
+      <p class="text-danger">The operation could not be completed.</p>
+
+      <p class="fs-lg fw-medium">Larger medium-weight text</p>
+
+      <div class="content-layout content-layout--xs">
+        <p class="text-truncate">
+          This deliberately long sentence demonstrates single-line truncation
+          when the available width becomes too narrow.
+        </p>
+      </div>
+
+      <div class="text-tabular">
+        <p>1,111.00</p>
+        <p>8,888.00</p>
+      </div>
+    </section>
+    <section class="stack p-4">
+      <h2>Backgrounds and borders</h2>
+
+      <div class="bg-primary text-on-primary p-4">Primary surface</div>
+
+      <div class="bg-warning text-on-warning p-4">Warning surface</div>
+
+      <div class="bg-danger-subtle text-danger p-4">
+        The operation could not be completed.
+      </div>
+
+      <div class="bg-surface text-body border border-control p-4">
+        Surface with a stronger boundary
+      </div>
+    </section>
+    <div class="bg-primary text-on-primary p-4">Primary action colors</div>
+
+    <p class="text-primary">Primary foreground color</p>
+
+    <section class="stack p-4">
+      <h2>Radius and shadow</h2>
+
+      <div class="bg-surface text-body border rounded-md shadow-sm p-4">
+        Medium radius with a small shadow.
+      </div>
+
+      <div class="bg-surface text-body border rounded-lg shadow-lg p-4">
+        Large radius with a larger shadow.
+      </div>
+
+      <div class="bg-primary text-on-primary rounded-pill pi-6 pb-3">
+        Pill-shaped surface.
+      </div>
+    </section>
+    <section class="stack p-4">
+      <h2>Position and overflow</h2>
+
+      <div class="position-relative border rounded-md p-4">
+        <p>Positioned parent</p>
+
+        <span
+          class="position-absolute inset-bs-0 inset-ie-0 bg-primary text-on-primary p-1"
+        >
+          Label
+        </span>
+      </div>
+
+      <div
+        class="overflow-x-auto border p-4"
+        role="region"
+        aria-label="Horizontal scrolling example"
+        tabindex="0"
+      >
+        <p class="text-nowrap">
+          This deliberately long line demonstrates horizontal scrolling when
+          there is insufficient space to display all of its content within the
+          available region.
+        </p>
+      </div>
+    </section>
+    <section class="stack p-4">
+      <h2>Scrollable region</h2>
+
+      <div
+        class="scrollbar-preview custom-scrollbar overflow-auto border p-4"
+        role="region"
+        aria-label="Scrollbar example"
+        tabindex="0"
+      >
+        <div class="stack">
+          <p>First item</p>
+          <p>Second item</p>
+          <p>Third item</p>
+          <p>Fourth item</p>
+          <p>Fifth item</p>
+          <p>Sixth item</p>
+          <p>Seventh item</p>
+          <p>Eighth item</p>
+        </div>
+      </div>
+    </section>
+    <section class="stack p-4">
+      <h2>Theme-aware surfaces</h2>
+
+      <article class="surface border rounded-md p-4 stack">
+        <h3>Default surface</h3>
+        <p>Uses the active theme’s surface and text colors.</p>
+        <p class="text-muted">Secondary information.</p>
+      </article>
+
+      <article class="surface surface--alt rounded-md p-4 stack">
+        <h3>Alternative surface</h3>
+        <p>Provides a different background within the same theme.</p>
+      </article>
+
+      <article class="surface surface--body border rounded-md p-4 stack">
+        <h3>Body surface</h3>
+        <p>Uses the active theme’s page background.</p>
+      </article>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

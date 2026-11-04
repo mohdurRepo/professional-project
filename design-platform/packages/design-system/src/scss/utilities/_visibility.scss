@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Visibility
+   ========================================================================== */
+
+// Hidden content retains its layout space.
+
+.visible {
+  visibility: visible !important;
+}
+
+.invisible {
+  visibility: hidden !important;
+}
+
+/* ==========================================================================
+   Visually Hidden
+   ========================================================================== */
+
+// Keeps content available to assistive technology.
+// Do not use on focusable elements unless they become visible on focus.
+
+@mixin -hidden {
+  position: absolute !important;
+
+  inline-size: 1px !important;
+  block-size: 1px !important;
+
+  padding: 0 !important;
+  margin: -1px !important;
+
+  overflow: hidden !important;
+  border: 0 !important;
+
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+.visually-hidden {
+  @include -hidden;
+}
+
+/* ==========================================================================
+   Hidden Until Focused
+   ========================================================================== */
+
+// Hiding declarations stop applying when the element or a descendant
+// receives focus. The element's ordinary styles then take effect.
+
+.visually-hidden-focusable:not(:focus-within) {
+  @include -hidden;
+}

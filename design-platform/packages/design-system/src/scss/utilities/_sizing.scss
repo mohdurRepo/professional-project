@@ -1,0 +1,63 @@
+/* ==========================================================================
+   Inline Size
+   ========================================================================== */
+
+// Inline size corresponds to width in horizontal writing modes.
+
+.inline-100 {
+  inline-size: 100% !important;
+}
+
+.inline-auto {
+  inline-size: auto !important;
+}
+
+.max-inline-100 {
+  max-inline-size: 100% !important;
+}
+
+// Allows flex and grid items to shrink below their intrinsic content width.
+// Content may still need wrapping or its own overflow handling.
+
+.min-inline-0 {
+  min-inline-size: 0 !important;
+}
+
+/* ==========================================================================
+   Block Size
+   ========================================================================== */
+
+// Block size corresponds to height in horizontal writing modes.
+// Percentage sizing needs a definite containing block size.
+
+.block-100 {
+  block-size: 100% !important;
+}
+
+.block-auto {
+  block-size: auto !important;
+}
+
+.max-block-100 {
+  max-block-size: 100% !important;
+}
+
+.min-block-0 {
+  min-block-size: 0 !important;
+}
+
+/* ==========================================================================
+   Minimum Viewport Block Size
+   ========================================================================== */
+
+// Minimum size allows the element to grow with its content.
+
+.min-screen {
+  min-block-size: 100vh !important;
+}
+
+@supports (min-block-size: 100dvh) {
+  .min-screen {
+    min-block-size: 100dvh !important;
+  }
+}

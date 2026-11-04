@@ -1,0 +1,69 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Spacing Utilities
+   ========================================================================== */
+
+// Logical naming:
+//
+// m / p   → all sides
+// mb / pb → block axis
+// mi / pi → inline axis
+// mbs     → margin block-start
+// mbe     → margin block-end
+// mis     → margin inline-start
+// mie     → margin inline-end
+//
+// Padding follows the same pattern.
+//
+// Each class overrides its corresponding property.
+
+$-properties: (
+  "m": margin,
+  "mb": margin-block,
+  "mi": margin-inline,
+  "mbs": margin-block-start,
+  "mbe": margin-block-end,
+  "mis": margin-inline-start,
+  "mie": margin-inline-end,
+
+  "p": padding,
+  "pb": padding-block,
+  "pi": padding-inline,
+  "pbs": padding-block-start,
+  "pbe": padding-block-end,
+  "pis": padding-inline-start,
+  "pie": padding-inline-end,
+
+  "gap": gap,
+  "row-gap": row-gap,
+  "column-gap": column-gap,
+);
+
+@each $name, $property in $-properties {
+  @each $key, $value in ds.$spaces {
+    .#{$name}-#{$key} {
+      #{$property}: var(--space-#{$key}) !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Automatic Margins
+   ========================================================================== */
+
+$-auto-margins: (
+  "m": margin,
+  "mb": margin-block,
+  "mi": margin-inline,
+  "mbs": margin-block-start,
+  "mbe": margin-block-end,
+  "mis": margin-inline-start,
+  "mie": margin-inline-end,
+);
+
+@each $name, $property in $-auto-margins {
+  .#{$name}-auto {
+    #{$property}: auto !important;
+  }
+}

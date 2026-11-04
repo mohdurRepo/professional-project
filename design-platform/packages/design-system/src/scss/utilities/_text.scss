@@ -1,0 +1,254 @@
+@use "../abstracts" as ds;
+
+/* ==========================================================================
+   Alignment
+   ========================================================================== */
+
+$-alignments: (
+  "start": start,
+  "center": center,
+  "end": end,
+  "justify": justify,
+);
+
+@each $name, $value in $-alignments {
+  .text-#{$name} {
+    text-align: $value !important;
+  }
+}
+
+/* ==========================================================================
+   Semantic Colors
+   ========================================================================== */
+
+// Foreground roles intended for corresponding theme surfaces.
+
+$-colors: (
+  "body": "color-text",
+  "heading": "color-heading",
+  "muted": "color-text-muted",
+  "primary": "color-link",
+  "success": "color-success-text",
+  "info": "color-info-text",
+  "attention": "color-attention-text",
+  "warning": "color-warning-text",
+  "danger": "color-danger-text",
+);
+
+@each $name, $token in $-colors {
+  .text-#{$name} {
+    color: var(--#{$token}) !important;
+  }
+}
+
+/* ==========================================================================
+   Text on Filled Backgrounds
+   ========================================================================== */
+
+// Pair with the matching background utility.
+// Example: bg-primary text-on-primary.
+
+$-on-colors: (
+  "primary": "color-on-primary",
+  "secondary": "color-on-secondary",
+  "accent": "color-on-accent",
+
+  "success": "color-on-success",
+  "info": "color-on-info",
+  "attention": "color-on-attention",
+  "warning": "color-on-warning",
+  "danger": "color-on-danger",
+
+  "light": "color-on-light",
+  "dark": "color-on-dark",
+
+  "surface-selected": "color-on-surface-selected",
+);
+
+@each $name, $token in $-on-colors {
+  .text-on-#{$name} {
+    color: var(--#{$token}) !important;
+  }
+}
+
+/* ==========================================================================
+   Fixed Colors
+   ========================================================================== */
+
+// These do not adapt to appearance or contrast.
+// Use only with a deliberately paired background.
+
+.text-white {
+  color: #{ds.brand("white")} !important;
+}
+
+.text-black {
+  color: #{ds.brand("black")} !important;
+}
+
+/* ==========================================================================
+   Font Size
+   ========================================================================== */
+
+@each $key, $value in ds.$font-sizes {
+  .fs-#{$key} {
+    font-size: var(--text-#{$key}) !important;
+  }
+}
+
+/* ==========================================================================
+   Font Weight
+   ========================================================================== */
+
+// Available rendered weights depend on the registered font faces.
+
+@each $key, $value in ds.$font-weights {
+  .fw-#{$key} {
+    font-weight: var(--font-weight-#{$key}) !important;
+  }
+}
+
+/* ==========================================================================
+   Font Style
+   ========================================================================== */
+
+.fst-normal {
+  font-style: normal !important;
+}
+
+.fst-italic {
+  font-style: italic !important;
+}
+
+/* ==========================================================================
+   Transformation
+   ========================================================================== */
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+/* ==========================================================================
+   Decoration
+   ========================================================================== */
+
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
+.text-underline {
+  text-decoration: underline !important;
+}
+
+.text-line-through {
+  text-decoration: line-through !important;
+}
+
+/* ==========================================================================
+   Wrapping
+   ========================================================================== */
+
+.text-wrap {
+  white-space: normal !important;
+}
+
+.text-nowrap {
+  white-space: nowrap !important;
+}
+
+.text-break {
+  overflow-wrap: anywhere !important;
+}
+
+/* ==========================================================================
+   Single-line Truncation
+   ========================================================================== */
+
+// Requires constrained available inline space.
+// Flex/grid items may also need min-inline-0.
+
+.text-truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* ==========================================================================
+   Line Height
+   ========================================================================== */
+
+@each $key, $value in ds.$line-heights {
+  .lh-#{$key} {
+    line-height: var(--line-height-#{$key}) !important;
+  }
+}
+
+.lh-1 {
+  line-height: 1 !important;
+}
+
+.lh-xl {
+  line-height: 2 !important;
+}
+
+/* ==========================================================================
+   Letter Spacing
+   ========================================================================== */
+
+// Apply deliberately to suitable text.
+// Do not apply tracking utilities to Arabic running text.
+
+.tracking-tight {
+  letter-spacing: -0.02em !important;
+}
+
+.tracking-normal {
+  letter-spacing: 0 !important;
+}
+
+.tracking-wide {
+  letter-spacing: 0.05em !important;
+}
+
+.tracking-wider {
+  letter-spacing: 0.1em !important;
+}
+
+/* ==========================================================================
+   Numeric Formatting
+   ========================================================================== */
+
+// Requires support for these OpenType features in the selected font.
+// Does not change language, digit shapes, or text direction.
+
+.text-tabular {
+  font-variant-numeric: tabular-nums !important;
+}
+
+.text-proportional {
+  font-variant-numeric: proportional-nums !important;
+}
+
+/* ==========================================================================
+   Selection
+   ========================================================================== */
+
+.user-select-none {
+  user-select: none !important;
+}
+
+.user-select-all {
+  user-select: all !important;
+}
+
+.user-select-auto {
+  user-select: auto !important;
+}
