@@ -1,0 +1,166 @@
+/* Touch targets */
+
+@media (any-pointer: coarse) {
+  .custom-select {
+    // The trigger and search field use this value to reserve space.
+    --custom-select-clear-size: 2.75rem;
+  }
+
+  .custom-select__trigger {
+    min-block-size: max(var(--custom-select-control-min-block-size), 2.75rem);
+  }
+
+  .custom-select__control:has(> .custom-select__clear:not([hidden]))
+    > .custom-select__trigger {
+    min-block-size: max(
+      var(--custom-select-control-min-block-size),
+      calc(var(--custom-select-clear-size) + 2 * var(--space-1))
+    );
+  }
+
+  .custom-select__option {
+    min-block-size: max(var(--custom-select-option-min-block-size), 2.75rem);
+  }
+}
+
+/* Increased contrast */
+
+@mixin -increased-contrast {
+  --custom-select-popover-shadow: none;
+
+  .custom-select__option:where(
+    :is(.is-active, [data-active="true"]):not(
+      [aria-disabled="true"],
+      .is-disabled
+    )
+  ) {
+    outline-width: 2px;
+    outline-offset: -2px;
+  }
+
+  .custom-select__option:where([aria-selected="true"], .is-selected) {
+    font-weight: var(--font-weight-heavy);
+  }
+}
+
+@media (prefers-contrast: more) {
+  :where(:root:not([data-contrast]), :root[data-contrast="system"])
+    .custom-select {
+    @include -increased-contrast;
+  }
+}
+
+:where(:root[data-contrast="high"]) .custom-select {
+  @include -increased-contrast;
+}
+
+/* Forced colors */
+
+@media (forced-colors: active) {
+  .custom-select {
+    --custom-select-bg: Canvas;
+    --custom-select-color: CanvasText;
+    --custom-select-placeholder-color: GrayText;
+
+    --custom-select-border-color: ButtonText;
+    --custom-select-hover-border-color: Highlight;
+    --custom-select-focus-color: Highlight;
+    --custom-select-focus-outline-color: Highlight;
+
+    --custom-select-indicator-color: ButtonText;
+    --custom-select-clear-color: ButtonText;
+    --custom-select-clear-hover-bg: Highlight;
+    --custom-select-clear-hover-color: HighlightText;
+
+    --custom-select-popover-bg: Canvas;
+    --custom-select-popover-color: CanvasText;
+    --custom-select-popover-border-color: ButtonText;
+    --custom-select-popover-shadow: none;
+
+    --custom-select-search-border-color: ButtonText;
+    --custom-select-search-icon-color: ButtonText;
+
+    --custom-select-option-color: CanvasText;
+    --custom-select-option-hover-bg: Highlight;
+    --custom-select-option-hover-color: HighlightText;
+    --custom-select-option-active-bg: Canvas;
+    --custom-select-option-selected-bg: Highlight;
+    --custom-select-option-selected-color: HighlightText;
+    --custom-select-option-disabled-color: GrayText;
+
+    --custom-select-check-color: Highlight;
+
+    --custom-select-tag-bg: Canvas;
+    --custom-select-tag-color: CanvasText;
+
+    --custom-select-disabled-bg: Canvas;
+    --custom-select-disabled-color: GrayText;
+    --custom-select-disabled-border-color: GrayText;
+  }
+
+  // Keep the explicit system-color pairs for the options and their markers.
+  .custom-select__option,
+  .custom-select__option-check {
+    forced-color-adjust: none;
+  }
+
+  .custom-select__option:where(
+    :is(.is-active, [data-active="true"]):not(
+      [aria-disabled="true"],
+      .is-disabled
+    )
+  ) {
+    color: CanvasText;
+  }
+
+  .custom-select__option:where(
+    :is([aria-selected="true"], .is-selected):not(
+      [aria-disabled="true"],
+      .is-disabled
+    )
+  ) {
+    color: HighlightText;
+  }
+
+  .custom-select--multiple
+    .custom-select__option:where(
+      :is([aria-selected="true"], .is-selected):not(
+        [aria-disabled="true"],
+        .is-disabled
+      )
+    )
+    .custom-select__option-check {
+    color: HighlightText;
+  }
+}
+
+/* Print */
+
+@media print {
+  .custom-select.is-enhanced > .custom-select__interface,
+  .custom-select__popover {
+    display: none !important;
+  }
+
+  .custom-select.is-enhanced > .custom-select__fallback {
+    position: static;
+    inset: auto;
+
+    inline-size: 100%;
+    block-size: auto;
+    margin: 0;
+    padding: 0;
+
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+
+  .custom-select__native {
+    appearance: none;
+
+    border: 0;
+    background-color: transparent;
+    color: #000;
+  }
+}

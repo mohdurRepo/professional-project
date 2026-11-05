@@ -1,0 +1,118 @@
+/* Option row */
+
+.custom-select__option {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--custom-select-option-gap);
+
+  min-inline-size: 0;
+  min-block-size: var(--custom-select-option-min-block-size);
+  padding-block: var(--custom-select-option-padding-block);
+  padding-inline: var(--custom-select-option-padding-inline);
+
+  border-radius: var(--custom-select-option-radius);
+
+  background-color: transparent;
+  color: var(--custom-select-option-color);
+
+  font-size: var(--custom-select-option-font-size);
+  line-height: var(--custom-select-line-height);
+  text-align: start;
+
+  cursor: pointer;
+}
+
+/* Label and search match */
+
+.custom-select__option-label {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.custom-select__match {
+  background-color: transparent;
+  color: inherit;
+
+  font-weight: var(--font-weight-heavy);
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.15em;
+}
+
+/* Selection marker */
+
+.custom-select__option-check {
+  --icon-size: var(--custom-select-check-size);
+
+  display: inline-flex;
+  flex: 0 0 var(--custom-select-check-size);
+  align-items: center;
+  justify-content: center;
+
+  inline-size: var(--custom-select-check-size);
+  block-size: var(--custom-select-check-size);
+
+  color: inherit;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Hover and keyboard-active state */
+
+@media (hover: hover) {
+  .custom-select__option:where(
+    :hover:not([aria-disabled="true"], .is-disabled)
+  ) {
+    background-color: var(--custom-select-option-hover-bg);
+    color: var(--custom-select-option-hover-color);
+  }
+}
+
+.custom-select__option:where(
+  :is(.is-active, [data-active="true"]):not(
+    [aria-disabled="true"],
+    .is-disabled
+  )
+) {
+  background-color: var(--custom-select-option-active-bg);
+  color: var(--custom-select-option-hover-color);
+
+  outline: 1px solid var(--custom-select-focus-outline-color);
+  outline-offset: -1px;
+}
+
+/* Selected state */
+
+.custom-select__option:where([aria-selected="true"], .is-selected) {
+  background-color: var(--custom-select-option-selected-bg);
+  color: var(--custom-select-option-selected-color);
+  font-weight: var(--font-weight-medium);
+}
+
+.custom-select__option:where([aria-selected="true"], .is-selected)
+  .custom-select__option-check {
+  visibility: visible;
+}
+
+/* Disabled state */
+
+.custom-select__option:where([aria-disabled="true"], .is-disabled) {
+  background-color: transparent;
+  color: var(--custom-select-option-disabled-color);
+  opacity: var(--custom-select-option-disabled-opacity);
+  cursor: not-allowed;
+}
+
+/* Focus fallback */
+
+.custom-select__option:focus-visible {
+  outline: var(--custom-select-focus-outline-width) solid
+    var(--custom-select-focus-outline-color);
+  outline-offset: var(--custom-select-focus-outline-offset);
+}
+
+.custom-select__option[hidden] {
+  display: none;
+}

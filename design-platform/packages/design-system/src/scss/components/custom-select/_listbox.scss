@@ -1,0 +1,86 @@
+/* Scrollable option list */
+
+.custom-select__listbox {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--custom-select-listbox-gap);
+
+  min-inline-size: 0;
+  min-block-size: 0;
+  max-block-size: var(--custom-select-listbox-max-block-size);
+
+  margin: 0;
+  padding: var(--custom-select-listbox-padding);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  list-style: none;
+  overscroll-behavior: contain;
+  scroll-padding-block: var(--custom-select-listbox-padding);
+}
+
+.custom-select__listbox[aria-busy="true"] {
+  cursor: progress;
+}
+
+/* Option groups */
+
+.custom-select__group {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: var(--custom-select-listbox-gap);
+
+  min-inline-size: 0;
+}
+
+.custom-select__group + .custom-select__group {
+  margin-block-start: var(--custom-select-group-padding-block);
+  padding-block-start: var(--custom-select-group-padding-block);
+
+  border-block-start: 1px solid var(--custom-select-search-border-color);
+}
+
+.custom-select__group-label {
+  display: block;
+
+  padding-block: var(--custom-select-group-padding-block);
+  padding-inline: var(--custom-select-group-padding-inline);
+
+  color: var(--custom-select-group-color);
+  font-size: var(--custom-select-group-font-size);
+  font-weight: var(--custom-select-group-font-weight);
+  line-height: var(--custom-select-line-height);
+
+  overflow-wrap: anywhere;
+}
+
+/* Empty results */
+
+// The empty message sits beside the listbox so the listbox contains
+// only options and option groups.
+.custom-select__empty {
+  display: grid;
+  flex: 1 1 auto;
+  place-items: center;
+
+  min-inline-size: 0;
+  min-block-size: var(--custom-select-empty-min-block-size);
+
+  margin: 0;
+  padding: var(--custom-select-empty-padding);
+
+  color: var(--custom-select-empty-color);
+  font-size: var(--custom-select-option-font-size);
+  line-height: var(--custom-select-line-height);
+  text-align: center;
+
+  overflow-wrap: anywhere;
+}
+
+.custom-select__listbox[hidden],
+.custom-select__empty[hidden] {
+  display: none;
+}

@@ -1,0 +1,128 @@
+.custom-select {
+  /* Control dimensions and typography */
+  --custom-select-control-min-block-size: var(--form-control-min-block-size);
+  --custom-select-control-padding-block: var(--form-control-padding-block);
+  --custom-select-control-padding-inline: var(--form-control-padding-inline);
+  --custom-select-control-gap: var(--form-control-gap);
+  --custom-select-control-border-width: var(--form-control-border-width);
+  --custom-select-control-radius: var(--form-control-radius);
+
+  --custom-select-font-size: var(--form-control-font-size);
+  --custom-select-font-weight: var(--form-control-font-weight);
+  --custom-select-line-height: var(--form-control-line-height);
+
+  /* Control colors and focus */
+  --custom-select-bg: var(--form-control-bg);
+  --custom-select-color: var(--form-control-color);
+  --custom-select-placeholder-color: var(--form-control-placeholder-color);
+  --custom-select-border-color: var(--form-control-border-color);
+  --custom-select-hover-border-color: var(--form-control-hover-border-color);
+
+  --custom-select-focus-color: var(--form-control-focus-border-color);
+  --custom-select-focus-outline-color: var(--form-control-focus-outline-color);
+  --custom-select-focus-outline-width: var(--form-control-focus-outline-width);
+  --custom-select-focus-outline-offset: var(
+    --form-control-focus-outline-offset
+  );
+
+  /* Trigger content */
+  --custom-select-indicator-size: var(--form-control-indicator-size);
+  --custom-select-indicator-color: var(--form-help-color);
+
+  --custom-select-clear-size: 2rem;
+  --custom-select-clear-radius: var(--radius-pill);
+  --custom-select-clear-color: var(--form-help-color);
+  --custom-select-clear-hover-bg: var(--form-field-action-hover-bg);
+  --custom-select-clear-hover-color: var(--form-field-action-hover-color);
+
+  /* Popover */
+  --custom-select-popover-gap: var(--space-2);
+  --custom-select-viewport-gap: var(--space-3);
+  --custom-select-popover-max-block-size: min(
+    22rem,
+    var(
+      --custom-select-available-block-size,
+      calc(100dvh - 2 * var(--custom-select-viewport-gap))
+    )
+  );
+
+  --custom-select-popover-padding: var(--space-2);
+  --custom-select-popover-border-width: var(--form-control-border-width);
+  --custom-select-popover-radius: var(--radius-md);
+  --custom-select-popover-z-index: var(--z-popover);
+
+  --custom-select-popover-bg: var(--color-surface);
+  --custom-select-popover-color: var(--color-text);
+  --custom-select-popover-border-color: var(--color-border-control);
+  --custom-select-popover-shadow: var(--shadow-lg);
+
+  /* Search and listbox */
+  --custom-select-search-gap: var(--space-2);
+  --custom-select-search-padding: var(--space-2);
+  --custom-select-search-border-color: var(--color-border);
+  --custom-select-search-icon-color: var(--form-help-color);
+
+  --custom-select-listbox-gap: var(--space-1);
+  --custom-select-listbox-max-block-size: 17.5rem;
+  --custom-select-listbox-padding: var(--space-1);
+
+  /* Option groups */
+  --custom-select-group-padding-block: var(--space-2);
+  --custom-select-group-padding-inline: var(--space-3);
+  --custom-select-group-color: var(--color-text-muted);
+  --custom-select-group-font-size: var(--text-xs);
+  --custom-select-group-font-weight: var(--font-weight-heavy);
+
+  /* Options */
+  --custom-select-option-min-block-size: 2.75rem;
+  --custom-select-option-gap: var(--space-2);
+  --custom-select-option-padding-block: var(--space-2);
+  --custom-select-option-padding-inline: var(--space-3);
+  --custom-select-option-radius: var(--radius-sm);
+
+  --custom-select-option-font-size: var(--text-sm);
+  --custom-select-option-color: var(--color-text);
+  --custom-select-option-hover-bg: var(--color-surface-hover);
+  --custom-select-option-hover-color: var(--color-heading);
+  --custom-select-option-active-bg: var(--color-surface-active);
+  --custom-select-option-selected-bg: var(--color-surface-selected);
+  --custom-select-option-selected-color: var(--color-on-surface-selected);
+
+  --custom-select-option-disabled-color: var(--color-text-muted);
+  --custom-select-option-disabled-opacity: 1;
+
+  --custom-select-check-size: 1rem;
+  --custom-select-check-color: var(--color-primary);
+
+  /* Empty results */
+  --custom-select-empty-min-block-size: 7rem;
+  --custom-select-empty-padding: var(--space-4);
+  --custom-select-empty-color: var(--color-text-muted);
+
+  /* Selection tags */
+  --custom-select-tag-gap: var(--space-1);
+  --custom-select-tag-padding-block: var(--space-1);
+  --custom-select-tag-padding-inline: var(--space-2);
+  --custom-select-tag-radius: var(--radius-sm);
+  --custom-select-tag-bg: var(--color-surface-alt);
+  --custom-select-tag-color: var(--color-text);
+  --custom-select-tag-font-size: var(--text-xs);
+  --custom-select-tag-font-weight: var(--font-weight-medium);
+
+  /* Disabled and validation */
+  --custom-select-disabled-bg: var(--form-control-disabled-bg);
+  --custom-select-disabled-color: var(--form-control-disabled-color);
+  --custom-select-disabled-border-color: var(
+    --form-control-disabled-border-color
+  );
+  --custom-select-disabled-opacity: var(--form-control-disabled-opacity);
+
+  --custom-select-valid-color: var(--form-valid-color);
+  --custom-select-invalid-color: var(--form-invalid-color);
+
+  /* Motion and existing fallback timing */
+  --custom-select-transition: var(--form-control-transition);
+  --custom-select-popover-duration: var(--form-control-transition);
+  --custom-select-popover-easing: ease-out;
+  --custom-select-fallback-delay: 2s;
+}

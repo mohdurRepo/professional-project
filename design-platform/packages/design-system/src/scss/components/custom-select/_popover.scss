@@ -1,0 +1,82 @@
+/* Dropdown panel */
+
+.custom-select__popover {
+  position: fixed;
+  inset: auto;
+
+  // Positioning code supplies physical viewport coordinates.
+  top: var(--custom-select-popover-top, 0);
+  left: var(--custom-select-popover-left, 0);
+  z-index: var(--custom-select-popover-z-index);
+
+  display: none;
+  flex-direction: column;
+
+  inline-size: min(
+    var(--custom-select-popover-inline-size, 20rem),
+    calc(100vw - 2 * var(--custom-select-viewport-gap))
+  );
+  min-inline-size: 0;
+  min-block-size: 0;
+  max-block-size: min(
+    var(--custom-select-popover-max-block-size),
+    var(--custom-select-available-block-size, 100dvh)
+  );
+
+  margin: 0;
+  padding: var(--custom-select-popover-padding);
+  overflow: hidden;
+
+  border: var(--custom-select-popover-border-width) solid
+    var(--custom-select-popover-border-color);
+  border-radius: var(--custom-select-popover-radius);
+
+  background-color: var(--custom-select-popover-bg);
+  color: var(--custom-select-popover-color);
+  box-shadow: var(--custom-select-popover-shadow);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity var(--custom-select-popover-duration)
+    var(--custom-select-popover-easing);
+}
+
+/* Invisible layout pass used by the positioner. */
+.custom-select__popover.is-measuring:not([hidden]) {
+  display: flex;
+  visibility: hidden;
+}
+
+/* Positioned and open */
+
+.custom-select__popover.is-positioned:not([hidden], .is-closing):is(
+    :not([popover]).is-open,
+    :popover-open
+  ) {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Keep the panel mounted during an exit fade. */
+
+.custom-select__popover.is-positioned.is-closing:not([hidden]):is(
+    :not([popover]),
+    :popover-open
+  ) {
+  display: flex;
+}
+
+.custom-select__popover::backdrop {
+  background-color: transparent;
+}
+
+@starting-style {
+  .custom-select__popover.is-positioned:not([hidden], .is-closing):is(
+      :not([popover]).is-open,
+      :popover-open
+    ) {
+    opacity: 0;
+  }
+}

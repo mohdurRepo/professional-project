@@ -1,0 +1,71 @@
+@use "../../abstracts" as ds;
+
+/* Component root */
+
+.custom-select {
+  position: relative;
+
+  inline-size: 100%;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+
+  color: var(--custom-select-color);
+  font-family: inherit;
+  font-size: var(--custom-select-font-size);
+  font-weight: var(--custom-select-font-weight);
+  line-height: var(--custom-select-line-height);
+}
+
+/* Native fallback */
+
+.custom-select__fallback,
+.custom-select__native {
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.custom-select__fallback {
+  position: relative;
+}
+
+// Keep existing placeholder markup dormant during migration.
+.custom-select__initial-trigger {
+  display: none;
+}
+
+// The native select stays in the form and retains its name and value.
+// The initializer must manage its tab order and validation focus.
+.custom-select.is-enhanced > .custom-select__fallback {
+  @include ds.visually-hidden;
+
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  pointer-events: none;
+}
+
+/* Enhanced interface */
+
+.custom-select > .custom-select__interface {
+  position: relative;
+  display: none;
+
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.custom-select.is-enhanced > .custom-select__interface {
+  display: block;
+}
+
+/* Trigger and clear-button region */
+
+.custom-select__control {
+  position: relative;
+
+  display: flex;
+  align-items: stretch;
+
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: var(--custom-select-control-min-block-size);
+}

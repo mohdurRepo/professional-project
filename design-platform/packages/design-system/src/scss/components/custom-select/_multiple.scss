@@ -1,0 +1,124 @@
+@use "../../abstracts" as ds;
+
+/* Multiple-selection trigger */
+
+.custom-select--multiple .custom-select__trigger {
+  padding-block: var(--custom-select-tag-gap);
+}
+
+.custom-select--multiple .custom-select__value,
+.custom-select__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--custom-select-tag-gap);
+
+  min-inline-size: 0;
+
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.custom-select--multiple
+  .custom-select__value:where(.is-placeholder, [data-placeholder="true"]) {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Tags and count summaries */
+
+.custom-select__tag,
+.custom-select__tag-overflow,
+.custom-select__selection-count {
+  display: inline-flex;
+  align-items: center;
+
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: 1.625rem;
+
+  padding-block: var(--custom-select-tag-padding-block);
+  padding-inline: var(--custom-select-tag-padding-inline);
+
+  border-radius: var(--custom-select-tag-radius);
+
+  font-size: var(--custom-select-tag-font-size);
+  font-weight: var(--custom-select-tag-font-weight);
+  line-height: var(--custom-select-line-height);
+}
+
+.custom-select__tag {
+  background-color: var(--custom-select-tag-bg);
+  color: var(--custom-select-tag-color);
+}
+
+.custom-select__tag-label {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-select__tag-overflow,
+.custom-select__selection-count {
+  justify-content: center;
+  border: 1px solid var(--custom-select-border-color);
+
+  color: var(--custom-select-color);
+  white-space: nowrap;
+}
+
+/* Checkbox-style option markers */
+
+.custom-select--multiple .custom-select__option-check {
+  --icon-size: calc(var(--custom-select-check-size) * 0.75);
+
+  border: 1px solid var(--custom-select-border-color);
+  border-radius: var(--radius-sm);
+
+  background-color: var(--custom-select-bg);
+  color: transparent;
+  visibility: visible;
+}
+
+.custom-select--multiple
+  .custom-select__option:where([aria-selected="true"], .is-selected)
+  .custom-select__option-check {
+  border-color: var(--custom-select-check-color);
+  background-color: var(--custom-select-check-color);
+  color: var(--color-on-primary);
+}
+
+.custom-select--multiple
+  .custom-select__option:where([aria-disabled="true"], .is-disabled)
+  .custom-select__option-check {
+  border-color: var(--custom-select-disabled-border-color);
+  background-color: var(--custom-select-disabled-bg);
+  color: transparent;
+}
+
+.custom-select--multiple
+  .custom-select__option:where([aria-disabled="true"], .is-disabled):where(
+    [aria-selected="true"],
+    .is-selected
+  )
+  .custom-select__option-check {
+  color: var(--custom-select-disabled-color);
+}
+
+/* Compact summary */
+
+@include ds.respond-down("sm") {
+  .custom-select--multiple.has-selection-count .custom-select__tags {
+    display: none;
+  }
+}
+
+.custom-select__tags[hidden],
+.custom-select__tag-overflow[hidden],
+.custom-select__selection-count[hidden] {
+  display: none;
+}

@@ -1507,6 +1507,142 @@
           </div>
         </div>
       </fieldset>
+      <div class="form-group">
+        <label class="form-label" for="test-custom-region">Region</label>
+
+        <div class="custom-select" data-custom-select>
+          <div class="custom-select__fallback">
+            <select
+              class="form-select custom-select__native"
+              id="test-custom-region"
+              name="region"
+              required
+            >
+              <option value="" disabled selected>Choose a region</option>
+              <option value="central">Central</option>
+              <option value="eastern">Eastern</option>
+              <option value="western">Western</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="custom-select is-enhanced">
+        <div class="custom-select__interface">
+          <div class="custom-select__control">
+            <button class="custom-select__trigger" type="button">
+              <span class="custom-select__value">
+                Central region with a deliberately long display name
+              </span>
+              <span
+                class="custom-select__indicator has-icon icon-chevron-down"
+                aria-hidden="true"
+              ></span>
+            </button>
+
+            <button
+              class="custom-select__clear has-icon icon-close-x"
+              type="button"
+              aria-label="Clear region"
+            ></button>
+          </div>
+          <div
+            class="custom-select__popover is-positioned is-open"
+            style="
+              --custom-select-popover-top: 6rem;
+              --custom-select-popover-left: 1rem;
+              --custom-select-popover-inline-size: 20rem;
+            "
+          >
+            <p class="p-3">Dropdown panel preview</p>
+          </div>
+        </div>
+      </div>
+      <div class="custom-select__search has-query">
+        <div class="custom-select__search-field">
+          <span
+            class="custom-select__search-icon has-icon icon-search"
+            aria-hidden="true"
+          ></span>
+
+          <input
+            class="custom-select__search-input"
+            type="search"
+            aria-label="Search regions"
+            placeholder="Search regions"
+            value="Central"
+          />
+
+          <button
+            class="custom-select__search-clear has-icon icon-close-x"
+            type="button"
+            aria-label="Clear search"
+          ></button>
+        </div>
+      </div>
+    </form>
+    <form class="form" id="custom-select-test">
+      <div class="form-group">
+        <label class="form-label" for="test-region">Region</label>
+
+        <div
+          class="custom-select"
+          data-custom-select
+          data-searchable
+          data-clearable
+        >
+          <div class="custom-select__fallback">
+            <select
+              class="form-select custom-select__native"
+              id="test-region"
+              name="region"
+            >
+              <option value="" selected>Choose a region</option>
+              <option value="central">Central</option>
+              <option value="eastern">Eastern</option>
+              <option value="western">Western</option>
+              <option value="northern" disabled>Northern (unavailable)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="test-topics">Topics</label>
+
+        <div
+          class="custom-select"
+          data-custom-select
+          data-searchable
+          data-clearable
+          data-placeholder="Choose one or more topics"
+        >
+          <div class="custom-select__fallback">
+            <select
+              class="form-select custom-select__native"
+              id="test-topics"
+              name="topics"
+              multiple
+            >
+              <optgroup label="Markets">
+                <option value="equities" selected>Equities</option>
+                <option value="funds">Funds</option>
+                <option value="bonds">Bonds</option>
+              </optgroup>
+
+              <optgroup label="Resources">
+                <option value="reports">Reports</option>
+                <option value="announcements">Announcements</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions form-actions-start">
+        <button class="btn btn-outline-primary" type="reset">
+          Reset selections
+        </button>
+      </div>
     </form>
     <script type="module" src="/src/main.js"></script>
   </body>

@@ -1,0 +1,119 @@
+@use "trigger";
+
+/* Search region */
+
+.custom-select__search {
+  flex: 0 0 auto;
+  padding: var(--custom-select-search-padding);
+  border-block-end: 1px solid var(--custom-select-search-border-color);
+}
+
+.custom-select__search-field {
+  position: relative;
+  min-inline-size: 0;
+}
+
+/* Search input */
+
+.custom-select__search-input {
+  appearance: none;
+  display: block;
+
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: max(
+    2.5rem,
+    calc(var(--custom-select-clear-size) + 2 * var(--space-1))
+  );
+
+  padding-block: var(--space-2);
+  padding-inline: var(--custom-select-option-padding-inline);
+
+  border: var(--custom-select-control-border-width) solid
+    var(--custom-select-border-color);
+  border-radius: var(--custom-select-option-radius);
+
+  background-color: var(--custom-select-bg);
+  color: var(--custom-select-color);
+
+  font: inherit;
+  font-size: var(--custom-select-option-font-size);
+  text-align: start;
+
+  transition: border-color var(--custom-select-transition);
+}
+
+.custom-select__search-field:has(> .custom-select__search-icon)
+  > .custom-select__search-input {
+  padding-inline-start: calc(
+    var(--custom-select-option-padding-inline) +
+      var(--custom-select-indicator-size) + var(--custom-select-search-gap)
+  );
+}
+
+.custom-select__search.has-query
+  .custom-select__search-field:has(> .custom-select__search-clear:not([hidden]))
+  > .custom-select__search-input {
+  padding-inline-end: calc(
+    var(--custom-select-option-padding-inline) +
+      var(--custom-select-clear-size) + var(--custom-select-search-gap)
+  );
+}
+
+.custom-select__search-input::placeholder {
+  color: var(--custom-select-placeholder-color);
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .custom-select__search-input:where(:hover:not(:disabled)) {
+    border-color: var(--custom-select-hover-border-color);
+  }
+}
+
+.custom-select__search-input:where(:focus) {
+  border-color: var(--custom-select-focus-color);
+}
+
+.custom-select__search-input:focus-visible {
+  border-color: var(--custom-select-focus-outline-color);
+  outline: var(--custom-select-focus-outline-width) solid
+    var(--custom-select-focus-outline-color);
+  outline-offset: var(--custom-select-focus-outline-offset);
+}
+
+// The component provides its own clear button.
+.custom-select__search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* Leading icon */
+
+.custom-select__search-icon {
+  --icon-size: var(--custom-select-indicator-size);
+
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: var(--custom-select-option-padding-inline);
+
+  color: var(--custom-select-search-icon-color);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.custom-select__search-field:focus-within .custom-select__search-icon {
+  color: var(--custom-select-focus-color);
+}
+
+/* Clear query */
+
+.custom-select__search-clear {
+  @extend .custom-select__clear;
+
+  inset-inline-end: var(--custom-select-option-padding-inline);
+  display: none;
+}
+
+.custom-select__search.has-query .custom-select__search-clear:not([hidden]) {
+  display: inline-flex;
+}
