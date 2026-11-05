@@ -95,6 +95,18 @@
       .scrollbar-preview {
         max-block-size: 12rem;
       }
+      .form-phone__summary > [data-phone-preview] {
+        display: none;
+      }
+
+      .form-phone__country:has(option[value="US"]:checked)
+        [data-phone-preview="US"],
+      .form-phone__country:has(option[value="CA"]:checked)
+        [data-phone-preview="CA"],
+      .form-phone__country:has(option[value="SA"]:checked)
+        [data-phone-preview="SA"] {
+        display: inline;
+      }
     </style>
   </head>
   <body>
@@ -454,6 +466,1048 @@
         <p>Uses the active theme’s page background.</p>
       </article>
     </section>
+    <section class="stack stack--lg p-4">
+      <h1>Icon component</h1>
+
+      <!-- Text and placement -->
+      <section class="stack">
+        <h2>Icons with text</h2>
+
+        <div class="cluster">
+          <span class="has-icon icon-search icon-md"> Search </span>
+
+          <span class="has-icon icon-check icon-md icon-success">
+            Completed
+          </span>
+
+          <span class="has-icon icon-check icon-end icon-md">
+            Trailing icon
+          </span>
+        </div>
+      </section>
+
+      <!-- Sizes -->
+      <section class="stack">
+        <h2>Sizes</h2>
+
+        <div class="cluster">
+          <span class="has-icon icon-check icon-xs" aria-hidden="true"></span>
+          <span class="has-icon icon-check icon-sm" aria-hidden="true"></span>
+          <span class="has-icon icon-check icon-md" aria-hidden="true"></span>
+          <span class="has-icon icon-check icon-lg" aria-hidden="true"></span>
+          <span class="has-icon icon-check icon-xl" aria-hidden="true"></span>
+          <span class="has-icon icon-check icon-2xl" aria-hidden="true"></span>
+        </div>
+      </section>
+
+      <!-- Semantic colors -->
+      <section class="stack">
+        <h2>Colors</h2>
+
+        <div class="cluster">
+          <span class="has-icon icon-info-warning icon-primary">
+            Information
+          </span>
+
+          <span class="has-icon icon-check icon-success"> Saved </span>
+
+          <span class="has-icon icon-info-warning icon-warning">
+            Review required
+          </span>
+
+          <span class="has-icon icon-close-x icon-danger"> Failed </span>
+        </div>
+      </section>
+
+      <!-- Native button: button styling comes next -->
+      <section class="stack">
+        <h2>Icon-only button</h2>
+
+        <div>
+          <button type="button" aria-label="Search">
+            <span
+              class="has-icon icon-search icon-md"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Animation -->
+      <section class="stack">
+        <h2>Motion</h2>
+
+        <div class="cluster">
+          <span class="has-icon icon-sync-refresh icon-md icon-spin">
+            Refreshing
+          </span>
+
+          <span class="has-icon icon-bell icon-md icon-pulse">
+            Notification
+          </span>
+        </div>
+      </section>
+
+      <!-- Currency -->
+      <section class="stack">
+        <h2>Currency</h2>
+
+        <p>
+          <span class="sar-symbol">SAR</span>
+          <span class="text-tabular">1,250.00</span>
+        </p>
+
+        <p lang="ar" dir="rtl">
+          <span class="sar-symbol">ريال سعودي</span>
+          <span class="text-tabular">١٬٢٥٠٫٠٠</span>
+        </p>
+      </section>
+
+      <!-- Lists -->
+      <section class="stack">
+        <h2>Icon list</h2>
+
+        <ul class="icon-list icon-list-check icon-list-success" role="list">
+          <li>First completed item</li>
+          <li>
+            Second completed item with longer text to verify wrapping and
+            alignment on narrow screens.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Local RTL direction -->
+      <section class="stack" lang="ar" dir="rtl">
+        <h2>اتجاه الأيقونات</h2>
+
+        <div class="cluster">
+          <span class="has-icon icon-chevron-right icon-md icon-flip-rtl">
+            التالي
+          </span>
+
+          <span class="has-icon icon-check icon-md"> مكتمل </span>
+        </div>
+      </section>
+
+      <!-- Inline SVG support -->
+      <section class="stack">
+        <h2>Inline SVG</h2>
+
+        <p class="cluster">
+          <svg
+            class="svg-icon icon-md text-success"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M9.55 17.3L4.8 12.55L6.2 11.15L9.55 14.5L17.8 6.25L19.2 7.65L9.55 17.3Z"
+              fill="currentColor"
+            />
+          </svg>
+
+          <span>Completed using inline SVG</span>
+        </p>
+      </section>
+    </section>
+    <section class="stack p-4">
+      <h2>Button foundation</h2>
+
+      <div class="cluster">
+        <button type="button" class="btn btn-sm">Small</button>
+
+        <button type="button" class="btn">Default</button>
+
+        <button type="button" class="btn btn-lg">Large</button>
+
+        <button type="button" class="btn btn-pill">Pill</button>
+
+        <button type="button" class="btn" disabled>Disabled</button>
+      </div>
+
+      <button type="button" class="btn btn-block">Full-width action</button>
+
+      <div>
+        <a class="btn" href="#button-destination"> Navigate to the example </a>
+      </div>
+
+      <section id="button-destination">
+        <h3>Navigation destination</h3>
+      </section>
+    </section>
+    <section class="stack stack--lg p-4">
+      <h2>Button variants</h2>
+
+      <section class="stack">
+        <h3>Solid</h3>
+
+        <div class="cluster">
+          <button type="button" class="btn btn-primary">Primary</button>
+          <button type="button" class="btn btn-secondary">Secondary</button>
+          <button type="button" class="btn btn-accent">Accent</button>
+          <button type="button" class="btn btn-success">Success</button>
+          <button type="button" class="btn btn-info">Information</button>
+          <button type="button" class="btn btn-attention">Attention</button>
+          <button type="button" class="btn btn-warning">Warning</button>
+          <button type="button" class="btn btn-danger">Danger</button>
+          <button type="button" class="btn btn-light">Light</button>
+          <button type="button" class="btn btn-dark">Dark</button>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h3>Outline</h3>
+
+        <div class="cluster">
+          <button type="button" class="btn btn-outline-primary">Primary</button>
+
+          <button type="button" class="btn btn-outline-accent">Accent</button>
+
+          <button type="button" class="btn btn-outline-success">Success</button>
+
+          <button type="button" class="btn btn-outline-warning">Warning</button>
+
+          <button type="button" class="btn btn-outline-danger">Danger</button>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h3>Ghost and disabled</h3>
+
+        <div class="cluster">
+          <button type="button" class="btn btn-ghost">Secondary action</button>
+
+          <button type="button" class="btn btn-primary" disabled>
+            Disabled primary
+          </button>
+
+          <button type="button" class="btn btn-outline-primary" disabled>
+            Disabled outline
+          </button>
+        </div>
+      </section>
+    </section>
+    <section class="stack stack--lg p-4">
+      <h2>Button icons and loading</h2>
+
+      <section class="stack">
+        <h3>Leading and trailing icons</h3>
+
+        <div class="cluster">
+          <button type="button" class="btn btn-primary has-icon icon-search">
+            Search
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-primary has-icon icon-chevron-right btn-icon-end"
+          >
+            Continue
+          </button>
+
+          <button type="button" class="btn btn-primary">
+            <span class="has-icon icon-file-download" aria-hidden="true"></span>
+            Download
+          </button>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h3>Icon-only sizes</h3>
+
+        <div class="cluster">
+          <button
+            type="button"
+            class="btn btn-primary btn-icon btn-sm"
+            aria-label="Search"
+          >
+            <span
+              class="has-icon icon-search icon-sm"
+              aria-hidden="true"
+            ></span>
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-primary btn-icon"
+            aria-label="Search"
+          >
+            <span
+              class="has-icon icon-search icon-md"
+              aria-hidden="true"
+            ></span>
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-primary btn-icon btn-lg"
+            aria-label="Search"
+          >
+            <span
+              class="has-icon icon-search icon-lg"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h3>Loading</h3>
+
+        <div class="cluster">
+          <button
+            type="button"
+            class="btn btn-primary"
+            aria-busy="true"
+            disabled
+          >
+            Saving
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            aria-busy="true"
+            disabled
+          >
+            Loading results
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-primary btn-icon"
+            aria-label="Searching"
+            aria-busy="true"
+            disabled
+          >
+            <span
+              class="has-icon icon-search icon-md"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </div>
+      </section>
+    </section>
+    <section class="stack stack--lg p-4">
+      <h2>Badges</h2>
+
+      <section class="stack">
+        <h3>Solid variants</h3>
+
+        <div class="cluster">
+          <span class="badge badge-primary">Primary</span>
+          <span class="badge badge-secondary">Secondary</span>
+          <span class="badge badge-accent">Accent</span>
+          <span class="badge badge-success">Success</span>
+          <span class="badge badge-info">Information</span>
+          <span class="badge badge-attention">Attention</span>
+          <span class="badge badge-warning">Warning</span>
+          <span class="badge badge-danger">Danger</span>
+          <span class="badge badge-light">Light</span>
+          <span class="badge badge-dark">Dark</span>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h3>Outline variants</h3>
+
+        <div class="cluster">
+          <span class="badge badge-outline-primary">Primary</span>
+          <span class="badge badge-outline-secondary">Secondary</span>
+          <span class="badge badge-outline-accent">Accent</span>
+          <span class="badge badge-outline-success">Success</span>
+          <span class="badge badge-outline-info">Information</span>
+          <span class="badge badge-outline-attention">Attention</span>
+          <span class="badge badge-outline-warning">Warning</span>
+          <span class="badge badge-outline-danger">Danger</span>
+          <span class="badge badge-outline-light">Light</span>
+          <span class="badge badge-outline-dark">Dark</span>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h3>Sizes and shapes</h3>
+
+        <div class="cluster">
+          <span class="badge badge-primary badge-sm">Small</span>
+          <span class="badge badge-primary">Default</span>
+          <span class="badge badge-primary badge-lg">Large</span>
+          <span class="badge badge-success badge-rounded">Rounded</span>
+          <span class="badge badge-info badge-square">Square</span>
+          <span class="badge badge-danger badge-rounded">12</span>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h3>Icons</h3>
+
+        <div class="cluster">
+          <span class="badge badge-success has-icon icon-check">
+            Completed
+          </span>
+
+          <span class="badge badge-outline-warning has-icon icon-info-warning">
+            Review required
+          </span>
+
+          <span class="badge badge-primary has-icon icon-check icon-end">
+            Verified
+          </span>
+
+          <span class="badge badge-info">
+            <span class="has-icon icon-info-warning" aria-hidden="true"></span>
+            Information
+          </span>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h3>Disabled presentation</h3>
+
+        <div class="cluster">
+          <span class="badge badge-primary badge-disabled"> Unavailable </span>
+
+          <span class="badge badge-outline-primary badge-disabled">
+            Unavailable outline
+          </span>
+        </div>
+      </section>
+
+      <section class="stack">
+        <h3>Wrapping</h3>
+
+        <div class="content-layout content-layout--xs">
+          <span class="badge badge-outline-info">
+            A longer informational label that should wrap when the available
+            space becomes narrow or text is enlarged.
+          </span>
+        </div>
+      </section>
+
+      <section class="stack" lang="ar" dir="rtl">
+        <h3>الشارات باللغة العربية</h3>
+
+        <div class="cluster">
+          <span class="badge badge-success has-icon icon-check"> مكتمل </span>
+
+          <span class="badge badge-outline-warning badge-rounded">
+            بانتظار المراجعة
+          </span>
+
+          <span class="badge badge-primary has-icon icon-check icon-end">
+            تم التحقق
+          </span>
+        </div>
+      </section>
+    </section>
+    <section class="stack p-4">
+      <h2>Skeleton loading</h2>
+
+      <p role="status">Loading content…</p>
+
+      <div aria-busy="true">
+        <div class="stack" aria-hidden="true">
+          <span class="skeleton skeleton--circle"></span>
+          <span class="skeleton"></span>
+          <span class="skeleton skeleton--lg"></span>
+          <span class="skeleton skeleton--md"></span>
+          <span class="skeleton skeleton--sm"></span>
+        </div>
+      </div>
+    </section>
+
+    <a
+      class="card card--interactive navigation-card navigation-card--no-media"
+      href="#navigation-card-destination"
+    >
+      <div class="navigation-card__body">
+        <div class="navigation-card__header">
+          <span class="navigation-card__eyebrow">Explore</span>
+          <h3 class="navigation-card__title">Company information</h3>
+        </div>
+
+        <p class="navigation-card__description">
+          Find company profiles and related information.
+        </p>
+
+        <span
+          class="navigation-card__action has-icon icon-chevron-right icon-flip-rtl"
+        >
+          View information
+        </span>
+      </div>
+    </a>
+
+    <section id="navigation-card-destination">
+      <h2>Company information destination</h2>
+    </section>
+
+    <article class="card resource-card">
+      <header class="resource-card__header">
+        <div class="resource-card__heading">
+          <span class="resource-card__eyebrow">Reports</span>
+
+          <h3 class="resource-card__title">
+            <a class="resource-card__title-link" href="#report-details">
+              Annual report
+            </a>
+          </h3>
+        </div>
+
+        <span
+          class="resource-card__icon has-icon icon-pdf-file"
+          aria-hidden="true"
+        ></span>
+      </header>
+
+      <div class="resource-card__body">
+        <p class="resource-card__description">
+          A summary of the year’s activities and performance.
+        </p>
+
+        <div class="resource-card__meta">
+          <span class="resource-card__meta-item">
+            <span class="resource-card__meta-label">Published:</span>
+            <time class="resource-card__meta-value" datetime="2026-10-01">
+              1 October 2026
+            </time>
+          </span>
+        </div>
+      </div>
+
+      <footer class="resource-card__footer">
+        <div class="resource-card__file">
+          <span class="resource-card__file-type">PDF</span>
+          <span class="resource-card__file-size">2.4 MB</span>
+        </div>
+
+        <div class="resource-card__actions">
+          <a class="btn btn-primary" href="#report-details"> View report </a>
+
+          <button
+            type="button"
+            class="btn btn-outline-primary has-icon icon-file-download"
+            disabled
+          >
+            Download unavailable
+          </button>
+        </div>
+      </footer>
+    </article>
+
+    <section id="report-details">
+      <h2>Report details</h2>
+    </section>
+    <article class="card person-card person-card--horizontal">
+      <div class="person-card__media" aria-hidden="true">
+        <span class="has-icon icon-avatar icon-sm"></span>
+      </div>
+
+      <div class="person-card__body">
+        <div class="person-card__identity">
+          <h3 class="person-card__name">Sara Ahmed</h3>
+          <p class="person-card__role">Research director</p>
+        </div>
+
+        <a
+          class="person-card__action has-icon icon-chevron-right icon-flip-rtl"
+          href="#profile-details"
+        >
+          View profile
+        </a>
+      </div>
+    </article>
+
+    <section id="profile-details">
+      <h2>Profile details</h2>
+    </section>
+    <div class="person-card__media">
+      <img
+        src="YOUR-PORTRAIT-PATH"
+        alt=""
+        width="400"
+        height="500"
+        loading="lazy"
+      />
+    </div>
+    <div class="alert alert-success">
+      <span class="alert-icon has-icon icon-check" aria-hidden="true"></span>
+
+      <div class="alert-content">
+        <h3 class="alert-title">Changes saved</h3>
+        <p class="alert-text">
+          Your information has been updated successfully.
+        </p>
+      </div>
+    </div>
+
+    <div class="alert alert-warning alert-sm">
+      <span
+        class="alert-icon has-icon icon-info-warning"
+        aria-hidden="true"
+      ></span>
+
+      <div class="alert-content">
+        <p class="alert-text">
+          Review the supplied information before continuing.
+        </p>
+      </div>
+    </div>
+    <section class="stack p-4">
+      <h2>Dismissible alert</h2>
+
+      <div
+        class="alert alert-success alert-dismissible"
+        data-alert-focus="after-alert"
+      >
+        <span class="alert-icon has-icon icon-check" aria-hidden="true"></span>
+
+        <div class="alert-content">
+          <h3 class="alert-title">Changes saved</h3>
+          <p class="alert-text">Your information has been updated.</p>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-icon alert-close"
+          data-alert-dismiss
+          aria-label="Dismiss message"
+        >
+          <span class="has-icon icon-close-x icon-sm" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <h3 id="after-alert" tabindex="-1">Continue working</h3>
+
+      <p>The message can be dismissed without losing keyboard focus.</p>
+    </section>
+    <section class="stack stack--xl p-4">
+      <h2 class="section-heading">
+        <span class="section-heading__text">
+          <span class="section-heading__title"> Simple section heading </span>
+        </span>
+      </h2>
+
+      <header
+        class="section-heading section-heading--lg section-heading--decorated"
+      >
+        <span
+          class="section-heading__icon has-icon icon-chart-bar"
+          aria-hidden="true"
+        ></span>
+
+        <div class="section-heading__text">
+          <p class="section-heading__eyebrow">Insights</p>
+          <h2 class="section-heading__title">Market information</h2>
+        </div>
+      </header>
+
+      <header
+        class="section-heading section-heading--center section-heading--decorated"
+      >
+        <div class="section-heading__text">
+          <p class="section-heading__eyebrow">Resources</p>
+          <h2 class="section-heading__title">Centered heading</h2>
+        </div>
+      </header>
+
+      <header class="section-heading section-heading--end" lang="ar" dir="rtl">
+        <span
+          class="section-heading__icon has-icon icon-info-warning"
+          aria-hidden="true"
+        ></span>
+
+        <div class="section-heading__text">
+          <p class="section-heading__eyebrow">المعلومات</p>
+          <h2 class="section-heading__title">عنوان القسم باللغة العربية</h2>
+        </div>
+      </header>
+    </section>
+    <form class="form form-horizontal">
+      <fieldset class="form-fieldset">
+        <legend class="form-legend">Contact details</legend>
+
+        <div class="form-fieldset-body">
+          <div class="form-group">
+            <label class="form-label" for="test-email">
+              Email address
+              <span class="form-required" aria-hidden="true">*</span>
+            </label>
+
+            <input
+              class="form-control"
+              id="test-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              aria-describedby="test-email-help"
+              required
+            />
+
+            <p class="form-help" id="test-email-help">
+              We’ll use this address to send your confirmation.
+            </p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="test-message">Message</label>
+            <textarea
+              class="form-control"
+              id="test-message"
+              name="message"
+              rows="4"
+              placeholder="Enter your message"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="test-region">Region</label>
+
+            <div class="form-select-wrap">
+              <select
+                class="form-select"
+                id="test-region"
+                name="region"
+                required
+              >
+                <option value="" disabled selected>Choose a region</option>
+                <option value="central">Central</option>
+                <option value="eastern">Eastern</option>
+                <option value="western">Western</option>
+              </select>
+
+              <span
+                class="form-select-icon has-icon icon-chevron-down"
+                aria-hidden="true"
+              ></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="test-password">Password</label>
+
+            <div
+              class="form-field form-field-icon-start form-field-content-end"
+            >
+              <input
+                class="form-control"
+                id="test-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+              />
+
+              <span
+                class="form-field-icon has-icon icon-key"
+                aria-hidden="true"
+              ></span>
+
+              <button
+                class="form-field-action"
+                type="button"
+                data-password-toggle
+                aria-controls="test-password"
+                aria-label="Show password"
+              >
+                <span data-password-toggle-label>Show</span>
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="test-reference"
+              >Reference number</label
+            >
+
+            <div class="input-group">
+              <span class="input-group-text" id="test-reference-prefix"
+                >REF</span
+              >
+              <input
+                class="form-control"
+                id="test-reference"
+                name="reference"
+                type="text"
+                value="123456"
+                aria-describedby="test-reference-prefix"
+              />
+              <button
+                class="input-group-action"
+                type="button"
+                data-copy-target="test-reference"
+                data-copy-status="reference-copy-status"
+              >
+                <span data-copy-label>Copy</span>
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-floating">
+              <input
+                class="form-control"
+                id="floating-email"
+                name="floating-email"
+                type="email"
+                autocomplete="email"
+                placeholder=" "
+              />
+              <label for="floating-email">Email address</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-floating form-select-wrap">
+              <select
+                class="form-select"
+                id="floating-region"
+                name="floating-region"
+              >
+                <option value="">Choose a region</option>
+                <option value="central">Central</option>
+                <option value="eastern">Eastern</option>
+                <option value="western">Western</option>
+              </select>
+
+              <span
+                class="form-select-icon has-icon icon-chevron-down"
+                aria-hidden="true"
+              ></span>
+
+              <label for="floating-region">Region</label>
+            </div>
+          </div>
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">Preferences</legend>
+
+            <div class="form-fieldset-body">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  id="choice-updates"
+                  name="updates"
+                  type="checkbox"
+                  checked
+                />
+                <label class="form-check-label" for="choice-updates">
+                  Receive updates
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  id="choice-email"
+                  name="contact-method"
+                  type="radio"
+                  value="email"
+                  checked
+                />
+                <label class="form-check-label" for="choice-email">Email</label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  id="choice-sms"
+                  name="contact-method"
+                  type="radio"
+                  value="sms"
+                />
+                <label class="form-check-label" for="choice-sms">SMS</label>
+              </div>
+
+              <div class="form-switch">
+                <input
+                  class="form-switch-input"
+                  id="choice-notifications"
+                  name="notifications"
+                  type="checkbox"
+                  role="switch"
+                />
+                <label class="form-switch-label" for="choice-notifications">
+                  Enable notifications
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group">
+            <div class="form-file">
+              <input
+                class="form-file-input"
+                id="test-attachments"
+                name="attachments"
+                type="file"
+                multiple
+                data-file-list="test-attachment-list"
+                aria-labelledby="test-attachments-label"
+              />
+
+              <label class="form-dropzone" for="test-attachments">
+                <span class="form-dropzone-content">
+                  <strong id="test-attachments-label"
+                    >Choose or drop attachments</strong
+                  >
+                  <span data-file-name>No file selected</span>
+                </span>
+              </label>
+
+              <ul
+                class="form-file-list"
+                id="test-attachment-list"
+                data-file-list
+                data-file-list-hide-empty
+                role="list"
+                aria-live="polite"
+                hidden
+              ></ul>
+            </div>
+          </div>
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">Verification code</legend>
+
+            <div class="form-otp" dir="ltr" data-otp>
+              <input
+                class="form-otp-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                aria-label="Digit 1 of 6"
+                data-otp-input
+              />
+              <input
+                class="form-otp-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                aria-label="Digit 2 of 6"
+                data-otp-input
+              />
+              <input
+                class="form-otp-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                aria-label="Digit 3 of 6"
+                data-otp-input
+              />
+              <input
+                class="form-otp-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                aria-label="Digit 4 of 6"
+                data-otp-input
+              />
+              <input
+                class="form-otp-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                aria-label="Digit 5 of 6"
+                data-otp-input
+              />
+              <input
+                class="form-otp-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                aria-label="Digit 6 of 6"
+                data-otp-input
+              />
+            </div>
+          </fieldset>
+          <div class="form-group is-invalid">
+            <label class="form-label" for="validation-email"
+              >Email address</label
+            >
+
+            <input
+              class="form-control"
+              id="validation-email"
+              name="email"
+              type="email"
+              value="wrong-address"
+              aria-invalid="true"
+              aria-describedby="validation-email-error"
+            />
+
+            <p class="form-error" id="validation-email-error">
+              Enter an email address in the format name@example.com.
+            </p>
+          </div>
+          <div class="form-actions form-actions-fluid">
+            <p class="form-actions-status" role="status">
+              You have unsaved changes.
+            </p>
+
+            <div class="form-actions-group">
+              <button class="btn btn-outline-primary" type="button">
+                Cancel
+              </button>
+              <button class="btn btn-primary" type="button">
+                Save changes
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone-number">Phone number</label>
+
+            <div class="input-group form-phone">
+              <div class="input-group-text form-phone__country">
+                <label class="visually-hidden" for="phone-country">
+                  Country and calling code
+                </label>
+
+                <span class="form-phone__summary" dir="ltr" aria-hidden="true">
+                  <img
+                    class="form-phone__flag-image"
+                    data-phone-flag-image
+                    alt=""
+                    width="20"
+                    height="14"
+                    hidden
+                  />
+                  <span data-phone-flag>🇺🇸</span>
+                  <span data-phone-code>+1</span>
+                </span>
+
+                <span
+                  class="form-phone__chevron has-icon icon-chevron-down icon-xs"
+                  aria-hidden="true"
+                ></span>
+
+                <select
+                  class="form-phone__select"
+                  id="phone-country"
+                  name="phoneCountry"
+                  autocomplete="country"
+                >
+                  <option value="US" data-calling-code="+1" data-flag="🇺🇸">
+                    United States (+1)
+                  </option>
+                  <option value="CA" data-calling-code="+1" data-flag="🇨🇦">
+                    Canada (+1)
+                  </option>
+                  <option value="SA" data-calling-code="+966" data-flag="🇸🇦">
+                    Saudi Arabia (+966)
+                  </option>
+                </select>
+              </div>
+
+              <input
+                class="form-control"
+                id="phone-number"
+                name="phoneNationalNumber"
+                type="tel"
+                autocomplete="tel-national"
+                dir="ltr"
+                aria-describedby="phone-help"
+              />
+            </div>
+
+            <p class="form-help" id="phone-help">
+              Enter your number without the country calling code.
+            </p>
+          </div>
+        </div>
+      </fieldset>
+    </form>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

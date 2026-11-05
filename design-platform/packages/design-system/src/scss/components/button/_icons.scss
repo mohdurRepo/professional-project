@@ -1,0 +1,43 @@
+/* ==========================================================================
+   Button Icon Composition
+   ========================================================================== */
+
+// Support an icon directly on the button through .has-icon.
+// Button spacing takes precedence over the icon primitive's spacing.
+
+.btn.has-icon {
+  gap: var(--btn-gap);
+}
+
+/* ==========================================================================
+   Trailing Icons
+   ========================================================================== */
+
+// Decorative pseudo-element on the button itself.
+
+.btn-icon-end.has-icon::before {
+  order: 1;
+}
+
+// Separate decorative icon inside the button.
+// Move only the icon, without reversing the other children.
+
+.btn-icon-end > :where(.has-icon, .svg-icon) {
+  order: 1;
+}
+
+/* ==========================================================================
+   Icon-only Buttons
+   ========================================================================== */
+
+// Keep minimum dimensions rather than fixing the block size.
+// Larger icon content can expand the button.
+
+.btn-icon {
+  min-inline-size: var(--btn-min-size);
+  inline-size: var(--btn-min-size);
+  min-block-size: var(--btn-min-size);
+
+  padding: 0;
+  aspect-ratio: 1;
+}

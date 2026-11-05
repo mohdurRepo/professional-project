@@ -1,0 +1,78 @@
+/* Country segment */
+
+.form-phone > .form-phone__country {
+  --_phone-corner-radius: max(
+    0px,
+    calc(var(--form-control-radius) - var(--form-control-border-width))
+  );
+
+  position: relative;
+
+  flex: 0 0 auto;
+  gap: var(--space-2);
+
+  border-start-start-radius: var(--_phone-corner-radius);
+  border-end-start-radius: var(--_phone-corner-radius);
+
+  white-space: nowrap;
+}
+
+.form-phone__summary {
+  color: var(--form-control-color);
+}
+
+/* Native select covers the flag, code, and chevron. */
+
+.form-phone__country > .form-phone__select {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  inline-size: 100%;
+  block-size: 100%;
+  margin: 0;
+
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Draw keyboard focus on the visible country segment. */
+
+.form-phone__country:has(> .form-phone__select:focus-visible) {
+  outline: var(--form-control-focus-outline-width) solid
+    var(--form-control-focus-outline-color);
+  outline-offset: var(--form-control-focus-outline-offset);
+}
+
+/* Disabled state */
+
+.form-phone__country:has(> .form-phone__select:disabled)
+  > :where(.form-phone__summary, .form-phone__chevron) {
+  color: var(--form-control-disabled-color);
+}
+
+.form-phone__country > .form-phone__select:disabled {
+  cursor: not-allowed;
+}
+
+/* Restore the visible native select in forced colors. */
+
+@media (forced-colors: active) {
+  .form-phone > .form-phone__country {
+    --form-control-focus-outline-color: Highlight;
+
+    flex: 0 1 45%;
+    padding: 0;
+  }
+
+  .form-phone__country > .form-phone__select {
+    position: static;
+
+    min-inline-size: 0;
+    opacity: 1;
+  }
+
+  .form-phone__country > :where(.form-phone__summary, .form-phone__chevron) {
+    display: none;
+  }
+}

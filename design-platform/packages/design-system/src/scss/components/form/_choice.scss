@@ -1,0 +1,169 @@
+/* Choice layout */
+
+.form-check,
+.form-switch {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--form-control-gap);
+
+  min-inline-size: 0;
+
+  color: var(--form-control-color);
+  font-size: var(--form-control-font-size);
+  line-height: var(--form-control-line-height);
+}
+
+.form-check-inline {
+  display: inline-flex;
+}
+
+.form-check-label,
+.form-switch-label {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+/* Shared input geometry */
+
+.form-check-input,
+.form-switch-input {
+  flex: 0 0 auto;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Native checkbox and radio */
+
+.form-check-input {
+  --form-choice-size: 1.25rem;
+
+  inline-size: var(--form-choice-size);
+  block-size: var(--form-choice-size);
+
+  accent-color: var(--color-primary);
+}
+
+/* Switch */
+
+.form-switch {
+  --form-switch-inline-size: 2.75rem;
+  --form-switch-block-size: 1.5rem;
+  --form-switch-thumb-size: 1rem;
+  --form-switch-thumb-offset: 0.1875rem;
+}
+
+.form-switch-input {
+  --_switch-track: var(--form-control-bg);
+  --_switch-border: var(--form-control-border-color);
+  --_switch-thumb: var(--form-help-color);
+  --_switch-position: var(--form-switch-thumb-offset);
+
+  appearance: none;
+
+  inline-size: var(--form-switch-inline-size);
+  block-size: var(--form-switch-block-size);
+
+  border: var(--form-control-border-width) solid var(--_switch-border);
+  border-radius: var(--radius-pill);
+
+  background-color: var(--_switch-track);
+  background-image: radial-gradient(
+    circle closest-side,
+    var(--_switch-thumb) 98%,
+    transparent 100%
+  );
+  background-position: var(--_switch-position) center;
+  background-repeat: no-repeat;
+  background-size: var(--form-switch-thumb-size) var(--form-switch-thumb-size);
+
+  transition:
+    background-color var(--form-control-transition),
+    border-color var(--form-control-transition);
+}
+
+.form-switch-input:where(:checked) {
+  --_switch-track: var(--color-primary);
+  --_switch-border: var(--color-primary);
+  --_switch-thumb: var(--color-on-primary);
+  --_switch-position: calc(100% - var(--form-switch-thumb-offset));
+}
+
+.form-switch-input:where(:dir(rtl):not(:checked)) {
+  --_switch-position: calc(100% - var(--form-switch-thumb-offset));
+}
+
+.form-switch-input:where(:dir(rtl):checked) {
+  --_switch-position: var(--form-switch-thumb-offset);
+}
+
+@media (hover: hover) {
+  .form-switch-input:where(:hover:not(:disabled):not(:checked)) {
+    --_switch-border: var(--form-control-hover-border-color);
+  }
+
+  .form-switch-input:where(:hover:not(:disabled):checked) {
+    --_switch-track: var(--color-primary-hover);
+    --_switch-border: var(--color-primary-hover);
+  }
+}
+
+/* Focus */
+
+// Keep the ring outside these small controls so the mark or thumb stays clear.
+.form-check-input:focus-visible,
+.form-switch-input:focus-visible {
+  outline: var(--form-control-focus-outline-width) solid
+    var(--form-control-focus-outline-color);
+  outline-offset: 2px;
+}
+
+/* Disabled */
+
+.form-check-input:disabled,
+.form-switch-input:disabled {
+  cursor: not-allowed;
+}
+
+.form-check-input:disabled + .form-check-label,
+.form-switch-input:disabled + .form-switch-label {
+  color: var(--form-control-disabled-color);
+  cursor: not-allowed;
+}
+
+.form-switch-input:where(:disabled) {
+  --_switch-track: var(--form-control-disabled-bg);
+  --_switch-border: var(--form-control-disabled-border-color);
+  --_switch-thumb: var(--form-control-disabled-color);
+}
+
+/* Forced colors */
+
+@media (forced-colors: active) {
+  .form-check-input,
+  .form-switch-input {
+    accent-color: auto;
+  }
+
+  // Use the system checkbox so the state stays visible without the gradient.
+  .form-switch-input {
+    appearance: auto;
+
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+
+    border: revert;
+    border-radius: revert;
+    background: revert;
+  }
+
+  .form-check-input:focus-visible,
+  .form-switch-input:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .form-check-input:disabled + .form-check-label,
+  .form-switch-input:disabled + .form-switch-label {
+    color: GrayText;
+  }
+}

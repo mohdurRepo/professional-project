@@ -1,0 +1,159 @@
+@use "../../abstracts" as ds;
+
+/* ==========================================================================
+   Button
+   ========================================================================== */
+
+// Use <button> for actions and <a href="..."> for navigation.
+// Variant modules configure these local appearance properties.
+
+.btn {
+  --btn-bg: var(--color-surface);
+  --btn-color: var(--color-text);
+  --btn-border-color: var(--color-border-control);
+
+  --btn-hover-bg: var(--color-surface-hover);
+  --btn-hover-color: var(--color-text);
+  --btn-hover-border-color: var(--color-border-control-hover);
+
+  --btn-min-size: 2.75rem;
+  --btn-padding-block: 0.625rem;
+  --btn-padding-inline: var(--space-5);
+  --btn-font-size: var(--text-sm);
+  --btn-radius: var(--radius-sm);
+  --btn-gap: var(--space-2);
+
+  appearance: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--btn-gap);
+
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: var(--btn-min-size);
+
+  padding-block: var(--btn-padding-block);
+  padding-inline: var(--btn-padding-inline);
+
+  border: 1px solid var(--btn-border-color);
+  border-radius: var(--btn-radius);
+
+  background-color: var(--btn-bg);
+  color: var(--btn-color);
+
+  font: inherit;
+  font-size: var(--btn-font-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+
+  vertical-align: middle;
+  cursor: pointer;
+
+  @include ds.transition((background-color, color, border-color), "normal");
+}
+
+/* ==========================================================================
+   Hover
+   ========================================================================== */
+
+// Avoid persistent hover styling on devices without hover capability.
+
+@media (hover: hover) {
+  .btn:where(
+    :hover:not(:disabled):not(.is-disabled):not([aria-disabled="true"]):not(
+        [aria-busy="true"]
+      ):not(.btn-loading)
+  ) {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    border-color: var(--btn-hover-border-color);
+  }
+}
+
+/* ==========================================================================
+   Focus
+   ========================================================================== */
+
+.btn:focus-visible {
+  @include ds.focus-ring;
+}
+
+/* ==========================================================================
+   Disabled Appearance
+   ========================================================================== */
+
+// Only native disabled controls disable interaction automatically.
+// aria-disabled and .is-disabled require appropriate HTML or behavior.
+
+.btn:where(:disabled, .is-disabled, [aria-disabled="true"]) {
+  background-color: var(--color-disabled);
+  color: var(--color-on-disabled);
+  border-color: var(--color-border-disabled);
+
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Sizes
+   ========================================================================== */
+
+.btn-sm {
+  --btn-min-size: 2.25rem;
+  --btn-padding-block: var(--space-2);
+  --btn-padding-inline: var(--space-4);
+  --btn-font-size: var(--text-xs);
+}
+
+.btn-lg {
+  --btn-min-size: 3.25rem;
+  --btn-padding-block: var(--space-3);
+  --btn-padding-inline: var(--space-6);
+  --btn-font-size: var(--text-base);
+}
+
+/* ==========================================================================
+   Shapes
+   ========================================================================== */
+
+.btn-radius {
+  --btn-radius: var(--radius-md);
+}
+
+.btn-rounded,
+.btn-pill {
+  --btn-radius: var(--radius-pill);
+}
+
+.btn-square {
+  --btn-radius: var(--radius-none);
+}
+
+/* ==========================================================================
+   Full Width
+   ========================================================================== */
+
+.btn-block {
+  inline-size: 100%;
+}
+
+/* ==========================================================================
+   Forced Colors
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .btn {
+    border-color: ButtonText;
+  }
+
+  .btn:where(:disabled, .is-disabled, [aria-disabled="true"]) {
+    color: GrayText;
+    border-color: GrayText;
+  }
+}

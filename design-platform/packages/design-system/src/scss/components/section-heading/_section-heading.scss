@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Section Heading
+   ========================================================================== */
+
+// Reusable heading composition.
+//
+// Local customization:
+// --section-heading-color
+// --section-heading-muted
+// --section-heading-accent
+// --section-heading-font-size
+// --section-heading-icon-size
+// --section-heading-gap
+// --section-heading-line-height
+// --section-heading-line-gap
+// --section-heading-line-radius
+//
+// Heading level comes from HTML, independently of the visual size.
+
+.section-heading {
+  --section-heading-color: var(--color-heading);
+  --section-heading-muted: var(--color-text-muted);
+  --section-heading-accent: var(--color-link);
+
+  --section-heading-font-size: var(--text-lg);
+  --section-heading-icon-size: 1.25rem;
+  --section-heading-gap: var(--space-3);
+
+  --section-heading-line-height: 0.375rem;
+  --section-heading-line-gap: var(--space-3);
+  --section-heading-line-radius: var(--radius-pill);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--section-heading-gap);
+
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+
+  margin: 0;
+
+  color: var(--section-heading-color);
+
+  font-size: var(--section-heading-font-size);
+  font-weight: var(--font-weight-heavy);
+  line-height: var(--line-height-tight);
+
+  text-align: start;
+}
+
+/* ==========================================================================
+   Icon
+   ========================================================================== */
+
+.section-heading > .section-heading__icon {
+  --icon-size: var(--section-heading-icon-size);
+
+  flex: 0 0 auto;
+  color: var(--section-heading-accent);
+}
+
+.section-heading > .section-heading__icon > :where(.has-icon, .svg-icon) {
+  --icon-size: var(--section-heading-icon-size);
+}
+
+/* ==========================================================================
+   Text Group
+   ========================================================================== */
+
+.section-heading > .section-heading__text {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+/* ==========================================================================
+   Eyebrow
+   ========================================================================== */
+
+// No automatic case transformation or letter spacing.
+
+.section-heading__eyebrow {
+  display: block;
+
+  margin: 0;
+  margin-block-end: var(--space-1);
+
+  color: var(--section-heading-muted);
+
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================================
+   Title
+   ========================================================================== */
+
+// Explicit styling supports both a span inside a heading and
+// a heading element inside the text group.
+
+.section-heading__title {
+  display: block;
+
+  min-inline-size: 0;
+  margin: 0;
+
+  color: inherit;
+
+  font-family: inherit;
+  font-size: var(--section-heading-font-size);
+  font-weight: var(--font-weight-heavy);
+  line-height: var(--line-height-tight);
+
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+/* ==========================================================================
+   Sizes
+   ========================================================================== */
+
+// Uses the shared fluid text scale.
+
+.section-heading--sm {
+  --section-heading-font-size: var(--text-base);
+  --section-heading-icon-size: 1rem;
+  --section-heading-gap: var(--space-2);
+}
+
+.section-heading--lg {
+  --section-heading-font-size: var(--text-xl);
+  --section-heading-icon-size: 1.5rem;
+}
+
+/* ==========================================================================
+   Alignment
+   ========================================================================== */
+
+// The full-width root makes these align the complete composition,
+// as well as its text. Start and end follow writing direction.
+
+.section-heading--start {
+  justify-content: flex-start;
+  text-align: start;
+}
+
+.section-heading--center {
+  justify-content: center;
+  text-align: center;
+}
+
+.section-heading--end {
+  justify-content: flex-end;
+  text-align: end;
+}
+
+/* ==========================================================================
+   Decoration
+   ========================================================================== */
+
+// The line participates in normal flow instead of being absolutely
+// positioned below the content. No compensating root padding is needed.
+
+.section-heading--decorated {
+  align-items: flex-start;
+}
+
+.section-heading--decorated > .section-heading__text::after {
+  content: "";
+
+  display: block;
+  flex: 0 0 auto;
+
+  block-size: var(--section-heading-line-height);
+  margin-block-start: var(--section-heading-line-gap);
+
+  border-radius: var(--section-heading-line-radius);
+  background-color: var(--section-heading-accent);
+}
+
+/* ==========================================================================
+   Forced Colors
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .section-heading {
+    --section-heading-color: CanvasText;
+    --section-heading-muted: CanvasText;
+    --section-heading-accent: CanvasText;
+  }
+
+  .section-heading--decorated > .section-heading__text::after {
+    block-size: 0;
+
+    border-block-start: var(--section-heading-line-height) solid CanvasText;
+
+    background-color: transparent;
+  }
+}

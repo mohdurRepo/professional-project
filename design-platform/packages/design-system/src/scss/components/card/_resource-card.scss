@@ -1,0 +1,339 @@
+@use "base";
+
+/* ==========================================================================
+   Resource Card
+   ========================================================================== */
+
+// Use alongside .card.
+//
+// Shared card tokens control surface, typography colors, spacing,
+// borders, radius, and elevation.
+//
+// No forced minimum height, automatic movement, or loading overlay.
+
+.resource-card {
+  --resource-card-gap: var(--space-3);
+}
+
+/* ==========================================================================
+   Regions
+   ========================================================================== */
+
+.resource-card
+  > :where(
+    .resource-card__header,
+    .resource-card__body,
+    .resource-card__footer
+  ) {
+  min-inline-size: 0;
+
+  padding-block: var(--card-padding-block);
+  padding-inline: var(--card-padding-inline);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.resource-card > .resource-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: var(--resource-card-gap);
+}
+
+.resource-card__heading {
+  display: grid;
+  flex: 1 1 auto;
+  align-content: start;
+
+  gap: var(--space-2);
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Eyebrow
+   ========================================================================== */
+
+// Plain category text.
+// Add a badge component in the markup when a badge treatment is wanted.
+
+.resource-card__eyebrow {
+  color: var(--card-muted-color);
+
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================================
+   Resource Icon
+   ========================================================================== */
+
+.resource-card__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--space-3);
+
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--radius-md);
+
+  background-color: var(--color-surface-alt);
+  color: var(--color-link);
+}
+
+.resource-card__icon.has-icon,
+.resource-card__icon > :where(.has-icon, .svg-icon) {
+  --icon-size: 1.25rem;
+}
+
+/* ==========================================================================
+   Title
+   ========================================================================== */
+
+.resource-card__title {
+  margin: 0;
+
+  color: var(--card-heading-color);
+
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-heavy);
+  line-height: var(--line-height-tight);
+
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.resource-card__title-link {
+  color: var(--color-link);
+
+  text-decoration-line: underline;
+  text-underline-offset: 0.2em;
+}
+
+.resource-card__title-link:hover {
+  color: var(--color-link-hover);
+}
+
+.resource-card__title-link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Body
+   ========================================================================== */
+
+.resource-card > .resource-card__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+
+  gap: var(--resource-card-gap);
+}
+
+.resource-card > .resource-card__header + .resource-card__body {
+  padding-block-start: 0;
+}
+
+.resource-card__description {
+  margin: 0;
+
+  color: var(--card-muted-color);
+
+  font-size: var(--text-sm);
+  line-height: var(--line-height-relaxed);
+
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================================
+   Metadata
+   ========================================================================== */
+
+.resource-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+
+  gap: var(--space-2) var(--space-3);
+  min-inline-size: 0;
+
+  margin-block-start: auto;
+
+  color: var(--card-muted-color);
+
+  font-size: var(--text-xs);
+  line-height: var(--line-height-normal);
+}
+
+.resource-card__meta-item {
+  display: inline-flex;
+  align-items: baseline;
+
+  gap: var(--space-1);
+  min-inline-size: 0;
+
+  overflow-wrap: anywhere;
+}
+
+.resource-card__meta-item.has-icon {
+  --icon-size: 0.875em;
+}
+
+.resource-card__meta-label {
+  color: var(--card-muted-color);
+}
+
+.resource-card__meta-value {
+  color: var(--card-heading-color);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.resource-card > .resource-card__footer {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--resource-card-gap);
+  margin-block-start: auto;
+
+  border-block-start: var(--card-border-width) solid var(--card-border-color);
+}
+
+/* ==========================================================================
+   File Information
+   ========================================================================== */
+
+.resource-card__file {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+
+  gap: var(--space-2);
+  min-inline-size: 0;
+
+  color: var(--card-muted-color);
+
+  font-size: var(--text-xs);
+  line-height: var(--line-height-normal);
+}
+
+.resource-card__file-type {
+  color: var(--card-heading-color);
+  font-weight: var(--font-weight-medium);
+}
+
+.resource-card__file-size {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Actions
+   ========================================================================== */
+
+// Existing .btn classes own action appearance and sizing.
+// Do not override button typography or dimensions here.
+
+.resource-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: var(--space-2);
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Compact Variant
+   ========================================================================== */
+
+.resource-card--compact {
+  --card-padding-block: var(--space-3);
+  --card-padding-inline: var(--space-3);
+  --resource-card-gap: var(--space-2);
+}
+
+.resource-card--compact .resource-card__title {
+  font-size: var(--text-base);
+}
+
+/* ==========================================================================
+   Brief Variant
+   ========================================================================== */
+
+// Concise composition without an imposed minimum height.
+// Omit unused description or metadata elements from the markup.
+
+.resource-card--brief {
+  --resource-card-gap: var(--space-2);
+}
+
+.resource-card--brief > .resource-card__body {
+  flex: 0 1 auto;
+}
+
+.resource-card--brief .resource-card__meta {
+  margin-block-start: 0;
+}
+
+/* ==========================================================================
+   Featured Variant
+   ========================================================================== */
+
+// Emphasis within the current theme.
+// An inverse brand surface requires a complete contextual theme,
+// rather than partially changing text and background colors.
+
+.resource-card--featured {
+  --card-border-color: var(--color-primary);
+  --card-shadow: var(--shadow-md);
+}
+
+/* ==========================================================================
+   Availability
+   ========================================================================== */
+
+// Presentation only.
+// Keep information readable; disable individual unavailable actions
+// through appropriate HTML or application behavior.
+
+.resource-card:where(.is-unavailable, [data-available="false"]) {
+  --card-shadow: none;
+}
+
+/* ==========================================================================
+   Loading
+   ========================================================================== */
+
+// Compose the existing skeleton component in the markup.
+// No duplicate shimmer, hidden content, or interaction blocking.
+
+.resource-card:where(.is-loading, [aria-busy="true"]) {
+  cursor: wait;
+}
+
+/* ==========================================================================
+   Forced Colors
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .resource-card__icon {
+    border-color: CanvasText;
+    background-color: Canvas;
+    color: CanvasText;
+  }
+
+  .resource-card__title-link {
+    color: LinkText;
+  }
+}

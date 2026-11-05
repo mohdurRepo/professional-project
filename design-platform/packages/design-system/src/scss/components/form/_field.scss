@@ -1,0 +1,135 @@
+/* Field wrapper */
+
+.form-field {
+  --form-field-end-space: 4.5rem;
+  --form-field-action-inset: var(--space-1);
+
+  position: relative;
+
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+/* Leading icon */
+
+.form-field > .form-field-icon {
+  --icon-size: var(--form-control-indicator-size);
+
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: calc(
+    (var(--form-control-indicator-space) - var(--icon-size)) / 2
+  );
+
+  color: var(--form-help-color);
+  pointer-events: none;
+
+  transform: translateY(-50%);
+}
+
+.form-field-icon-start > .form-control {
+  padding-inline-start: var(--form-control-indicator-space);
+}
+
+.form-field:focus-within > .form-field-icon {
+  color: var(--form-control-focus-border-color);
+}
+
+.form-field:has(> .form-control:disabled) > .form-field-icon {
+  color: var(--form-control-disabled-color);
+}
+
+/* Trailing content */
+
+// Increase --form-field-end-space when the action needs a wider label.
+.form-field-content-end > .form-control {
+  padding-inline-end: var(--form-field-end-space);
+}
+
+/* Field action */
+
+.form-field > .form-field-action {
+  appearance: none;
+
+  position: absolute;
+  inset-block: var(--form-field-action-inset);
+  inset-inline-end: var(--form-field-action-inset);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--form-control-gap);
+
+  min-inline-size: 2.5rem;
+  padding-inline: var(--space-2);
+
+  border: 0;
+  border-radius: var(--radius-sm);
+
+  background-color: transparent;
+  color: var(--form-field-action-color);
+
+  font: inherit;
+  font-size: var(--form-help-font-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--form-label-line-height);
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--form-control-transition),
+    color var(--form-control-transition);
+}
+
+@media (hover: hover) {
+  .form-field
+    > .form-field-action:where(
+      :hover:not(:disabled):not([aria-disabled="true"])
+    ) {
+    background-color: var(--form-field-action-hover-bg);
+    color: var(--form-field-action-hover-color);
+  }
+}
+
+.form-field
+  > .form-field-action:where(
+    :is(:active, [aria-pressed="true"])
+      :not(:disabled)
+      :not([aria-disabled="true"])
+  ) {
+  background-color: var(--form-field-action-active-bg);
+  color: var(--form-field-action-active-color);
+}
+
+.form-field > .form-field-action:focus-visible {
+  outline: var(--form-control-focus-outline-width) solid
+    var(--form-control-focus-outline-color);
+  outline-offset: var(--form-control-focus-outline-offset);
+}
+
+.form-field > .form-field-action:where(:disabled, [aria-disabled="true"]) {
+  color: var(--form-field-action-disabled-color);
+  cursor: not-allowed;
+}
+
+/* Forced colors */
+
+@media (forced-colors: active) {
+  .form-field > .form-field-icon,
+  .form-field:focus-within > .form-field-icon {
+    color: CanvasText;
+  }
+
+  .form-field > .form-field-action {
+    color: ButtonText;
+  }
+
+  .form-field > .form-field-action:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .form-field > .form-field-action:where(:disabled, [aria-disabled="true"]),
+  .form-field:has(> .form-control:disabled) > .form-field-icon {
+    color: GrayText;
+  }
+}

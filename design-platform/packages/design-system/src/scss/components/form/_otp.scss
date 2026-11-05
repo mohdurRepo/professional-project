@@ -1,0 +1,64 @@
+@use "../../abstracts" as ds;
+@use "control";
+
+/* Verification-code group */
+
+.form-otp {
+  --form-otp-input-size: 3rem;
+  --form-otp-gap: var(--space-2);
+  --form-otp-font-size: var(--text-xl);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--form-otp-gap);
+
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Verification-code cell */
+
+.form-otp-input {
+  @extend .form-control;
+
+  flex: 0 1 var(--form-otp-input-size);
+
+  inline-size: var(--form-otp-input-size);
+  min-block-size: var(--form-otp-input-size);
+
+  padding-block: var(--space-1);
+  padding-inline: 0;
+
+  font-size: var(--form-otp-font-size);
+  font-weight: var(--form-label-font-weight);
+  font-variant-numeric: tabular-nums;
+
+  text-align: center;
+}
+
+/* Optional separator */
+
+.form-otp-separator {
+  flex: 0 0 auto;
+
+  color: var(--form-help-color);
+  font-size: var(--text-lg);
+  line-height: var(--form-control-line-height);
+
+  user-select: none;
+}
+
+/* Compact viewports */
+
+@include ds.respond-down("sm") {
+  .form-otp {
+    --form-otp-input-size: clamp(2.25rem, 12vw, 2.75rem);
+    --form-otp-gap: var(--space-1);
+    --form-otp-font-size: var(--text-lg);
+  }
+}

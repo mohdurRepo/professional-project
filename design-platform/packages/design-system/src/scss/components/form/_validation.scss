@@ -1,0 +1,107 @@
+/* Shared validation state */
+
+@mixin -state($color) {
+  --form-state-color: #{$color};
+  --form-control-border-color: var(--form-state-color);
+  --form-control-hover-border-color: var(--form-state-color);
+}
+
+/* Explicit state on a field, group, or control */
+
+:where(
+  .form-group,
+  .form-fieldset,
+  .form-field,
+  .form-select-wrap,
+  .form-file,
+  .form-otp,
+  .input-group,
+  .form-control,
+  .form-select,
+  .form-check-input,
+  .form-switch-input,
+  .form-file-input,
+  .form-otp-input
+).is-valid {
+  @include -state(var(--form-valid-color));
+}
+
+:where(
+  .form-group,
+  .form-fieldset,
+  .form-field,
+  .form-select-wrap,
+  .form-file,
+  .form-otp,
+  .input-group,
+  .form-control,
+  .form-select,
+  .form-check-input,
+  .form-switch-input,
+  .form-file-input,
+  .form-otp-input
+).is-invalid {
+  @include -state(var(--form-invalid-color));
+}
+
+/* Invalid state on the control itself */
+
+:where(
+    .form-control,
+    .form-select,
+    .form-check-input,
+    .form-switch-input,
+    .form-file-input,
+    .form-otp-input
+  )[aria-invalid]:not([aria-invalid="false"]) {
+  @include -state(var(--form-invalid-color));
+}
+
+/* The visible boundary can belong to the wrapper. */
+
+:where(.input-group, .form-file):has(
+  > :where(.form-control, .form-file-input)[aria-invalid]:not(
+      [aria-invalid="false"]
+    )
+) {
+  @include -state(var(--form-invalid-color));
+}
+
+/* Native checkboxes and radios keep their browser-rendered marks. */
+
+.form-check-input:where(:not(:disabled):not(:focus-visible)) {
+  box-shadow: var(--form-state-color, transparent) 0 0 0 1px;
+}
+
+/* Feedback messages */
+
+.form-feedback,
+.form-success,
+.form-error {
+  margin: 0;
+
+  font-size: var(--form-help-font-size);
+  line-height: var(--form-help-line-height);
+
+  overflow-wrap: anywhere;
+}
+
+.form-feedback {
+  color: var(--form-state-color, var(--form-help-color));
+}
+
+.form-success {
+  color: var(--form-valid-color);
+}
+
+.form-error {
+  color: var(--form-invalid-color);
+}
+
+@media (forced-colors: active) {
+  .form-feedback,
+  .form-success,
+  .form-error {
+    color: CanvasText;
+  }
+}

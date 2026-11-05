@@ -1,0 +1,231 @@
+/* ==========================================================================
+   Alert
+   ========================================================================== */
+
+// Contextual message presentation.
+//
+// Announcement semantics belong to the markup:
+// do not assign role="alert" to every informational message.
+//
+// Local customization:
+// --alert-gap
+// --alert-padding-block
+// --alert-padding-inline
+
+.alert {
+  --alert-bg: var(--color-surface);
+  --alert-color: var(--color-text);
+  --alert-border: var(--color-border-control);
+  --alert-icon-color: currentColor;
+
+  --alert-icon-size: 1.25rem;
+  --alert-font-size: var(--text-sm);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--alert-gap, var(--space-3));
+
+  min-inline-size: 0;
+
+  padding-block: var(--alert-padding-block, var(--space-4));
+  padding-inline: var(--alert-padding-inline, var(--space-5));
+
+  border: 1px solid var(--alert-border);
+  border-radius: var(--radius-md);
+
+  background-color: var(--alert-bg);
+  color: var(--alert-color);
+
+  font-size: var(--alert-font-size);
+  line-height: var(--line-height-normal);
+}
+
+/* ==========================================================================
+   Icon
+   ========================================================================== */
+
+// The slot may itself be .has-icon or .svg-icon,
+// or contain a separate icon element.
+
+.alert > .alert-icon {
+  --icon-size: var(--alert-icon-size);
+
+  flex: 0 0 auto;
+  color: var(--alert-icon-color);
+}
+
+.alert > .alert-icon > :where(.has-icon, .svg-icon) {
+  --icon-size: var(--alert-icon-size);
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.alert > .alert-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+
+  gap: var(--space-1);
+  min-inline-size: 0;
+}
+
+.alert-title {
+  margin: 0;
+
+  color: inherit;
+
+  font-size: inherit;
+  font-weight: var(--font-weight-heavy);
+  line-height: var(--line-height-tight);
+
+  overflow-wrap: anywhere;
+}
+
+.alert-text {
+  margin: 0;
+
+  color: inherit;
+
+  font-size: inherit;
+  line-height: inherit;
+
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+// Links inherit the alert's foreground instead of introducing a color
+// intended for a different background.
+
+.alert-content a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-underline-offset: 0.2em;
+}
+
+.alert-content a:focus-visible {
+  outline: var(--focus-ring-width) solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Primary
+   ========================================================================== */
+
+// No dedicated primary-subtle token exists yet.
+// Use the standard surface with the primary foreground role.
+
+.alert-primary {
+  --alert-bg: var(--color-surface);
+  --alert-color: var(--color-link);
+  --alert-border: var(--color-link);
+}
+
+/* ==========================================================================
+   Status Variants
+   ========================================================================== */
+
+$-statuses: ("success", "info", "attention", "warning", "danger");
+
+@each $status in $-statuses {
+  .alert-#{$status} {
+    --alert-bg: var(--color-#{$status}-subtle);
+    --alert-color: var(--color-#{$status}-text);
+    --alert-border: var(--color-#{$status}-text);
+  }
+}
+
+/* ==========================================================================
+   Compact Size
+   ========================================================================== */
+
+.alert-sm {
+  --alert-padding-block: var(--space-3);
+  --alert-padding-inline: var(--space-4);
+  --alert-icon-size: 1rem;
+  --alert-font-size: var(--text-xs);
+}
+
+/* ==========================================================================
+   Banner
+   ========================================================================== */
+
+// Fills its containing region, not automatically the viewport.
+
+.alert-banner {
+  inline-size: 100%;
+  border-radius: var(--radius-none);
+}
+
+/* ==========================================================================
+   Dismiss Control
+   ========================================================================== */
+
+// Compose with .btn.btn-icon.
+// Keep this control's foreground suitable for the alert background.
+
+.alert > .alert-close {
+  --btn-bg: transparent;
+  --btn-color: var(--alert-color);
+  --btn-border-color: transparent;
+
+  --btn-hover-bg: var(--alert-color);
+  --btn-hover-color: var(--alert-bg);
+  --btn-hover-border-color: var(--alert-color);
+
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+}
+
+.alert > .alert-close:focus-visible {
+  outline-color: var(--alert-color);
+}
+
+/* ==========================================================================
+   Increased Contrast
+   ========================================================================== */
+
+@mixin -increased-contrast {
+  border-width: 2px;
+}
+
+// Preserve semantic colors instead of replacing every status with
+// the same black/white presentation.
+
+@media (prefers-contrast: more) {
+  :where(:root:not([data-contrast]), :root[data-contrast="system"]) .alert {
+    @include -increased-contrast;
+  }
+}
+
+:where(:root[data-contrast="high"]) .alert {
+  @include -increased-contrast;
+}
+
+/* ==========================================================================
+   Forced Colors
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .alert {
+    --alert-bg: Canvas;
+    --alert-color: CanvasText;
+    --alert-border: CanvasText;
+    --alert-icon-color: CanvasText;
+  }
+
+  .alert-content a {
+    color: LinkText;
+  }
+
+  .alert > .alert-close {
+    --btn-color: ButtonText;
+    --btn-hover-bg: Highlight;
+    --btn-hover-color: HighlightText;
+    --btn-hover-border-color: Highlight;
+  }
+}

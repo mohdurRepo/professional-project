@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Button Variants
+   ========================================================================== */
+
+// Keys match the theme's filled-action roles.
+// Values identify suitable foreground roles for outline buttons.
+//
+// Outline text is deliberately separate from the filled background:
+// bright fills are not automatically suitable as text.
+
+$-variants: (
+  "primary": "color-link",
+  "secondary": "color-text-muted",
+  "accent": "color-text",
+  "success": "color-success-text",
+  "info": "color-info-text",
+  "attention": "color-attention-text",
+  "warning": "color-warning-text",
+  "danger": "color-danger-text",
+  "light": "color-text",
+  "dark": "color-text",
+);
+
+/* ==========================================================================
+   Solid
+   ========================================================================== */
+
+@each $name, $foreground in $-variants {
+  .btn-#{$name} {
+    --btn-bg: var(--color-#{$name});
+    --btn-color: var(--color-on-#{$name});
+    --btn-border-color: var(--color-#{$name});
+
+    --btn-hover-bg: var(--color-#{$name}-hover);
+    --btn-hover-color: var(--color-on-#{$name});
+    --btn-hover-border-color: var(--color-#{$name}-hover);
+  }
+}
+
+/* ==========================================================================
+   Outline
+   ========================================================================== */
+
+@each $name, $foreground in $-variants {
+  .btn-outline-#{$name} {
+    --btn-bg: transparent;
+    --btn-color: var(--#{$foreground});
+    --btn-border-color: var(--#{$foreground});
+
+    --btn-hover-bg: var(--color-#{$name});
+    --btn-hover-color: var(--color-on-#{$name});
+    --btn-hover-border-color: var(--color-#{$name});
+  }
+}
+
+/* ==========================================================================
+   Ghost
+   ========================================================================== */
+
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-color: var(--color-text);
+  --btn-border-color: transparent;
+
+  --btn-hover-bg: var(--color-surface-hover);
+  --btn-hover-color: var(--color-text);
+  --btn-hover-border-color: transparent;
+}

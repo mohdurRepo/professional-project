@@ -1,0 +1,454 @@
+@use "../../abstracts" as ds;
+
+/* ==========================================================================
+   Card Foundation
+   ========================================================================== */
+
+// Structure and appearance only.
+//
+// No brand artwork, fixed height, automatic loading overlay,
+// or application-specific behavior.
+//
+// Both existing region naming styles remain supported:
+// .card-body and .card__body, for example.
+
+.card {
+  /* Surface */
+
+  --card-bg: var(--color-surface);
+  --card-color: var(--color-text);
+  --card-heading-color: var(--color-heading);
+  --card-muted-color: var(--color-text-muted);
+
+  /* Border and shape */
+
+  --card-border-width: 1px;
+  --card-border-style: solid;
+  --card-border-color: var(--color-border);
+  --card-hover-border-color: var(--color-border-control);
+
+  --card-radius: var(--radius-lg);
+
+  /* Elevation */
+
+  --card-shadow: var(--shadow-sm);
+  --card-hover-shadow: var(--shadow-md);
+
+  /* Spacing */
+
+  --card-padding-block: var(--space-4);
+  --card-padding-inline: var(--space-4);
+  --card-gap: var(--space-4);
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  inline-size: 100%;
+  min-inline-size: 0;
+
+  margin: 0;
+  padding: 0;
+
+  border: var(--card-border-width) var(--card-border-style)
+    var(--card-border-color);
+
+  border-radius: var(--card-radius);
+
+  background-color: var(--card-bg);
+  color: var(--card-color);
+
+  box-shadow: var(--card-shadow);
+
+  font: inherit;
+  text-align: start;
+}
+
+/* ==========================================================================
+   Shared Regions
+   ========================================================================== */
+
+// Direct-child scoping prevents an outer card from changing the regions
+// of a nested card.
+
+.card
+  > :where(
+    .card-header,
+    .card__header,
+    .card-body,
+    .card__body,
+    .card-footer,
+    .card__footer
+  ) {
+  min-inline-size: 0;
+
+  padding-block: var(--card-padding-block);
+  padding-inline: var(--card-padding-inline);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.card > :where(.card-header, .card__header) {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: var(--card-gap);
+}
+
+/* ==========================================================================
+   Body
+   ========================================================================== */
+
+.card > :where(.card-body, .card__body) {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+
+  gap: var(--card-gap);
+}
+
+// Shared spacing between adjacent undivided regions.
+// A divided header retains padding on both sides of its separator.
+
+.card
+  > :where(
+    .card-header:not(.card-header--divided):not(.card__header--divided),
+    .card__header:not(.card-header--divided):not(.card__header--divided)
+  )
+  + :where(.card-body, .card__body) {
+  padding-block-start: 0;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.card > :where(.card-footer, .card__footer) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: var(--card-gap);
+}
+
+.card
+  > :where(.card-body, .card__body)
+  + :where(
+    .card-footer:not(.card-footer--divided):not(.card__footer--divided),
+    .card__footer:not(.card-footer--divided):not(.card__footer--divided)
+  ) {
+  padding-block-start: 0;
+}
+
+/* ==========================================================================
+   Dividers
+   ========================================================================== */
+
+.card > :where(.card-header--divided, .card__header--divided) {
+  border-block-end: var(--card-border-width) solid var(--card-border-color);
+}
+
+.card > :where(.card-footer--divided, .card__footer--divided) {
+  border-block-start: var(--card-border-width) solid var(--card-border-color);
+}
+
+/* ==========================================================================
+   Heading Group
+   ========================================================================== */
+
+.card__heading {
+  display: grid;
+  align-content: start;
+
+  gap: var(--space-1);
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+.card-title,
+.card__title {
+  margin: 0;
+
+  color: var(--card-heading-color);
+
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-heavy);
+  line-height: var(--line-height-tight);
+
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.card-subtitle,
+.card__subtitle {
+  margin: 0;
+
+  color: var(--card-muted-color);
+
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+
+  overflow-wrap: anywhere;
+}
+
+.card-text,
+.card__text {
+  margin: 0;
+
+  color: var(--card-color);
+
+  font-size: var(--text-base);
+  line-height: var(--line-height-relaxed);
+
+  overflow-wrap: anywhere;
+}
+
+.card-muted,
+.card__muted {
+  color: var(--card-muted-color);
+}
+
+/* ==========================================================================
+   Media
+   ========================================================================== */
+
+// Media clips itself; the card root does not clip focus indicators.
+//
+// Without --card-media-ratio, media keeps its natural proportions.
+// Set a ratio when cropping is required.
+
+.card > :where(.card-media, .card__media) {
+  min-inline-size: 0;
+  overflow: hidden;
+
+  aspect-ratio: var(--card-media-ratio, auto);
+  background-color: var(--color-surface-alt);
+}
+
+.card > :where(.card-media, .card__media):first-child {
+  border-start-start-radius: max(
+    0px,
+    calc(var(--card-radius) - var(--card-border-width))
+  );
+
+  border-start-end-radius: max(
+    0px,
+    calc(var(--card-radius) - var(--card-border-width))
+  );
+}
+
+.card > :where(.card-media, .card__media):last-child {
+  border-end-start-radius: max(
+    0px,
+    calc(var(--card-radius) - var(--card-border-width))
+  );
+
+  border-end-end-radius: max(
+    0px,
+    calc(var(--card-radius) - var(--card-border-width))
+  );
+}
+
+:where(.card-media, .card__media) > :where(img, picture, video) {
+  display: block;
+  inline-size: 100%;
+}
+
+:where(.card-media, .card__media) > :where(img, video),
+:where(.card-media, .card__media) > picture > img {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+// Opt-in cropped media.
+
+.card--cropped-media
+  :where(.card-media, .card__media)
+  > :where(img, picture, video),
+.card--cropped-media :where(.card-media, .card__media) > picture > img {
+  block-size: 100%;
+}
+
+.card--cropped-media :where(.card-media, .card__media) :where(img, video) {
+  object-fit: cover;
+  object-position: var(--card-media-position, center);
+}
+
+/* ==========================================================================
+   Actions
+   ========================================================================== */
+
+.card-actions,
+.card__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: var(--space-2);
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Density
+   ========================================================================== */
+
+.card--compact {
+  --card-padding-block: var(--space-3);
+  --card-padding-inline: var(--space-3);
+  --card-gap: var(--space-3);
+}
+
+.card--comfortable {
+  --card-padding-block: var(--space-6);
+  --card-padding-inline: var(--space-6);
+  --card-gap: var(--space-5);
+}
+
+/* ==========================================================================
+   Surface and Elevation
+   ========================================================================== */
+
+.card--alt {
+  --card-bg: var(--color-surface-alt);
+}
+
+.card--flat {
+  --card-shadow: none;
+  --card-hover-shadow: none;
+}
+
+.card--borderless {
+  --card-border-width: 0px;
+  --card-shadow: none;
+}
+
+.card--elevated {
+  --card-shadow: var(--shadow-md);
+  --card-hover-shadow: var(--shadow-lg);
+}
+
+/* ==========================================================================
+   Interactive Presentation
+   ========================================================================== */
+
+// Apply only when the card itself is a native interactive element.
+// A card containing separate actions does not need this modifier.
+//
+// No default lift or image zoom.
+
+.card--interactive {
+  appearance: none;
+  text-decoration: none;
+  cursor: pointer;
+
+  @include ds.transition((border-color, box-shadow), "fast");
+}
+
+@media (hover: hover) {
+  .card--interactive:where(
+    :hover:not(:disabled):not(.is-disabled):not([aria-disabled="true"]):not(
+        [aria-busy="true"]
+      )
+  ) {
+    border-color: var(--card-hover-border-color);
+    box-shadow: var(--card-hover-shadow);
+  }
+}
+
+.card--interactive:focus-visible {
+  @include ds.focus-ring;
+}
+
+/* ==========================================================================
+   Selected Presentation
+   ========================================================================== */
+
+// These selectors provide appearance only.
+// aria-selected requires an appropriate widget role and interaction model.
+
+.card:where(.is-selected, [data-selected="true"], [aria-selected="true"]) {
+  border-color: var(--color-primary);
+
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+}
+
+/* ==========================================================================
+   Disabled Presentation
+   ========================================================================== */
+
+// Only native disabled controls disable interaction automatically.
+
+.card:where(:disabled, .is-disabled, [aria-disabled="true"]) {
+  --card-bg: var(--color-disabled);
+  --card-color: var(--color-on-disabled);
+  --card-heading-color: var(--color-on-disabled);
+  --card-muted-color: var(--color-on-disabled);
+  --card-border-color: var(--color-border-disabled);
+
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Busy Presentation
+   ========================================================================== */
+
+// Do not hide content or block interaction implicitly.
+// Compose skeletons and manage interaction in the consuming application.
+
+.card[aria-busy="true"] {
+  cursor: wait;
+}
+
+/* ==========================================================================
+   Forced Colors
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .card {
+    --card-bg: Canvas;
+    --card-color: CanvasText;
+    --card-heading-color: CanvasText;
+    --card-muted-color: CanvasText;
+    --card-border-color: CanvasText;
+
+    box-shadow: none;
+  }
+
+  .card--interactive:where(:hover, :focus-visible),
+  .card:where(.is-selected, [data-selected="true"], [aria-selected="true"]) {
+    border-color: Highlight;
+  }
+
+  .card:where(:disabled, .is-disabled, [aria-disabled="true"]) {
+    --card-color: GrayText;
+    --card-heading-color: GrayText;
+    --card-muted-color: GrayText;
+    --card-border-color: GrayText;
+  }
+}
+
+/* ==========================================================================
+   Print
+   ========================================================================== */
+
+@media print {
+  .card {
+    --card-bg: transparent;
+    --card-color: #000000;
+    --card-heading-color: #000000;
+    --card-muted-color: #000000;
+    --card-border-color: #000000;
+
+    box-shadow: none;
+  }
+}

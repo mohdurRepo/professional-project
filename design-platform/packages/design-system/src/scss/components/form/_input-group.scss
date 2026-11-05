@@ -1,0 +1,175 @@
+/* Input group */
+
+.input-group {
+  --input-group-border-color: var(--form-control-border-color);
+  --input-group-divider-color: var(--form-control-border-color);
+
+  display: flex;
+  align-items: stretch;
+
+  inline-size: 100%;
+  min-inline-size: 0;
+
+  overflow: hidden;
+
+  border: var(--form-control-border-width) solid var(--input-group-border-color);
+  border-radius: var(--form-control-radius);
+
+  background-color: var(--form-control-bg);
+  transition: border-color var(--form-control-transition);
+}
+
+/* Control */
+
+.input-group > .form-control {
+  flex: 1 1 0;
+  min-inline-size: 0;
+
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.input-group > .form-control:focus-visible {
+  // The group draws the ring while this control has visible focus.
+  outline: none;
+}
+
+.input-group > .form-control:where([readonly]) {
+  background-color: var(--form-control-readonly-bg);
+}
+
+.input-group > .form-control:where(:disabled) {
+  background-color: var(--form-control-disabled-bg);
+}
+
+/* Text addon and action */
+
+.input-group > :where(.input-group-text, .input-group-action) {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+
+  min-inline-size: 0;
+  padding-inline: var(--form-control-padding-inline);
+
+  background-color: var(--color-surface-alt);
+
+  font: inherit;
+  line-height: var(--form-control-line-height);
+
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.input-group-text {
+  color: var(--form-help-color);
+  font-size: var(--form-control-font-size);
+}
+
+.input-group-action {
+  appearance: none;
+
+  gap: var(--form-control-gap);
+  border: 0;
+
+  color: var(--form-field-action-color);
+  font-size: var(--form-help-font-size);
+  font-weight: var(--font-weight-medium);
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--form-control-transition),
+    color var(--form-control-transition);
+}
+
+@media (hover: hover) {
+  .input-group-action:where(:hover:not(:disabled):not([aria-disabled="true"])) {
+    background-color: var(--form-field-action-hover-bg);
+    color: var(--form-field-action-hover-color);
+  }
+}
+
+.input-group-action:where(:active:not(:disabled):not([aria-disabled="true"])) {
+  background-color: var(--form-field-action-active-bg);
+  color: var(--form-field-action-active-color);
+}
+
+.input-group-action:focus-visible {
+  outline: var(--form-control-focus-outline-width) solid
+    var(--form-control-focus-outline-color);
+  outline-offset: var(--form-control-focus-outline-offset);
+}
+
+.input-group > .input-group-action:where(:disabled, [aria-disabled="true"]) {
+  background-color: var(--form-control-disabled-bg);
+  color: var(--form-control-disabled-color);
+  cursor: not-allowed;
+}
+
+/* Dividers */
+
+// Add a divider between adjacent group parts.
+.input-group
+  > :where(.form-control, .input-group-text, .input-group-action)
+  + :is(.form-control, .input-group-text, .input-group-action) {
+  border-inline-start: var(--form-control-border-width) solid
+    var(--input-group-divider-color);
+}
+
+/* Group interaction */
+
+@media (hover: hover) {
+  .input-group:where(
+    :has(> .form-control:hover:not(:disabled):not([readonly]))
+  ) {
+    --input-group-border-color: var(--form-control-hover-border-color);
+  }
+}
+
+.input-group:where(:has(> .form-control:focus)) {
+  --input-group-border-color: var(--form-control-focus-border-color);
+}
+
+.input-group:where(:has(> .form-control:focus-visible)) {
+  --input-group-border-color: var(--form-control-focus-outline-color);
+
+  outline: var(--form-control-focus-outline-width) solid
+    var(--form-control-focus-outline-color);
+  outline-offset: 0;
+}
+
+.input-group:where(:has(> .form-control:disabled)) {
+  --input-group-border-color: var(--form-control-disabled-border-color);
+  --input-group-divider-color: var(--form-control-disabled-border-color);
+}
+
+/* Forced colors */
+
+@media (forced-colors: active) {
+  .input-group {
+    --form-control-focus-outline-color: Highlight;
+    --input-group-border-color: CanvasText;
+    --input-group-divider-color: CanvasText;
+  }
+
+  .input-group:where(:has(> .form-control:focus)) {
+    --input-group-border-color: Highlight;
+  }
+
+  .input-group:where(:has(> .form-control:disabled)) {
+    --input-group-border-color: GrayText;
+    --input-group-divider-color: GrayText;
+  }
+
+  .input-group > :where(.input-group-text, .input-group-action) {
+    background-color: Canvas;
+    color: CanvasText;
+  }
+
+  .input-group > .input-group-action:where(:disabled, [aria-disabled="true"]) {
+    color: GrayText;
+  }
+}

@@ -1,0 +1,166 @@
+@use "../../abstracts" as ds;
+
+/* ==========================================================================
+   Skeleton
+   ========================================================================== */
+
+// Decorative loading placeholder.
+//
+// Consumers own accessible loading announcements and content replacement.
+// Do not place real content or interactive elements inside a skeleton.
+//
+// Local customization:
+// --skeleton-base
+// --skeleton-highlight
+// --skeleton-width
+// --skeleton-height
+// --skeleton-radius
+// --skeleton-size: circle diameter
+
+.skeleton {
+  --skeleton-width: 100%;
+  --skeleton-height: 0.75rem;
+  --skeleton-radius: var(--radius-pill);
+
+  position: relative;
+  isolation: isolate;
+
+  display: block;
+
+  inline-size: var(--skeleton-width);
+  max-inline-size: 100%;
+  block-size: var(--skeleton-height);
+
+  overflow: hidden;
+  border-radius: var(--skeleton-radius);
+
+  background-color: var(--skeleton-base, var(--color-surface-alt));
+
+  pointer-events: none;
+}
+
+.skeleton::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    var(--skeleton-highlight, var(--color-surface)),
+    transparent
+  );
+
+  transform: translateX(-100%);
+  animation: ds-skeleton-loading 1.4s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Width Variants
+   ========================================================================== */
+
+.skeleton--sm {
+  --skeleton-width: 42%;
+}
+
+.skeleton--md {
+  --skeleton-width: 66%;
+}
+
+.skeleton--lg {
+  --skeleton-width: 88%;
+}
+
+/* ==========================================================================
+   Circle
+   ========================================================================== */
+
+// Automatic block size follows the constrained inline size,
+// preserving a circle when the parent becomes narrower.
+
+.skeleton--circle {
+  --skeleton-width: var(--skeleton-size, 2.5rem);
+  --skeleton-radius: 50%;
+
+  block-size: auto;
+  aspect-ratio: 1;
+}
+
+/* ==========================================================================
+   Animation
+   ========================================================================== */
+
+@keyframes ds-skeleton-loading {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+.skeleton {
+  @include ds.reduced-motion {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+/* ==========================================================================
+   Increased Contrast
+   ========================================================================== */
+
+@mixin -increased-contrast {
+  outline: 1px solid var(--color-border-control);
+  outline-offset: -1px;
+
+  &::after {
+    display: none;
+  }
+}
+
+// Follow the system unless a contrast preference is explicitly selected.
+
+@media (prefers-contrast: more) {
+  :where(:root:not([data-contrast]), :root[data-contrast="system"]) .skeleton {
+    @include -increased-contrast;
+  }
+}
+
+:where(:root[data-contrast="high"]) .skeleton {
+  @include -increased-contrast;
+}
+
+/* ==========================================================================
+   Forced Colors
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .skeleton {
+    background-color: Canvas;
+    outline: 1px solid CanvasText;
+    outline-offset: -1px;
+    forced-color-adjust: auto;
+  }
+
+  .skeleton::after {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Print
+   ========================================================================== */
+
+@media print {
+  .skeleton {
+    display: none;
+  }
+}

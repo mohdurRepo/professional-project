@@ -1,0 +1,82 @@
+@use "../../abstracts" as ds;
+
+/* Action rows and groups */
+
+.form-actions,
+.form-actions-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+
+  min-inline-size: 0;
+}
+
+.form-actions {
+  gap: var(--form-actions-gap, var(--space-3));
+  inline-size: 100%;
+}
+
+.form-actions-group {
+  gap: var(--form-actions-group-gap, var(--space-2));
+}
+
+:where(.form-actions, .form-actions-group) > * {
+  min-inline-size: 0;
+}
+
+/* Alignment */
+
+.form-actions-start {
+  justify-content: flex-start;
+}
+
+.form-actions-center {
+  justify-content: center;
+}
+
+.form-actions-between {
+  justify-content: space-between;
+}
+
+/* Fluid actions */
+
+.form-actions-fluid > .btn,
+.form-actions-fluid > .form-actions-group > .btn {
+  flex: 1 1 10rem;
+}
+
+.form-actions-fluid > .form-actions-group {
+  flex: 1 1 auto;
+}
+
+/* Submission status */
+
+.form-actions-status {
+  flex: 1 1 16rem;
+  margin: 0;
+
+  color: var(--form-help-color);
+  font-size: var(--form-help-font-size);
+  line-height: var(--form-help-line-height);
+
+  overflow-wrap: anywhere;
+}
+
+/* Narrow screens */
+
+// Use .form-actions-inline to keep the wrapping row on narrow screens.
+@include ds.respond-down("sm") {
+  .form-actions:not(.form-actions-inline),
+  .form-actions:not(.form-actions-inline) > .form-actions-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-actions:not(.form-actions-inline)
+    > :where(.btn, .form-actions-group, .form-actions-status),
+  .form-actions:not(.form-actions-inline) > .form-actions-group > .btn {
+    flex: 0 1 auto;
+    inline-size: 100%;
+  }
+}

@@ -1,0 +1,106 @@
+/* ==========================================================================
+   Icon Registry
+   ========================================================================== */
+
+// Keys preserve the existing icon-* and icon-list-* class names.
+// Values reference the original SVG filenames.
+//
+// Paths are relative to this file:
+// src/scss/components/icon/_registry.scss
+//
+// Artwork belongs in:
+// src/assets/icons/
+//
+// Keep URLs literal so Vite can process and rebase the assets.
+
+$icons: (
+  /* Interface */ "check": url("../../../assets/icons/check.svg"),
+  "search": url("../../../assets/icons/search.svg"),
+  "sun": url("../../../assets/icons/sun.svg"),
+  "close-x": url("../../../assets/icons/close-x.svg"),
+  "add-plus": url("../../../assets/icons/add-plus.svg"),
+  "minus-line": url("../../../assets/icons/minus-line.svg"),
+  "edit-pencil": url("../../../assets/icons/edit-pencil.svg"),
+  "trash-delete": url("../../../assets/icons/trash-delete.svg"),
+  "copy": url("../../../assets/icons/copy.svg"),
+  "sync-refresh": url("../../../assets/icons/sync-refresh.svg"),
+  "external-link": url("../../../assets/icons/external-link.svg"),
+  "menu-dots-vertical": url("../../../assets/icons/menu-dots-vertical.svg"),
+  /* Chevrons */ "chevron-up": url("../../../assets/icons/chevron-up.svg"),
+  "chevron-down": url("../../../assets/icons/chevron-down.svg"),
+  "chevron-right": url("../../../assets/icons/chevron-right.svg"),
+  "chevron-left": url("../../../assets/icons/chevron-left.svg"),
+  "chevron-up-bold": url("../../../assets/icons/chevron-up-bold.svg"),
+  "chevron-down-bold": url("../../../assets/icons/chevron-down-bold.svg"),
+  "chevron-right-bold": url("../../../assets/icons/chevron-right-bold.svg"),
+  "chevron-left-bold": url("../../../assets/icons/chevron-left-bold.svg"),
+  /* Direction and Trends */
+  "triangle-up": url("../../../assets/icons/triangle-up.svg"),
+  "triangle-down": url("../../../assets/icons/triangle-down.svg"),
+  "arrow-up-right": url("../../../assets/icons/arrow-up-right.svg"),
+  "trending-up": url("../../../assets/icons/trending-up.svg"),
+  "trending-down": url("../../../assets/icons/trending-down.svg"),
+  "trend-up": url("../../../assets/icons/trend-up.svg"),
+  /* Location and Language */
+  "location-pin": url("../../../assets/icons/location-pin.svg"),
+  "globe": url("../../../assets/icons/globe.svg"),
+  /* Calendar */ "calendar-add": url("../../../assets/icons/calendar-add.svg"),
+  "calendar-scheduler": url("../../../assets/icons/calendar-scheduler.svg"),
+  /* Status and Notifications */
+  "info-warning": url("../../../assets/icons/info-warning.svg"),
+  "bell": url("../../../assets/icons/bell.svg"),
+  "alert-bell": url("../../../assets/icons/alert-bell.svg"),
+  /* Favorites and Bookmarks */
+  "star-outline": url("../../../assets/icons/star-outline.svg"),
+  "star-filled": url("../../../assets/icons/star-filled.svg"),
+  "bookmark-ribbon": url("../../../assets/icons/bookmark-ribbon.svg"),
+  "bookmark-ribbon-outline":
+    url("../../../assets/icons/bookmark-ribbon-outline.svg"),
+  /* Files and Sharing */ "share": url("../../../assets/icons/share.svg"),
+  "file-download": url("../../../assets/icons/file-download.svg"),
+  "pdf-file": url("../../../assets/icons/pdf-file.svg"),
+  "folder-import": url("../../../assets/icons/folder-import.svg"),
+  /* Data and Views */
+  "filter-funnel": url("../../../assets/icons/filter-funnel.svg"),
+  "analytics-filter": url("../../../assets/icons/analytics-filter.svg"),
+  "list-bullet": url("../../../assets/icons/list-bullet.svg"),
+  "chart-bar": url("../../../assets/icons/chart-bar.svg"),
+  "segment-container": url("../../../assets/icons/segment-container.svg"),
+  "card-list-view": url("../../../assets/icons/card-list-view.svg"),
+  "grid-bento-view": url("../../../assets/icons/grid-bento-view.svg"),
+  "panel-dashboard": url("../../../assets/icons/panel-dashboard.svg"),
+  "network-radar": url("../../../assets/icons/network-radar.svg"),
+  "analytics-steps": url("../../../assets/icons/analytics-steps.svg"),
+  /* Communication */
+  "telephone-support": url("../../../assets/icons/telephone-support.svg"),
+  "telephone-handle": url("../../../assets/icons/telephone-handle.svg"),
+  "scanner-fax": url("../../../assets/icons/scanner-fax.svg"),
+  "inbox-email": url("../../../assets/icons/inbox-email.svg"),
+  "headset-support": url("../../../assets/icons/headset-support.svg"),
+  "mailbox-split": url("../../../assets/icons/mailbox-split.svg"),
+  "at-sign": url("../../../assets/icons/at-sign.svg"),
+  /* Account and Security */ "eye": url("../../../assets/icons/eye.svg"),
+  "eye-off": url("../../../assets/icons/eye-off.svg"),
+  "key": url("../../../assets/icons/key.svg"),
+  "avatar": url("../../../assets/icons/avatar.svg"),
+  "history-clock": url("../../../assets/icons/history-clock.svg"),
+  "logout-door": url("../../../assets/icons/logout-door.svg"),
+  /* Media */ "play-circle": url("../../../assets/icons/play-circle.svg"),
+  "play": url("../../../assets/icons/play.svg"),
+  /* Appearance */
+  "theme-palette": url("../../../assets/icons/theme-palette.svg"),
+  /* Currency */ "riyal": url("../../../assets/icons/riyal-symbol.svg"),
+  "riyal-parentheses": url("../../../assets/icons/riyal-parentheses.svg"),
+  /* Social Brands */
+  "brand-whatsapp": url("../../../assets/icons/brand-whatsapp.svg"),
+  "brand-facebook": url("../../../assets/icons/brand-facebook.svg"),
+  "brand-linkedin": url("../../../assets/icons/brand-linkedin.svg"),
+  "brand-instagram": url("../../../assets/icons/brand-instagram.svg"),
+  "brand-x": url("../../../assets/icons/brand-x.svg"),
+  "brand-youtube": url("../../../assets/icons/brand-youtube.svg"),
+  /* Product Brands */ "tadawul": url("../../../assets/icons/tadawul-icon.svg"),
+  "tadawul-outline": url("../../../assets/icons/tadawul-icon-outline.svg"),
+  "tadawul-bordered": url("../../../assets/icons/tadawul-bordered-icon.svg"),
+  "edaa": url("../../../assets/icons/edaa-icon.svg"),
+  "muqassa": url("../../../assets/icons/muqassa-icon.svg")
+);

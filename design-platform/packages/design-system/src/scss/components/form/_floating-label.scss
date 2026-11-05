@@ -1,0 +1,136 @@
+/* Floating label wrapper */
+
+.form-floating {
+  --form-floating-label-block-start: var(--space-2);
+  --form-floating-padding-block-end: var(--space-2);
+  --form-floating-padding-block-start: calc(
+    var(--form-floating-label-block-start) + var(--form-help-font-size) *
+      var(--form-help-line-height) + var(--space-1)
+  );
+
+  position: relative;
+
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+/* Controls */
+
+.form-floating > :where(.form-control, .form-select) {
+  min-block-size: var(--form-control-min-block-size-lg);
+
+  padding-block-start: var(--form-floating-padding-block-start);
+  padding-block-end: var(--form-floating-padding-block-end);
+}
+
+.form-floating > textarea.form-control {
+  min-block-size: max(
+    8rem,
+    calc(
+      var(--form-floating-padding-block-start) +
+        var(--form-floating-padding-block-end) + var(--form-control-font-size) *
+        var(--form-control-line-height)
+    )
+  );
+}
+
+/* Label */
+
+.form-floating > label {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline: var(--form-control-padding-inline);
+
+  overflow: hidden;
+
+  color: var(--form-control-placeholder-color);
+
+  font-size: var(--form-control-font-size);
+  font-weight: var(--form-control-font-weight);
+  line-height: var(--form-help-line-height);
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.form-floating > textarea.form-control ~ label {
+  inset-block-start: var(--form-floating-padding-block-start);
+  transform: none;
+}
+
+/* Placeholder */
+
+.form-floating > .form-control::placeholder {
+  color: transparent;
+}
+
+.form-floating > .form-control:focus::placeholder {
+  color: var(--form-control-placeholder-color);
+}
+
+/* Raised state */
+
+.form-floating
+  > .form-control:where(
+    :focus,
+    :not(:placeholder-shown),
+    :autofill,
+    :-webkit-autofill
+  )
+  ~ label,
+.form-floating > .form-select ~ label {
+  inset-block-start: var(--form-floating-label-block-start);
+
+  color: var(--form-help-color);
+  font-size: var(--form-help-font-size);
+
+  transform: none;
+}
+
+.form-floating > :where(.form-control, .form-select):focus ~ label {
+  color: var(--form-control-focus-border-color);
+}
+
+/* Select with a custom chevron */
+
+// Keep the chevron immediately after the select, then place the label.
+.form-floating > .form-select + .form-select-icon {
+  inset-block-start: calc(
+    50% +
+      (
+        var(--form-floating-padding-block-start) - var(
+            --form-floating-padding-block-end
+          )
+      ) /
+      2
+  );
+}
+
+.form-floating > .form-select + .form-select-icon ~ label {
+  inset-inline-end: var(--form-control-indicator-space);
+}
+
+/* Disabled */
+
+.form-floating > :where(.form-control, .form-select):disabled ~ label {
+  color: var(--form-control-disabled-color);
+}
+
+/* Forced colors */
+
+@media (forced-colors: active) {
+  .form-floating > label {
+    color: CanvasText;
+  }
+
+  .form-floating > :where(.form-control, .form-select):focus ~ label {
+    color: CanvasText;
+  }
+
+  .form-floating > :where(.form-control, .form-select):disabled ~ label {
+    color: GrayText;
+  }
+}

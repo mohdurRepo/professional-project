@@ -1,3 +1,13 @@
 import "./scss/main.scss";
+import { initAlerts } from "./js/components/alert/index.js";
+import { initForms } from "./js/components/form/index.js";
 
-console.info("Design system playground is ready.");
+const disposeAlerts = initAlerts(document);
+const disposeForms = initForms(document);
+
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => {
+    disposeForms();
+    disposeAlerts();
+  });
+}
