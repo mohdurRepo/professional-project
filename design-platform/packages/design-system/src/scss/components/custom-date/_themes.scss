@@ -1,0 +1,106 @@
+@mixin -strong-boundaries {
+  .custom-date {
+    --custom-date-control-border-width: 2px;
+    --custom-date-popover-border-width: 2px;
+    --custom-date-popover-border-color: var(--color-border-strong);
+    --custom-date-popover-shadow: none;
+    --custom-date-mobile-sheet-shadow: none;
+    --custom-date-day-outside-opacity: 1;
+  }
+
+  .custom-date__day.is-today {
+    border-width: 2px;
+  }
+
+  .custom-date__day:is(.is-in-range, .is-range-preview) {
+    text-decoration-line: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .custom-date__day.is-range-preview {
+    text-decoration-style: dotted;
+  }
+
+  .custom-date__preset:is(.is-active, [aria-pressed="true"]) {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+}
+
+:where(:root[data-contrast="high"]) {
+  @include -strong-boundaries;
+}
+
+@media (prefers-contrast: more) {
+  :where(:root:not([data-contrast]), :root[data-contrast="system"]) {
+    @include -strong-boundaries;
+  }
+}
+
+@media (forced-colors: active) {
+  .custom-date {
+    --custom-date-popover-border-color: ButtonBorder;
+    --custom-date-day-outside-opacity: 1;
+    --custom-date-day-disabled-opacity: 1;
+    --custom-date-nav-disabled-opacity: 1;
+    --custom-date-disabled-opacity: 1;
+  }
+
+  .custom-date__trigger,
+  .custom-date__control--range,
+  .custom-date__preset,
+  .custom-date__action {
+    border-color: ButtonBorder;
+  }
+
+  .custom-date__day.is-today {
+    border-color: Highlight;
+  }
+
+  .custom-date__day:is(.is-in-range, .is-range-preview) {
+    border-block: 1px solid Highlight;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .custom-date__day.is-range-preview {
+    border-block-style: dotted;
+    text-decoration-style: dotted;
+  }
+
+  :is(
+    .custom-date__day:is(
+      .is-selected,
+      [aria-selected="true"],
+      .is-range-start,
+      .is-range-end
+    ),
+    .custom-date__picker-option:is(.is-selected, [aria-selected="true"]),
+    .custom-date__preset:is(.is-active, [aria-pressed="true"])
+  ):where(:not(:disabled, .is-disabled, [aria-disabled="true"])) {
+    forced-color-adjust: none;
+    border-color: Highlight;
+    background-color: Highlight;
+    color: HighlightText;
+  }
+
+  .custom-date__day:is(
+      .is-selected,
+      [aria-selected="true"],
+      .is-range-start,
+      .is-range-end
+    ):focus-visible {
+    outline-color: HighlightText;
+  }
+
+  :is(
+    .custom-date__trigger,
+    .custom-date__day,
+    .custom-date__nav,
+    .custom-date__picker-option,
+    .custom-date__preset,
+    .custom-date__action
+  ):is(:disabled, .is-disabled, [aria-disabled="true"]) {
+    color: GrayText;
+  }
+}

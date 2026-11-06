@@ -1,0 +1,105 @@
+// Range states share the calendar's day buttons and focus styles.
+.custom-date__day:is(
+    .is-in-range,
+    .is-range-preview,
+    .is-preview-start,
+    .is-preview-end
+  ):where(:not(:disabled, .is-disabled, [aria-disabled="true"])) {
+  border-color: transparent;
+  background-color: var(--custom-date-range-fill);
+  color: var(--custom-date-range-ink);
+}
+
+.custom-date__day.is-in-range {
+  --custom-date-range-fill: var(--custom-date-range-bg);
+  --custom-date-range-ink: var(--custom-date-range-color);
+}
+
+.custom-date__day:is(.is-range-preview, .is-preview-start, .is-preview-end) {
+  --custom-date-range-fill: var(--custom-date-range-preview-bg);
+  --custom-date-range-ink: var(--custom-date-range-preview-color);
+}
+
+.custom-date__day:is(.is-in-range, .is-range-preview) {
+  border-radius: 0;
+}
+
+.custom-date__day:is(.is-preview-start, .is-preview-end):where(
+    :not(:disabled, .is-disabled, [aria-disabled="true"])
+  ) {
+  border-color: var(--custom-date-focus-outline-color);
+}
+
+.custom-date__day:is(.is-range-start, .is-range-end):where(
+    :not(:disabled, .is-disabled, [aria-disabled="true"])
+  ) {
+  border-color: var(--custom-date-selected-border-color);
+  background-color: var(--custom-date-boundary-fill);
+  color: var(--custom-date-boundary-ink);
+  font-weight: var(--custom-date-selected-font-weight);
+  opacity: 1;
+}
+
+.custom-date__day.is-range-start {
+  --custom-date-boundary-fill: var(--custom-date-range-start-bg);
+  --custom-date-boundary-ink: var(--custom-date-range-start-color);
+}
+
+.custom-date__day.is-range-end {
+  --custom-date-boundary-fill: var(--custom-date-range-end-bg);
+  --custom-date-boundary-ink: var(--custom-date-range-end-color);
+}
+
+.custom-date__day:is(.is-same-day-range, .is-range-start.is-range-end) {
+  --custom-date-boundary-fill: var(--custom-date-selected-bg);
+  --custom-date-boundary-ink: var(--custom-date-selected-color);
+}
+
+// Bridge only adjacent dates in the same seven-column row.
+.custom-date__day {
+  &:where(
+    :not(
+      :disabled,
+      .is-disabled,
+      [aria-disabled="true"],
+      .is-same-day-range,
+      :nth-child(7n)
+    )
+  ) {
+    &:is(.is-range-start, .is-in-range):has(
+        + .custom-date__day:is(.is-in-range, .is-range-end):where(
+            :not(:disabled, .is-disabled, [aria-disabled="true"])
+          )
+      ) {
+      --custom-date-range-bridge: var(--custom-date-range-bg);
+    }
+
+    &:is(.is-preview-start, .is-range-preview):has(
+        + .custom-date__day:is(.is-range-preview, .is-preview-end):where(
+            :not(:disabled, .is-disabled, [aria-disabled="true"])
+          )
+      ) {
+      --custom-date-range-bridge: var(--custom-date-range-preview-bg);
+    }
+
+    &:is(.is-range-start, .is-in-range, .is-preview-start, .is-range-preview) {
+      overflow: visible;
+
+      &::before {
+        position: absolute;
+        inset-block: 20%;
+        inset-inline-start: calc(100% + 1px);
+        inline-size: var(--custom-date-calendar-grid-gap);
+        background-color: var(--custom-date-range-bridge, transparent);
+        pointer-events: none;
+        content: "";
+      }
+    }
+  }
+}
+
+.custom-date__range-instruction {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: var(--line-height-normal);
+}

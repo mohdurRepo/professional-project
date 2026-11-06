@@ -1,0 +1,20 @@
+// Transition durations already follow the shared motion tokens.
+@mixin -reduce-date-motion {
+  .custom-date__popover-shell,
+  .custom-date__popover-main,
+  .custom-date__picker-grid {
+    scroll-behavior: auto;
+  }
+
+  :is(.custom-date__nav, .custom-date__day):active:not(:disabled) {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @include -reduce-date-motion;
+}
+
+:where(:root[data-motion-preference="reduce"]) {
+  @include -reduce-date-motion;
+}

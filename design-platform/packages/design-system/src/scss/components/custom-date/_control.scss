@@ -1,0 +1,213 @@
+/* Shared trigger and action spacing */
+
+.custom-date__control {
+  --_date-indicator-inset: calc(
+    var(--custom-date-control-padding-inline) +
+      var(--custom-date-indicator-size) + var(--custom-date-control-gap)
+  );
+  --_date-clear-space: 0px;
+}
+
+.custom-date__control:has(> .custom-date__clear:not([hidden])) {
+  --_date-clear-space: calc(
+    var(--custom-date-clear-size) + var(--custom-date-control-gap)
+  );
+}
+
+.custom-date__trigger {
+  appearance: none;
+
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: var(--custom-date-control-min-block-size);
+
+  padding-block: var(--custom-date-control-padding-block);
+  padding-inline-start: var(--custom-date-control-padding-inline);
+  padding-inline-end: calc(
+    var(--_date-indicator-inset) + var(--_date-clear-space)
+  );
+
+  border: var(--custom-date-control-border-width) solid
+    var(--custom-date-border-color);
+  border-radius: var(--custom-date-control-radius);
+
+  background-color: var(--custom-date-bg);
+  color: var(--custom-date-color);
+
+  font: inherit;
+  text-align: start;
+
+  cursor: pointer;
+  transition: border-color var(--custom-date-transition);
+}
+
+/* Date values */
+
+.custom-date__value {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.custom-date__value.is-placeholder,
+.custom-date__range-start.is-placeholder,
+.custom-date__range-end.is-placeholder {
+  color: var(--custom-date-placeholder-color);
+}
+
+.custom-date__value[dir="ltr"],
+.custom-date__date-value {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Shared range border */
+
+.custom-date__control--range {
+  --_date-inner-radius: max(
+    0px,
+    calc(
+      var(--custom-date-control-radius) - var(
+          --custom-date-control-border-width
+        )
+    )
+  );
+
+  border: var(--custom-date-control-border-width) solid
+    var(--custom-date-border-color);
+  border-radius: var(--custom-date-control-radius);
+
+  background-color: var(--custom-date-bg);
+}
+
+.custom-date__control--range > .custom-date__trigger {
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-1);
+
+  inline-size: auto;
+
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.custom-date__control--range > .custom-date__trigger--start {
+  padding-inline-end: var(--custom-date-control-padding-inline);
+
+  border-start-start-radius: var(--_date-inner-radius);
+  border-end-start-radius: var(--_date-inner-radius);
+}
+
+.custom-date__control--range > .custom-date__trigger--end {
+  border-inline-start: var(--custom-date-control-border-width) solid
+    var(--custom-date-border-color);
+  border-start-end-radius: var(--_date-inner-radius);
+  border-end-end-radius: var(--_date-inner-radius);
+}
+
+.custom-date__boundary-label {
+  color: var(--form-help-color);
+  font-size: var(--form-help-font-size);
+  line-height: var(--form-help-line-height);
+}
+
+.custom-date__range-start,
+.custom-date__range-end {
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+}
+
+/* Optional labels above the range */
+
+.custom-date__boundary-labels,
+.custom-date__control--labels-above {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.custom-date__boundary-labels {
+  margin-block-end: var(--space-1);
+}
+
+.custom-date__boundary-labels > label {
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.custom-date__control--labels-above > .custom-date__trigger {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Interaction */
+
+@media (hover: hover) {
+  .custom-date__trigger:where(:hover:not(:disabled)) {
+    border-color: var(--custom-date-hover-border-color);
+  }
+
+  .custom-date__control--range
+    > .custom-date__trigger:where(:hover:not(:disabled)) {
+    background-color: var(--color-surface-hover);
+  }
+}
+
+.custom-date--range:where(.is-open)[data-active-boundary="start"]
+  .custom-date__trigger--start,
+.custom-date--range:where(.is-open)[data-active-boundary="end"]
+  .custom-date__trigger--end {
+  background-color: var(--color-surface-selected);
+  color: var(--color-on-surface-selected);
+}
+
+.custom-date__trigger:focus-visible {
+  outline: var(--custom-date-focus-outline-width) solid
+    var(--custom-date-focus-outline-color);
+  outline-offset: var(--custom-date-focus-outline-offset);
+}
+
+.custom-date__control:not(.custom-date__control--range)
+  > .custom-date__trigger:focus-visible {
+  border-color: var(--custom-date-focus-outline-color);
+}
+
+/* Calendar indicator and clear action */
+
+.custom-date__indicator,
+.custom-date__clear {
+  position: absolute;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-date__indicator {
+  --icon-size: var(--custom-date-indicator-size);
+
+  inset-inline-end: var(--custom-date-control-padding-inline);
+
+  color: var(--custom-date-indicator-color);
+  pointer-events: none;
+}
+
+// JavaScript will compose this with .btn.btn-icon.btn-ghost.
+.custom-date__clear {
+  --btn-min-size: var(--custom-date-clear-size);
+  --btn-radius: var(--custom-date-clear-radius);
+  --btn-color: var(--custom-date-clear-color);
+  --btn-hover-bg: var(--custom-date-clear-hover-bg);
+  --btn-hover-color: var(--custom-date-clear-hover-color);
+
+  inset-inline-end: var(--_date-indicator-inset);
+  z-index: 1;
+}
+
+.custom-date__clear[hidden] {
+  display: none;
+}

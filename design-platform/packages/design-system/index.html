@@ -1526,37 +1526,7 @@
           </div>
         </div>
       </div>
-      <div class="custom-select is-enhanced">
-        <div class="custom-select__interface">
-          <div class="custom-select__control">
-            <button class="custom-select__trigger" type="button">
-              <span class="custom-select__value">
-                Central region with a deliberately long display name
-              </span>
-              <span
-                class="custom-select__indicator has-icon icon-chevron-down"
-                aria-hidden="true"
-              ></span>
-            </button>
 
-            <button
-              class="custom-select__clear has-icon icon-close-x"
-              type="button"
-              aria-label="Clear region"
-            ></button>
-          </div>
-          <div
-            class="custom-select__popover is-positioned is-open"
-            style="
-              --custom-select-popover-top: 6rem;
-              --custom-select-popover-left: 1rem;
-              --custom-select-popover-inline-size: 20rem;
-            "
-          >
-            <p class="p-3">Dropdown panel preview</p>
-          </div>
-        </div>
-      </div>
       <div class="custom-select__search has-query">
         <div class="custom-select__search-field">
           <span
@@ -1644,6 +1614,61 @@
         </button>
       </div>
     </form>
+    <section class="stack" aria-labelledby="date-test-heading">
+      <h2 id="date-test-heading">Custom Date</h2>
+
+      <div class="stack stack--xs">
+        <label class="form-label" for="test-report-date">Report date</label>
+
+        <div class="custom-date" data-custom-date data-clearable>
+          <div class="custom-date__fallback">
+            <input
+              class="form-control custom-date__native"
+              id="test-report-date"
+              name="reportDate"
+              type="date"
+            />
+          </div>
+        </div>
+      </div>
+
+      <fieldset class="form-fieldset">
+        <legend class="form-legend">Reporting period</legend>
+
+        <div
+          class="custom-date"
+          data-custom-date-range
+          data-date-labels="above"
+          data-clearable
+        >
+          <div class="custom-date__fallback custom-date__native-range">
+            <div class="stack stack--xs">
+              <label class="form-label" for="test-start-date">Start date</label>
+              <input
+                class="form-control custom-date__native"
+                id="test-start-date"
+                name="startDate"
+                type="date"
+                value="2026-11-02"
+                data-date-start
+              />
+            </div>
+
+            <div class="stack stack--xs">
+              <label class="form-label" for="test-end-date">End date</label>
+              <input
+                class="form-control custom-date__native"
+                id="test-end-date"
+                name="endDate"
+                type="date"
+                value="2026-11-10"
+                data-date-end
+              />
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,64 @@
+@use "../../abstracts" as ds;
+
+@mixin native-enhancement($component) {
+  .#{$component} {
+    position: relative;
+    display: block;
+
+    inline-size: 100%;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+
+    color: var(--#{$component}-color);
+    font-family: inherit;
+    font-size: var(--#{$component}-font-size);
+    font-weight: var(--#{$component}-font-weight);
+    line-height: var(--#{$component}-line-height);
+  }
+
+  .#{$component}__fallback,
+  .#{$component}__native {
+    inline-size: 100%;
+    min-inline-size: 0;
+  }
+
+  .#{$component}__fallback {
+    position: relative;
+  }
+
+  // Older markup may still include a temporary visual trigger.
+  .#{$component}__initial-trigger {
+    display: none;
+  }
+
+  .#{$component} > .#{$component}__interface {
+    position: relative;
+    display: none;
+
+    inline-size: 100%;
+    min-inline-size: 0;
+  }
+
+  .#{$component}.is-enhanced > .#{$component}__fallback {
+    @include ds.visually-hidden;
+
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    pointer-events: none;
+  }
+
+  .#{$component}.is-enhanced > .#{$component}__interface {
+    display: block;
+  }
+
+  .#{$component}__control {
+    position: relative;
+
+    display: flex;
+    align-items: stretch;
+
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: var(--#{$component}-control-min-block-size);
+  }
+}

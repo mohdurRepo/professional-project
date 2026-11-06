@@ -1,0 +1,15 @@
+@use "../form/native-enhancement" as form;
+
+@include form.native-enhancement("custom-date");
+
+.custom-date__native-range {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+
+  gap: var(--custom-date-range-gap);
+  min-inline-size: 0;
+}
+
+.custom-date__native-range > * {
+  min-inline-size: 0;
+}

@@ -1,0 +1,109 @@
+/* Validation */
+
+:where(.custom-date.is-valid, .form-group.is-valid .custom-date)
+  .custom-date__control {
+  --_date-validation-color: var(--custom-date-valid-color);
+}
+
+:where(
+    .custom-date.is-invalid,
+    .form-group.is-invalid .custom-date,
+    .custom-date:has(.custom-date__native[aria-invalid="true"])
+  )
+  .custom-date__control {
+  --_date-validation-color: var(--custom-date-invalid-color);
+  --custom-date-focus-outline-color: var(--custom-date-invalid-color);
+}
+
+:where(
+    .custom-date:is(.is-valid, .is-invalid),
+    .form-group:is(.is-valid, .is-invalid) .custom-date,
+    .custom-date:has(.custom-date__native[aria-invalid="true"])
+  )
+  .custom-date__control {
+  --custom-date-border-color: var(--_date-validation-color);
+  --custom-date-hover-border-color: var(--_date-validation-color);
+  --custom-date-indicator-color: var(--_date-validation-color);
+}
+
+/* Open and native focus handoff */
+
+.custom-date:where(.is-open, .is-native-focused) .custom-date__control {
+  --custom-date-border-color: var(
+    --_date-validation-color,
+    var(--custom-date-focus-color)
+  );
+  --custom-date-indicator-color: var(
+    --_date-validation-color,
+    var(--custom-date-focus-color)
+  );
+}
+
+.custom-date.is-native-focused .custom-date__control {
+  outline: var(--custom-date-focus-outline-width) solid
+    var(--custom-date-focus-outline-color);
+  outline-offset: var(--custom-date-focus-outline-offset);
+}
+
+.custom-date__control:focus-within {
+  z-index: 1;
+}
+
+/* Availability */
+
+.custom-date:is(.is-readonly, :has(:where(.custom-date__native[readonly])))
+  .custom-date__control {
+  --custom-date-bg: var(--custom-date-readonly-bg);
+  --custom-date-border-color: var(--custom-date-readonly-border-color);
+  --custom-date-hover-border-color: var(--custom-date-readonly-border-color);
+  --custom-date-color: var(--custom-date-readonly-color);
+}
+
+.custom-date:is(.is-readonly, :has(:where(.custom-date__native[readonly])))
+  .custom-date__trigger {
+  cursor: default;
+}
+
+.custom-date:where(
+    .is-loading,
+    [aria-busy="true"],
+    :has(.custom-date__trigger[aria-busy="true"])
+  )
+  .custom-date__trigger {
+  cursor: wait;
+}
+
+.custom-date:is(.is-disabled, :has(:where(.custom-date__native:disabled)))
+  .custom-date__control {
+  --custom-date-bg: var(--custom-date-disabled-bg);
+  --custom-date-border-color: var(--custom-date-disabled-border-color);
+  --custom-date-hover-border-color: var(--custom-date-disabled-border-color);
+  --custom-date-color: var(--custom-date-disabled-color);
+  --custom-date-indicator-color: var(--custom-date-disabled-color);
+
+  opacity: var(--custom-date-disabled-opacity);
+}
+
+.custom-date:is(.is-disabled, :has(:where(.custom-date__native:disabled)))
+  .custom-date__trigger,
+.custom-date__trigger:disabled {
+  cursor: not-allowed;
+}
+
+.custom-date:is(
+    .is-disabled,
+    .is-readonly,
+    .is-loading,
+    [aria-busy="true"],
+    :has(
+      .custom-date__native:is(:disabled, [readonly]),
+      .custom-date__trigger[aria-busy="true"]
+    )
+  )
+  .custom-date__control {
+  --_date-clear-space: 0px;
+
+  > .custom-date__clear {
+    display: none;
+  }
+}

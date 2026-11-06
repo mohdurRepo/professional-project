@@ -1,0 +1,79 @@
+@use "../../abstracts" as ds;
+@use "../form/popover-frame" as form;
+
+@include form.popover-frame(
+  "custom-date",
+  $inline-size: var(
+      --custom-date-positioned-inline-size,
+      var(--custom-date-popover-inline-size)
+    ),
+  $max-inline-size: var(--custom-date-popover-max-inline-size)
+);
+
+/* Initial measurement with the existing date positioner */
+
+.custom-date__popover.is-open:not(.is-positioned, [hidden]) {
+  display: flex;
+  visibility: hidden;
+}
+
+/* Calendar shell and scrolling region */
+
+.custom-date__popover-shell {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+
+.custom-date__popover-main {
+  flex: 1 1 auto;
+
+  min-inline-size: 0;
+  min-block-size: 0;
+  padding: var(--custom-date-popover-padding);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Calendar columns */
+
+.custom-date__calendars {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+
+  min-inline-size: 0;
+}
+
+:where(.custom-date--range, .custom-date__popover--range)
+  .custom-date__calendars {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--custom-date-calendar-panel-space);
+}
+
+/* Footer frame */
+
+.custom-date__popover-footer {
+  flex: 0 0 auto;
+
+  min-inline-size: 0;
+  padding-block: var(--custom-date-footer-padding-block);
+  padding-inline: var(--custom-date-footer-padding-inline);
+
+  border-block-start: var(--custom-date-popover-border-width) solid
+    var(--custom-date-footer-border-color);
+}
+
+.custom-date__popover-footer:where(:empty, [hidden]) {
+  display: none;
+}
+
+/* Selection announcements */
+
+.custom-date__status {
+  @include ds.visually-hidden;
+}

@@ -1,0 +1,79 @@
+@use "../../abstracts" as ds;
+
+// Keep both range months reachable when the columns become too narrow.
+@include ds.respond-down("md") {
+  :where(.custom-date--range, .custom-date__popover--range)
+    .custom-date__calendars {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+// Match the current JavaScript positioner's floating-sheet media query.
+@media (max-width: 575.98px) and (min-height: 32rem) {
+  .custom-date__popover {
+    inset: auto 0
+      calc(
+        var(--custom-date-mobile-sheet-block-end-gap) +
+          env(safe-area-inset-bottom, 0px)
+      );
+    margin-inline: auto;
+    inline-size: var(--custom-date-mobile-sheet-inline-size);
+    max-inline-size: var(--custom-date-mobile-sheet-inline-size);
+    max-block-size: calc(
+      var(--custom-date-mobile-sheet-max-block-size) - env(
+          safe-area-inset-bottom,
+          0px
+        )
+    );
+    border-radius: var(--custom-date-mobile-sheet-radius);
+    box-shadow: var(--custom-date-mobile-sheet-shadow);
+
+    --custom-date-popover-padding: var(--custom-date-mobile-calendar-padding);
+    --custom-date-calendar-header-min-block-size: var(
+      --custom-date-mobile-calendar-header-size
+    );
+    --custom-date-nav-size: var(--custom-date-mobile-navigation-size);
+    --custom-date-weekday-min-block-size: var(
+      --custom-date-mobile-weekday-size
+    );
+    --custom-date-day-size: var(--custom-date-mobile-day-size);
+    --custom-date-day-font-size: var(--custom-date-mobile-day-font-size);
+    --custom-date-calendar-grid-gap: var(--custom-date-mobile-calendar-row-gap);
+    --custom-date-footer-padding-block: var(
+      --custom-date-mobile-footer-padding-block
+    );
+    --custom-date-footer-padding-inline: var(
+      --custom-date-mobile-footer-padding-inline
+    );
+    --custom-date-footer-layout-gap: var(--custom-date-mobile-footer-gap);
+    --custom-date-footer-action-gap: var(--custom-date-mobile-action-gap);
+    --custom-date-action-min-block-size: var(
+      --custom-date-mobile-action-min-block-size
+    );
+    --custom-date-action-padding-inline: var(
+      --custom-date-mobile-action-padding-inline
+    );
+    --custom-date-action-font-size: var(--custom-date-mobile-action-font-size);
+  }
+
+  .custom-date__popover::backdrop {
+    background-color: var(--custom-date-mobile-backdrop-bg);
+  }
+
+  .custom-date__actions {
+    flex-basis: 100%;
+  }
+}
+
+// Let the footer scroll with the calendar when viewport height is limited.
+@media (max-height: 36rem) {
+  .custom-date__popover-shell {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .custom-date__popover-main {
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+}

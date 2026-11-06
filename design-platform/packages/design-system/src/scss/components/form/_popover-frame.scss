@@ -1,0 +1,75 @@
+@mixin popover-frame($component, $inline-size, $max-inline-size, $padding: 0) {
+  .#{$component}__popover {
+    position: fixed;
+    inset: auto;
+
+    // The positioner supplies physical viewport coordinates.
+    top: var(--#{$component}-popover-top, 0);
+    left: var(--#{$component}-popover-left, 0);
+    z-index: var(--#{$component}-popover-z-index);
+
+    display: none;
+    flex-direction: column;
+
+    inline-size: $inline-size;
+    max-inline-size: $max-inline-size;
+    min-inline-size: 0;
+    min-block-size: 0;
+    max-block-size: min(
+      var(--#{$component}-popover-max-block-size),
+      var(--#{$component}-available-block-size, 100dvh)
+    );
+
+    margin: 0;
+    padding: $padding;
+    overflow: hidden;
+
+    border: var(--#{$component}-popover-border-width) solid
+      var(--#{$component}-popover-border-color);
+    border-radius: var(--#{$component}-popover-radius);
+
+    background-color: var(--#{$component}-popover-bg);
+    color: var(--#{$component}-popover-color);
+    box-shadow: var(--#{$component}-popover-shadow);
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity var(--#{$component}-popover-duration)
+      var(--#{$component}-popover-easing);
+  }
+
+  .#{$component}__popover.is-measuring:not([hidden]) {
+    display: flex;
+    visibility: hidden;
+  }
+
+  .#{$component}__popover.is-positioned:not([hidden], .is-closing):is(
+      :not([popover]).is-open,
+      :popover-open
+    ) {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .#{$component}__popover.is-positioned.is-closing:not([hidden]):is(
+      :not([popover]),
+      :popover-open
+    ) {
+    display: flex;
+  }
+
+  .#{$component}__popover::backdrop {
+    background-color: transparent;
+  }
+
+  @starting-style {
+    .#{$component}__popover.is-positioned:not([hidden], .is-closing):is(
+        :not([popover]).is-open,
+        :popover-open
+      ) {
+      opacity: 0;
+    }
+  }
+}
