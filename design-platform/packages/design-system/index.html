@@ -1669,6 +1669,41 @@
         </div>
       </fieldset>
     </section>
+    <section class="stack" aria-labelledby="range-slider-test-heading">
+      <h2 id="range-slider-test-heading">Range Slider</h2>
+
+      <div class="range-slider">
+        <label class="form-label" for="test-volume">Volume</label>
+        <input
+          class="range-slider-input"
+          id="test-volume"
+          name="volume"
+          type="range"
+          min="0"
+          max="100"
+          step="5"
+          value="40"
+        />
+        <div class="range-slider-labels" aria-hidden="true">
+          <span>0</span>
+          <span>100</span>
+        </div>
+      </div>
+
+      <div class="range-slider">
+        <label class="form-label" for="test-locked-volume">Locked volume</label>
+        <input
+          class="range-slider-input"
+          id="test-locked-volume"
+          type="range"
+          min="0"
+          max="100"
+          step="5"
+          value="65"
+          disabled
+        />
+      </div>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

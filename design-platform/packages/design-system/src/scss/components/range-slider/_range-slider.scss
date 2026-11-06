@@ -1,0 +1,44 @@
+@use "../../abstracts" as ds;
+
+.range-slider {
+  display: grid;
+  gap: var(--space-3);
+  min-inline-size: 0;
+}
+
+.range-slider-input {
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 2.75rem;
+  margin: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+
+  &:focus-visible {
+    @include ds.focus-ring;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.range-slider-labels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: var(--line-height-normal);
+  overflow-wrap: anywhere;
+
+  > :last-child {
+    text-align: end;
+  }
+}
+
+.range-slider-value {
+  color: var(--color-heading);
+  font-weight: ds.font-weight("bold");
+  font-variant-numeric: tabular-nums;
+}
