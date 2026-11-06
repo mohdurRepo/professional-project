@@ -1,0 +1,35 @@
+@use "../../abstracts" as ds;
+
+.table-responsive {
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  overflow: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: var(--table-responsive-scroll-padding, var(--space-3));
+  scroll-padding-block-start: var(--table-scroll-head-clearance, 0px);
+
+  &:focus-visible {
+    @include ds.focus-ring;
+  }
+
+  > .table-nowrap {
+    inline-size: max-content;
+    min-inline-size: 100%;
+  }
+
+  > .table-wide {
+    min-inline-size: max(100%, var(--table-min-inline-size, 64rem));
+  }
+}
+
+// Pair with .table-sticky-head for a header pinned inside the scroll region.
+.table-responsive--bounded {
+  max-block-size: var(--table-scroll-max-block-size, min(28rem, 65dvh));
+}
+
+@include ds.respond-down("md") {
+  .table:where(:not(.table-compact, .table-comfortable)) {
+    --table-cell-padding-block: var(--space-2);
+    --table-cell-padding-inline: var(--space-3);
+  }
+}

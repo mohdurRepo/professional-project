@@ -1,0 +1,71 @@
+.table > tbody > .table-group-row {
+  --table-row-bg: var(--table-group-bg);
+  color: var(--table-group-color);
+
+  > :is(th, td) {
+    border-block: 1px solid var(--table-group-border);
+    background-color: var(--table-row-bg);
+    color: inherit;
+    font-weight: var(--table-header-font-weight);
+  }
+
+  > .table-group-fill {
+    padding: 0;
+  }
+}
+
+.table-group-label {
+  inline-size: var(--table-group-label-width, auto);
+  min-inline-size: var(--table-group-label-width, auto);
+  white-space: nowrap;
+}
+
+@for $level from 1 through 3 {
+  .table-group-row[data-table-group-level="#{$level}"] > .table-group-label {
+    --_table-group-level: #{$level};
+  }
+}
+
+.table
+  > tbody
+  > .table-group-row:where([data-table-group-level])
+  > .table-group-label {
+  padding-inline-start: calc(
+    var(--table-cell-padding-inline) + var(--_table-group-level, 0) *
+      var(--table-group-indent, var(--space-6))
+  );
+}
+
+// This label may also appear in a summary row, which sets its own row surface.
+.table :is(.table-group-row, .table-total-row) > .table-group-label-sticky {
+  position: sticky;
+  inset-inline-start: var(--table-group-sticky-offset, 0px);
+  z-index: var(--table-sticky-body-z, 2);
+  background-color: var(--table-row-bg);
+  background-clip: padding-box;
+
+  &::after {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    border-inline-end: 1px solid var(--_table-group-sticky-border);
+    pointer-events: none;
+    content: "";
+  }
+}
+
+.table-group-row {
+  --_table-group-sticky-border: var(--table-group-border);
+}
+
+.table-total-row {
+  --_table-group-sticky-border: var(--table-summary-border);
+}
+
+@media (forced-colors: active) {
+  .table > tbody > .table-group-row {
+    --table-group-bg: Canvas;
+    --table-group-color: CanvasText;
+    --table-group-border: CanvasText;
+  }
+}

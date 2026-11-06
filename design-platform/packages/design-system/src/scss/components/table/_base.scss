@@ -1,0 +1,125 @@
+@use "../../abstracts" as ds;
+
+.table {
+  --table-bg: var(--color-surface);
+  --table-color: var(--color-text);
+  --table-head-bg: var(--color-surface-selected);
+  --table-head-color: var(--color-on-surface-selected);
+  --table-head-border: var(--color-border);
+  --table-head-border-strong: var(--color-border-strong);
+  --table-body-border: var(--color-border);
+  --table-row-header-color: var(--color-heading);
+  --table-foot-bg: var(--table-head-bg);
+  --table-foot-color: var(--table-head-color);
+  --table-foot-border: var(--color-border-strong);
+
+  --table-row-hover-bg: var(--color-surface-hover);
+  --table-row-selected-bg: var(--color-surface-selected);
+  --table-group-bg: var(--color-primary);
+  --table-group-color: var(--color-on-primary);
+  --table-group-border: var(--color-primary);
+  --table-summary-bg: var(--color-surface-alt);
+  --table-summary-color: var(--color-heading);
+  --table-summary-border: var(--color-border-strong);
+
+  --table-link-color: inherit;
+  --table-link-hover-color: var(--color-primary);
+  --table-caption-color: var(--color-text-muted);
+  --table-cell-padding-block: var(--space-3);
+  --table-cell-padding-inline: var(--space-4);
+  --table-font-size: var(--text-sm);
+  --table-line-height: var(--line-height-normal);
+  --table-header-font-weight: #{ds.font-weight("bold")};
+
+  // Existing variants and integrations consume these aliases.
+  --table-border-color: var(--table-body-border);
+  --table-border-strong: var(--table-head-border-strong);
+
+  inline-size: 100%;
+  border-collapse: collapse;
+  background-color: var(--table-bg);
+  color: var(--table-color);
+  font-size: var(--table-font-size);
+  line-height: var(--table-line-height);
+}
+
+.table > :is(thead, tbody, tfoot) > :where(tr) > :is(th, td) {
+  padding-block: var(--table-cell-padding-block);
+  padding-inline: var(--table-cell-padding-inline);
+  text-align: start;
+  vertical-align: middle;
+}
+
+.table > thead > :where(tr) > :is(th, td) {
+  border-block-end: 1px solid var(--table-head-border);
+  background-color: var(--table-head-bg);
+  color: var(--table-head-color);
+}
+
+.table > tbody > tr {
+  background-color: var(--table-row-bg, var(--table-bg));
+}
+
+.table > tbody > :where(tr) > :is(th, td) {
+  border-block-end: 1px solid var(--table-body-border);
+}
+
+.table > tfoot {
+  background-color: var(--table-foot-bg);
+  color: var(--table-foot-color);
+}
+
+.table > tfoot > :where(tr) > :is(th, td) {
+  border-block-start: 1px solid var(--table-foot-border);
+}
+
+.table > :is(thead, tfoot) > :where(tr) > :is(th, td),
+.table > tbody > :where(tr) > th[scope="row"] {
+  font-weight: var(--table-header-font-weight);
+}
+
+.table > tbody > :where(tr) > th[scope="row"] {
+  color: var(--table-row-header-color);
+}
+
+.table :is(.numeric, .table-cell-numeric, [data-numeric]) {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.table a {
+  color: var(--table-link-color);
+
+  &:hover {
+    color: var(--table-link-hover-color);
+  }
+
+  &:focus-visible {
+    @include ds.focus-ring;
+  }
+}
+
+.table > caption {
+  padding-block-end: var(--space-2);
+  color: var(--table-caption-color);
+  text-align: start;
+}
+
+:where(:root[data-contrast="high"]) .table {
+  --table-head-border: var(--color-border-strong);
+  --table-body-border: var(--color-border-strong);
+  --table-group-border: var(--color-border-strong);
+}
+
+@media (forced-colors: active) {
+  .table {
+    --table-head-border: CanvasText;
+    --table-head-border-strong: CanvasText;
+    --table-body-border: CanvasText;
+    --table-foot-border: CanvasText;
+    --table-link-color: LinkText;
+    --table-link-hover-color: LinkText;
+  }
+}

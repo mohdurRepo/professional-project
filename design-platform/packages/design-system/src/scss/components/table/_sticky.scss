@@ -1,0 +1,82 @@
+// Legacy classes still pin the first one or two columns.
+$legacy-first: ":is(.table-fixed-column, .table-fixed-columns) > :is(tbody, tfoot, thead) > tr:where(:not(.table-group-row, .table-empty, .table-loading)):where(:not(thead > tr:not(:first-child))) > :first-child";
+$legacy-second: ".table-fixed-columns > :is(tbody, tfoot, thead) > tr:where(:not(.table-group-row, .table-empty, .table-loading)):where(:not(thead > tr:not(:first-child))) > :nth-child(2)";
+
+.table:where(
+  .table-sticky,
+  .table-sticky-head,
+  .table-fixed-column,
+  .table-fixed-columns,
+  :has(.table-sticky-start, .table-group-label-sticky)
+) {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table > thead {
+  --_table-sticky-surface: var(--table-sticky-head-bg, var(--table-head-bg));
+  --_table-sticky-column-z: var(--table-sticky-intersection-z, 6);
+}
+
+.table > tfoot {
+  --_table-sticky-surface: var(--table-sticky-foot-bg, var(--table-foot-bg));
+}
+
+.table-sticky-head > thead > tr > :is(th, td) {
+  position: sticky;
+  inset-block-start: var(
+    --table-sticky-row-offset,
+    var(--table-sticky-block-offset, 0px)
+  );
+  z-index: var(--table-sticky-header-z, 4);
+  background-color: var(--_table-sticky-surface);
+  background-clip: padding-box;
+}
+
+.table > :is(thead, tbody, tfoot) > :where(tr) > .table-sticky-start,
+#{$legacy-first},
+#{$legacy-second} {
+  position: sticky;
+  inset-inline-start: var(--table-sticky-offset, 0px);
+  z-index: var(--_table-sticky-column-z, var(--table-sticky-body-z, 2));
+  inline-size: var(--table-sticky-size, auto);
+  min-inline-size: var(--table-sticky-size, auto);
+  max-inline-size: var(--table-sticky-size, none);
+  background-color: var(
+    --table-row-bg,
+    var(--_table-sticky-surface, var(--table-sticky-bg, var(--table-bg)))
+  );
+  background-clip: padding-box;
+}
+
+.table-fixed-columns {
+  --table-fixed-column-1-width: 7rem;
+  --table-fixed-column-2-width: 15rem;
+}
+
+#{$legacy-first}:where(.table-fixed-columns *) {
+  --table-sticky-size: var(--table-fixed-column-1-width);
+}
+
+#{$legacy-second} {
+  --table-sticky-offset: var(--table-fixed-column-1-width);
+  --table-sticky-size: var(--table-fixed-column-2-width);
+}
+
+.table .table-sticky-start.table-sticky-boundary::after,
+#{$legacy-first}:where(.table-fixed-column:not(.table-fixed-columns) *)::after,
+#{$legacy-second}::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  border-inline-end: 1px solid
+    var(--table-sticky-boundary-color, var(--table-border-strong));
+  pointer-events: none;
+  content: "";
+}
+
+@media (forced-colors: active) {
+  .table {
+    --table-sticky-boundary-color: CanvasText;
+  }
+}

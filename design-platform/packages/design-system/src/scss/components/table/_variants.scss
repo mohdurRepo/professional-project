@@ -1,0 +1,162 @@
+.table-header-primary {
+  --table-head-bg: var(--color-primary);
+  --table-head-color: var(--color-on-primary);
+  --table-head-border: currentColor;
+  --table-head-border-strong: currentColor;
+}
+
+.table-header-grouped > thead > tr:first-child > :is(th, td) {
+  border-block-end-color: var(--table-head-border-strong);
+}
+
+.table-header-grouped > thead > :where(tr) > :is(th, td):not(:last-child) {
+  border-inline-end: 1px solid var(--table-head-border);
+}
+
+.table-header-grouped .table-column-group {
+  border-inline-start: 1px solid var(--table-head-border-strong);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.table-column-label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: var(--line-height-tight);
+  text-align: center;
+  white-space: normal;
+}
+
+// Stripe only data rows. Hover and focus take precedence in source order.
+.table-striped {
+  --table-striped-bg: var(--color-surface-alt);
+}
+
+.table-striped
+  > tbody
+  > tr:where(
+    :nth-child(
+      even
+        of
+        tr:not(.table-group-row, .table-total-row, .table-empty, .table-loading)
+    )
+  ) {
+  --table-row-bg: var(--table-striped-bg);
+}
+
+.table-hover
+  > tbody
+  > tr:where(
+    :hover:not(
+      .table-group-row,
+      .table-total-row,
+      .table-empty,
+      .table-loading,
+      .is-disabled,
+      [aria-disabled="true"]
+    )
+  ),
+.table-clickable
+  > tbody
+  > tr:where(
+    :focus-within:not(
+      .table-group-row,
+      .table-total-row,
+      .table-empty,
+      .table-loading,
+      .is-disabled,
+      [aria-disabled="true"]
+    )
+  ) {
+  --table-row-bg: var(--table-row-hover-bg);
+}
+
+.table-clickable
+  > tbody
+  > tr:where(
+    :not(
+      .table-group-row,
+      .table-total-row,
+      .table-empty,
+      .table-loading,
+      .is-disabled,
+      [aria-disabled="true"]
+    )
+  ) {
+  cursor: pointer;
+}
+
+.table-bordered {
+  border: 1px solid var(--table-border-color);
+
+  > thead {
+    --_table-grid-border: var(--table-head-border);
+  }
+
+  > tbody {
+    --_table-grid-border: var(--table-body-border);
+  }
+
+  > tfoot {
+    --_table-grid-border: var(--table-foot-border);
+  }
+
+  > :is(thead, tbody, tfoot) > :where(tr) > :is(th, td) {
+    border: 1px solid var(--_table-grid-border);
+  }
+}
+
+.table-compact {
+  --table-cell-padding-block: var(--space-2);
+  --table-cell-padding-inline: var(--space-3);
+}
+
+.table-comfortable {
+  --table-cell-padding-block: var(--space-4);
+  --table-cell-padding-inline: var(--space-5);
+}
+
+.table-nowrap > :is(thead, tbody, tfoot) > :where(tr) > :is(th, td) {
+  white-space: nowrap;
+}
+
+.table-fixed-layout {
+  table-layout: fixed;
+}
+
+.table-wide {
+  min-inline-size: var(--table-min-inline-size, 64rem);
+}
+
+.table > :is(tbody, tfoot) > .table-total-row {
+  --table-row-bg: var(--table-summary-bg);
+  background-color: var(--table-row-bg);
+  color: var(--table-summary-color);
+
+  > :is(th, td) {
+    border-color: var(--table-summary-border);
+    color: inherit;
+    font-weight: var(--table-header-font-weight);
+  }
+}
+
+.table-total-row-primary {
+  --table-summary-bg: var(--color-primary);
+  --table-summary-color: var(--color-on-primary);
+  --table-summary-border: currentColor;
+}
+
+@media (forced-colors: active) {
+  .table-header-primary {
+    --table-head-bg: Canvas;
+    --table-head-color: CanvasText;
+    --table-head-border: CanvasText;
+    --table-head-border-strong: CanvasText;
+  }
+
+  .table-clickable > tbody > tr:focus-within {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

@@ -13,11 +13,14 @@ import {
   stopObservingCustomDates,
 } from "./js/components/custom-date/index.js";
 
+import { destroyTables, initTables } from "./js/components/table/index.js";
+
 const disposeAlerts = initAlerts(document);
 const disposeForms = initForms(document);
 
 initCustomSelects(document);
 initCustomDates(document);
+initTables(document);
 
 function disposeCustomSelects() {
   stopObservingCustomSelects(document);
@@ -31,6 +34,7 @@ function disposeCustomDates() {
 
 if (import.meta.hot) {
   import.meta.hot.dispose(() => {
+    destroyTables(document);
     disposeCustomDates();
     disposeCustomSelects();
     disposeForms();

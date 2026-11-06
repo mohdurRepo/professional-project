@@ -1,0 +1,91 @@
+// Override these on an individual table shell.
+:where(.table-shell) {
+  --table-scroll-jump-block-inset: 4.5rem;
+  --table-scroll-jump-inline-inset: clamp(
+    var(--space-2),
+    3.5vi,
+    var(--space-8)
+  );
+  --table-scroll-jump-top: 0px;
+}
+
+.table-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-inline-size: 0;
+}
+
+.table-shell > :is(.table-responsive, [data-table-scroll-frame]),
+.table-shell > .table-scroll-jump {
+  grid-area: 1 / 1;
+}
+
+.table-shell > :is(.table-responsive, [data-table-scroll-frame]) {
+  min-inline-size: 0;
+  isolation: isolate;
+}
+
+.table-shell > .table-scroll-jump {
+  --btn-bg: var(--color-surface);
+  --btn-color: var(--color-text);
+  --btn-border-color: var(--color-border-control);
+  --btn-radius: var(--radius-pill);
+  --btn-hover-bg: var(--color-surface-hover);
+  --btn-hover-border-color: var(--color-border-control-hover);
+
+  position: sticky;
+  inset-block-start: calc(
+    var(--table-scroll-jump-top) + var(--table-scroll-jump-block-inset)
+  );
+  align-self: start;
+  justify-self: end;
+  margin-block-start: var(--table-scroll-jump-block-inset);
+  margin-inline-end: var(--table-scroll-jump-inline-inset);
+  z-index: 1;
+
+  box-shadow: var(--shadow-sm);
+}
+
+@supports (background-color: color-mix(in srgb, white, transparent)) {
+  .table-shell > .table-scroll-jump {
+    --btn-bg: color-mix(in srgb, var(--color-surface) 90%, transparent);
+  }
+}
+
+:where(:root[data-contrast="high"]) .table-shell > .table-scroll-jump,
+.table-shell > .table-scroll-jump:focus-visible {
+  --btn-bg: var(--color-surface);
+  --btn-border-color: var(--color-border-strong);
+}
+
+@media (prefers-contrast: more) {
+  .table-shell > .table-scroll-jump {
+    --btn-bg: var(--color-surface);
+    --btn-border-color: var(--color-border-strong);
+  }
+}
+
+@media (forced-colors: active) {
+  .table-shell > .table-scroll-jump {
+    --btn-bg: ButtonFace;
+    --btn-color: ButtonText;
+    --btn-border-color: ButtonText;
+    --btn-hover-bg: ButtonFace;
+    --btn-hover-color: ButtonText;
+    --btn-hover-border-color: ButtonText;
+
+    box-shadow: none;
+  }
+}
+
+.table-scroll-jump[hidden] {
+  display: none;
+}
+
+.table-shell
+  > .table-scroll-jump:is(
+    [data-table-scroll-direction="start"]:dir(ltr),
+    [data-table-scroll-direction="end"]:dir(rtl)
+  ) {
+  --icon-scale-x: -1;
+}

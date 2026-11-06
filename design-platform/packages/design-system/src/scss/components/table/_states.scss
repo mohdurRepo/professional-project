@@ -1,0 +1,57 @@
+.table
+  > tbody
+  > tr:where(
+    :is(.is-selected, [aria-selected="true"]):not(
+      .table-group-row,
+      .table-total-row,
+      .table-empty,
+      .table-loading
+    )
+  ) {
+  --table-row-bg: var(--table-row-selected-bg);
+  --table-row-header-color: currentColor;
+  color: var(--color-on-surface-selected);
+}
+
+.table > tbody > tr:where(.is-disabled, [aria-disabled="true"]) {
+  --table-row-header-color: currentColor;
+  color: var(--color-on-disabled);
+}
+
+.table > tbody > :is(.table-empty, .table-loading) > :is(th, td) {
+  padding-block: clamp(var(--space-8), 5vi, var(--space-16));
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.table > tbody > .table-loading > :is(th, td) {
+  font-weight: var(--font-weight-medium);
+}
+
+.table[aria-busy="true"] {
+  cursor: progress;
+}
+
+// Compose with .skeleton and its existing width modifiers.
+.table .skeleton.table-skeleton {
+  min-inline-size: min(2.5rem, 100%);
+}
+
+.table :is(.table-cell-numeric, [data-numeric], .numeric) .skeleton {
+  margin-inline-start: auto;
+}
+
+.table > :is(thead, tbody, tfoot) > :where(tr) > :is(th, td).is-updating {
+  border-block-end: 2px solid currentColor;
+}
+
+@media (forced-colors: active) {
+  .table > tbody > tr:where(.is-selected, [aria-selected="true"]) {
+    outline: 1px solid Highlight;
+    outline-offset: -1px;
+  }
+
+  .table > tbody > tr:where(.is-disabled, [aria-disabled="true"]) {
+    color: GrayText;
+  }
+}
