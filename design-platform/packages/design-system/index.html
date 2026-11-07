@@ -1989,7 +1989,162 @@
         ></button>
       </div>
     </section>
+    <section class="stack" aria-labelledby="tabs-test-heading">
+      <h2 id="tabs-test-heading">Tabs test</h2>
 
+      <div class="tabs tabs--contained" data-tabs>
+        <div class="tabs-nav" role="tablist" aria-label="Market report">
+          <button
+            class="tab-link"
+            type="button"
+            role="tab"
+            data-tab-target="tabs-test-overview"
+            aria-selected="true"
+          >
+            Overview
+          </button>
+          <button
+            class="tab-link"
+            type="button"
+            role="tab"
+            data-tab-target="tabs-test-results"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            Results
+          </button>
+          <button
+            class="tab-link"
+            type="button"
+            role="tab"
+            data-tab-target="tabs-test-archive"
+            aria-selected="false"
+            tabindex="-1"
+            disabled
+          >
+            Archive
+          </button>
+        </div>
+
+        <div class="tabs-content">
+          <div
+            class="tab-pane"
+            id="tabs-test-overview"
+            role="tabpanel"
+            tabindex="0"
+          >
+            <p>Choose Results to see the report.</p>
+          </div>
+
+          <div class="tab-pane" id="tabs-test-results" role="tabpanel" hidden>
+            <div
+              class="tabs tabs--secondary"
+              data-tabs
+              data-tabs-activation="manual"
+            >
+              <div
+                class="tabs-nav"
+                role="tablist"
+                aria-label="Results view"
+                aria-orientation="vertical"
+              >
+                <button
+                  class="tab-link"
+                  type="button"
+                  role="tab"
+                  data-tab-target="tabs-test-summary"
+                  aria-selected="true"
+                >
+                  Summary
+                </button>
+                <button
+                  class="tab-link"
+                  type="button"
+                  role="tab"
+                  data-tab-target="tabs-test-table"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  Table
+                </button>
+              </div>
+
+              <div class="tabs-content">
+                <div
+                  class="tab-pane"
+                  id="tabs-test-summary"
+                  role="tabpanel"
+                  tabindex="0"
+                >
+                  <p>Two companies are included in this report.</p>
+                </div>
+
+                <div
+                  class="tab-pane"
+                  id="tabs-test-table"
+                  role="tabpanel"
+                  hidden
+                >
+                  <div class="table-shell" data-table-shell>
+                    <div
+                      class="table-responsive"
+                      id="tabs-test-scroll"
+                      data-table-scroll
+                      role="region"
+                      aria-label="Company results"
+                      tabindex="0"
+                    >
+                      <table
+                        class="table table-wide table-striped"
+                        style="--table-min-inline-size: 64rem"
+                      >
+                        <thead>
+                          <tr>
+                            <th scope="col">Company</th>
+                            <th scope="col" class="table-cell-numeric">Q1</th>
+                            <th scope="col" class="table-cell-numeric">Q2</th>
+                            <th scope="col" class="table-cell-numeric">
+                              Total
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Atlas</th>
+                            <td class="table-cell-numeric">120</td>
+                            <td class="table-cell-numeric">130</td>
+                            <td class="table-cell-numeric">250</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Cedar</th>
+                            <td class="table-cell-numeric">90</td>
+                            <td class="table-cell-numeric">105</td>
+                            <td class="table-cell-numeric">195</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <button
+                      class="btn btn-icon btn-ghost table-scroll-jump has-icon icon-chevron-right-bold"
+                      type="button"
+                      data-table-scroll-jump
+                      aria-controls="tabs-test-scroll"
+                      aria-label="Jump to last columns"
+                      hidden
+                    ></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane" id="tabs-test-archive" role="tabpanel" hidden>
+            <p>Archive content.</p>
+          </div>
+        </div>
+      </div>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -15,12 +15,15 @@ import {
 
 import { destroyTables, initTables } from "./js/components/table/index.js";
 
+import { initTabs } from "./js/components/tabs/index.js";
+
 const disposeAlerts = initAlerts(document);
 const disposeForms = initForms(document);
 
 initCustomSelects(document);
 initCustomDates(document);
 initTables(document);
+const disposeTabs = initTabs(document);
 
 function disposeCustomSelects() {
   stopObservingCustomSelects(document);
@@ -34,6 +37,7 @@ function disposeCustomDates() {
 
 if (import.meta.hot) {
   import.meta.hot.dispose(() => {
+    disposeTabs();
     destroyTables(document);
     disposeCustomDates();
     disposeCustomSelects();
