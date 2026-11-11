@@ -2379,6 +2379,77 @@
       <button class="btn" type="button">Next focus target</button>
       <p id="dropdown-test-details">Report details</p>
     </section>
+    <section class="stack" aria-labelledby="pagination-test-heading">
+      <h2 id="pagination-test-heading">Pagination test</h2>
+
+      <nav class="pagination pagination--rounded" aria-label="Report pages">
+        <p class="pagination__summary">
+          Showing <strong>1–20</strong> of 240 reports
+        </p>
+
+        <ul class="pagination__list" role="list">
+          <li class="pagination__item">
+            <button
+              class="pagination__link pagination__link--previous"
+              type="button"
+              disabled
+            >
+              Previous
+            </button>
+          </li>
+
+          <li class="pagination__item">
+            <span
+              class="pagination__link"
+              aria-current="page"
+              aria-label="Page 1"
+              >1</span
+            >
+          </li>
+          <li class="pagination__item">
+            <a
+              class="pagination__link"
+              href="?page=2#pagination-test-heading"
+              aria-label="Page 2"
+              >2</a
+            >
+          </li>
+          <li class="pagination__item">
+            <a
+              class="pagination__link"
+              href="?page=3#pagination-test-heading"
+              aria-label="Page 3"
+              >3</a
+            >
+          </li>
+          <li class="pagination__item" aria-hidden="true">
+            <span class="pagination__ellipsis">…</span>
+          </li>
+          <li class="pagination__item">
+            <a
+              class="pagination__link"
+              href="?page=12#pagination-test-heading"
+              aria-label="Page 12"
+              >12</a
+            >
+          </li>
+
+          <li class="pagination__item pagination__item--status">
+            <span class="pagination__status"
+              >Page <strong>1</strong> of <strong>12</strong></span
+            >
+          </li>
+
+          <li class="pagination__item">
+            <a
+              class="pagination__link pagination__link--next"
+              href="?page=2#pagination-test-heading"
+              >Next</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

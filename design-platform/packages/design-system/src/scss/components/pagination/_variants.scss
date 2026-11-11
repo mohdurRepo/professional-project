@@ -1,0 +1,99 @@
+@use "../../abstracts" as ds;
+
+.pagination--start {
+  justify-content: flex-start;
+
+  > .pagination__list {
+    margin-inline-start: 0;
+  }
+}
+
+.pagination--end {
+  justify-content: flex-end;
+}
+
+.pagination--between {
+  justify-content: space-between;
+}
+
+.pagination--compact {
+  --pagination-control-size: 2.5rem;
+  --pagination-control-padding-block: var(--space-1);
+  --pagination-control-padding-inline: var(--space-1);
+
+  .pagination__link:is(
+    .pagination__link--previous,
+    .pagination__link--next,
+    .pagination__link--first,
+    .pagination__link--last
+  ) {
+    padding-inline: var(--space-2);
+  }
+}
+
+.pagination--rounded {
+  --pagination-radius: var(--radius-pill);
+}
+
+.pagination--minimal {
+  --pagination-bg: transparent;
+  --pagination-border: transparent;
+}
+
+.pagination[aria-busy="true"] {
+  cursor: progress;
+}
+
+@include ds.respond-down("sm") {
+  .pagination {
+    justify-content: center;
+    gap: var(--space-2);
+
+    > .pagination__summary {
+      flex-basis: 100%;
+      text-align: center;
+    }
+
+    > .pagination__list {
+      margin-inline: 0;
+    }
+  }
+
+  // Supplying a status item opts into Previous / Page status / Next.
+  .pagination__list:has(> .pagination__item--status) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    inline-size: 100%;
+
+    > .pagination__item {
+      display: none;
+    }
+
+    > .pagination__item--status {
+      display: inline-flex;
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: center;
+    }
+
+    > .pagination__item:has(> .pagination__link--previous) {
+      display: inline-flex;
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: start;
+    }
+
+    > .pagination__item:has(> .pagination__link--next) {
+      display: inline-flex;
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end;
+    }
+  }
+}
+
+@media print {
+  .pagination {
+    display: none;
+  }
+}

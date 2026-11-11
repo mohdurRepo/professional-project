@@ -1,0 +1,161 @@
+@use "../../abstracts" as ds;
+
+.pagination {
+  --pagination-gap: var(--space-1);
+  --pagination-layout-gap: var(--space-3);
+  --pagination-control-size: 2.75rem;
+  --pagination-control-padding-block: var(--space-2);
+  --pagination-control-padding-inline: var(--space-2);
+  --pagination-radius: var(--radius-sm);
+  --pagination-bg: var(--color-surface);
+  --pagination-color: var(--color-text);
+  --pagination-border: var(--color-border);
+  --pagination-hover-bg: var(--color-surface-hover);
+  --pagination-hover-color: var(--color-text);
+  --pagination-hover-border: var(--color-border-strong);
+  --pagination-current-bg: var(--color-primary);
+  --pagination-current-color: var(--color-on-primary);
+  --pagination-current-border: var(--color-primary);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pagination-layout-gap);
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.pagination__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pagination-gap);
+  min-inline-size: 0;
+  margin: 0;
+  margin-inline-start: auto;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination__item {
+  display: inline-flex;
+  align-items: center;
+  min-inline-size: 0;
+}
+
+.pagination__item--status {
+  display: none;
+}
+
+.pagination__link,
+.pagination__ellipsis,
+.pagination__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-inline-size: var(--pagination-control-size);
+  min-block-size: var(--pagination-control-size);
+  padding-block: var(--pagination-control-padding-block);
+  padding-inline: var(--pagination-control-padding-inline);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--line-height-tight);
+  text-align: center;
+}
+
+.pagination__link {
+  border: 1px solid var(--pagination-border);
+  border-radius: var(--pagination-radius);
+  background-color: var(--pagination-bg);
+  color: var(--pagination-color);
+  font-family: inherit;
+  font-weight: ds.font-weight("medium");
+  text-decoration: none;
+
+  &:is(a[href], button):where(
+      :not(:disabled, [aria-disabled="true"], .is-disabled)
+    ) {
+    cursor: pointer;
+  }
+
+  @media (hover: hover) {
+    &:is(a[href], button):where(
+        :not(
+          :disabled,
+          [aria-disabled="true"],
+          .is-disabled,
+          [aria-current="page"],
+          .is-current
+        )
+      ):hover {
+      border-color: var(--pagination-hover-border);
+      background-color: var(--pagination-hover-bg);
+      color: var(--pagination-hover-color);
+    }
+  }
+
+  &:focus-visible {
+    @include ds.focus-ring;
+  }
+
+  &:is([aria-current="page"], .is-current) {
+    border-color: var(--pagination-current-border);
+    background-color: var(--pagination-current-bg);
+    color: var(--pagination-current-color);
+    font-weight: ds.font-weight("bold");
+  }
+
+  &:is(:disabled, [aria-disabled="true"], .is-disabled) {
+    color: var(--color-on-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.pagination__link:is(
+  .pagination__link--previous,
+  .pagination__link--next,
+  .pagination__link--first,
+  .pagination__link--last
+) {
+  --icon-size: 0.875rem;
+  padding-inline: var(--space-3);
+}
+
+.pagination__summary,
+.pagination__ellipsis,
+.pagination__status {
+  color: var(--color-text-muted);
+}
+
+.pagination__summary {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.pagination__summary :is(strong, .pagination__summary-value),
+.pagination__status
+  :is(strong, .pagination__status-current, .pagination__status-total) {
+  color: var(--color-heading);
+  font-weight: ds.font-weight("bold");
+}
+
+@media (forced-colors: active) {
+  .pagination__link {
+    --pagination-border: ButtonText;
+
+    &:is([aria-current="page"], .is-current) {
+      border-color: Highlight;
+      &:not(:focus-visible) {
+        outline: 1px solid Highlight;
+        outline-offset: -3px;
+      }
+    }
+
+    &:is(:disabled, [aria-disabled="true"], .is-disabled) {
+      color: GrayText;
+    }
+  }
+}
