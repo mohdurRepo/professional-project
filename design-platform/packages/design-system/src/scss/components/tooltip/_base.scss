@@ -1,0 +1,141 @@
+.tooltip {
+  --tooltip-gap: var(--space-2);
+  --tooltip-arrow-size: 0.5rem;
+  --tooltip-bg: var(--color-surface);
+  --tooltip-color: var(--color-text);
+  --tooltip-border: var(--color-border-strong);
+
+  display: inline-flex;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+.tooltip__content {
+  position: fixed;
+  inset: auto;
+  top: var(--tooltip-y, 0px);
+  left: var(--tooltip-x, 0px);
+  z-index: var(--z-tooltip);
+  inline-size: max-content;
+  max-inline-size: min(
+    18rem,
+    var(--tooltip-available-width, calc(100dvw - 2 * var(--space-3)))
+  );
+  margin: 0;
+  overflow: visible;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--tooltip-border);
+  border-radius: var(--radius-md);
+  background: var(--tooltip-bg);
+  color: var(--tooltip-color);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--text-xs);
+  line-height: var(--line-height-normal);
+  text-align: start;
+  overflow-wrap: anywhere;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &.is-measuring {
+    visibility: hidden;
+  }
+
+  &::before {
+    position: absolute;
+    inline-size: var(--tooltip-arrow-size);
+    block-size: var(--tooltip-arrow-size);
+    border: 0 solid var(--tooltip-border);
+    background: var(--tooltip-bg);
+    transform: translate(-50%, -50%) rotate(45deg);
+    display: none;
+    pointer-events: none;
+    content: "";
+  }
+
+  &[data-tooltip-side]::before {
+    display: block;
+  }
+
+  &[data-tooltip-side="top"]::before {
+    top: 100%;
+    left: var(--tooltip-arrow-x, 50%);
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+  }
+
+  &[data-tooltip-side="bottom"]::before {
+    top: 0;
+    left: var(--tooltip-arrow-x, 50%);
+    border-top-width: 1px;
+    border-left-width: 1px;
+  }
+
+  &[data-tooltip-side="left"]::before {
+    top: var(--tooltip-arrow-y, 50%);
+    left: 100%;
+    border-top-width: 1px;
+    border-right-width: 1px;
+  }
+
+  &[data-tooltip-side="right"]::before {
+    top: var(--tooltip-arrow-y, 50%);
+    left: 0;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+  }
+
+  // Keep the pointer over the tooltip while it crosses the gap.
+  &[data-tooltip-side]::after {
+    position: absolute;
+    content: "";
+  }
+
+  &[data-tooltip-side="top"]::after,
+  &[data-tooltip-side="bottom"]::after {
+    inset-inline: 0;
+    block-size: calc(var(--tooltip-offset, var(--tooltip-gap)) + 2px);
+  }
+
+  &[data-tooltip-side="left"]::after,
+  &[data-tooltip-side="right"]::after {
+    inset-block: 0;
+    inline-size: calc(var(--tooltip-offset, var(--tooltip-gap)) + 2px);
+  }
+
+  &[data-tooltip-side="top"]::after {
+    top: 100%;
+  }
+  &[data-tooltip-side="bottom"]::after {
+    bottom: 100%;
+  }
+  &[data-tooltip-side="left"]::after {
+    left: 100%;
+  }
+  &[data-tooltip-side="right"]::after {
+    right: 100%;
+  }
+}
+
+@supports (color: color-mix(in srgb, black, white)) {
+  .tooltip {
+    --tooltip-border: color-mix(
+      in srgb,
+      var(--color-primary) 24%,
+      var(--color-border-strong)
+    );
+  }
+}
+
+:where(:root[data-contrast="high"]) .tooltip {
+  --tooltip-border: var(--color-text);
+}
+
+@media (forced-colors: active) {
+  .tooltip {
+    --tooltip-bg: Canvas;
+    --tooltip-color: CanvasText;
+    --tooltip-border: CanvasText;
+  }
+}
