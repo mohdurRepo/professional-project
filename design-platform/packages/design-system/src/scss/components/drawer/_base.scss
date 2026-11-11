@@ -1,0 +1,123 @@
+@use "../../abstracts" as ds;
+
+dialog.drawer {
+  --drawer-width: 26.25rem;
+  --drawer-padding: clamp(var(--space-4), 3vi, var(--space-5));
+  --drawer-bg: var(--color-surface);
+  --drawer-color: var(--color-text);
+  --drawer-border: var(--color-border);
+  --drawer-border-width: 1px;
+  --drawer-radius: var(--radius-xl);
+  --drawer-shadow: var(--shadow-xl);
+  --drawer-backdrop: var(--color-overlay);
+
+  position: fixed;
+  inset-block: 0;
+  inset-inline: auto 0;
+  box-sizing: border-box;
+  inline-size: min(var(--drawer-width), 100%);
+  block-size: 100dvh;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  border-inline-start: var(--drawer-border-width) solid var(--drawer-border);
+  border-start-start-radius: var(--drawer-radius);
+  border-end-start-radius: var(--drawer-radius);
+  background-color: var(--drawer-bg);
+  color: var(--drawer-color);
+  box-shadow: var(--drawer-shadow);
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &::backdrop {
+    background-color: var(--drawer-backdrop);
+  }
+}
+
+.drawer-panel {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-block-size: 0;
+  min-inline-size: 0;
+}
+
+.drawer-header,
+.drawer-footer {
+  display: flex;
+  flex: none;
+  gap: var(--space-3);
+  padding: var(--drawer-padding);
+}
+
+.drawer-header {
+  align-items: flex-start;
+  justify-content: space-between;
+  border-block-end: 1px solid var(--drawer-border);
+
+  > :first-child {
+    min-inline-size: 0;
+  }
+}
+
+.drawer-title {
+  margin: 0;
+  color: var(--color-heading);
+  font-size: var(--text-xl);
+  font-weight: ds.font-weight("bold");
+  line-height: var(--line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.drawer-text {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.drawer-body {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  min-block-size: min(5rem, 20dvh);
+  padding: var(--drawer-padding);
+  overflow: auto;
+  overscroll-behavior: contain;
+  overflow-wrap: anywhere;
+}
+
+.drawer-footer {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  border-block-start: 1px solid var(--drawer-border);
+}
+
+.drawer-close {
+  flex: none;
+}
+
+:where(:root[data-contrast="high"]) dialog.drawer {
+  --drawer-border: var(--color-border-strong);
+  --drawer-border-width: 2px;
+}
+
+@media (forced-colors: active) {
+  dialog.drawer {
+    --drawer-border: CanvasText;
+    --drawer-shadow: none;
+  }
+}
+
+@media print {
+  dialog.drawer[open] {
+    display: none;
+  }
+}

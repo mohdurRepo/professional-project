@@ -1,0 +1,37 @@
+@use "../../abstracts" as ds;
+
+dialog.drawer.drawer-start {
+  inset-inline: 0 auto;
+  border-inline-start: 0;
+  border-inline-end: var(--drawer-border-width) solid var(--drawer-border);
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  border-start-end-radius: var(--drawer-radius);
+  border-end-end-radius: var(--drawer-radius);
+}
+
+dialog.drawer.drawer-sm {
+  --drawer-width: 20rem;
+}
+
+dialog.drawer.drawer-lg {
+  --drawer-width: 36rem;
+}
+
+@include ds.respond-down("sm") {
+  dialog.drawer {
+    inline-size: 100%;
+    border-inline: 0;
+  }
+
+  dialog.drawer.drawer-start {
+    border-inline-end: 0;
+  }
+}
+
+dialog.drawer.drawer-full {
+  --drawer-width: 100%;
+  --drawer-radius: 0;
+
+  border-inline: 0;
+}

@@ -2633,6 +2633,104 @@
         </footer>
       </dialog>
     </section>
+    <section class="stack" aria-labelledby="drawer-test-heading">
+      <h2 id="drawer-test-heading">Drawer test</h2>
+
+      <div>
+        <button
+          class="btn"
+          type="button"
+          data-drawer-open="test-filters"
+          aria-controls="test-filters-drawer"
+          aria-expanded="false"
+        >
+          Open filters
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          data-drawer-open="test-navigation"
+          aria-controls="test-navigation-drawer"
+          aria-expanded="false"
+        >
+          Open navigation
+        </button>
+      </div>
+
+      <dialog
+        class="drawer"
+        id="test-filters-drawer"
+        data-drawer="test-filters"
+        aria-labelledby="test-filters-title"
+      >
+        <div class="drawer-panel" data-drawer-panel>
+          <header class="drawer-header">
+            <div>
+              <h3 class="drawer-title" id="test-filters-title">
+                Report filters
+              </h3>
+              <p class="drawer-text">Choose the markets to include.</p>
+            </div>
+            <button
+              class="btn btn-icon btn-ghost drawer-close has-icon icon-close-x"
+              type="button"
+              data-drawer-close
+              aria-label="Close filters"
+            ></button>
+          </header>
+
+          <div class="drawer-body stack">
+            <label data-drawer-initial-focus tabindex="-1">
+              <input type="checkbox" name="market" value="main" />
+              Main market
+            </label>
+            <label>
+              <input type="checkbox" name="market" value="parallel" />
+              Parallel market
+            </label>
+          </div>
+
+          <footer class="drawer-footer">
+            <button class="btn" type="button" data-drawer-close>Done</button>
+          </footer>
+        </div>
+      </dialog>
+
+      <dialog
+        class="drawer drawer-start drawer-sm"
+        id="test-navigation-drawer"
+        data-drawer="test-navigation"
+        aria-labelledby="test-navigation-title"
+      >
+        <div class="drawer-panel" data-drawer-panel>
+          <header class="drawer-header">
+            <h3 class="drawer-title" id="test-navigation-title">
+              Report navigation
+            </h3>
+            <button
+              class="btn btn-icon btn-ghost drawer-close has-icon icon-close-x"
+              type="button"
+              data-drawer-close
+              data-drawer-initial-focus
+              aria-label="Close navigation"
+            ></button>
+          </header>
+
+          <div class="drawer-body">
+            <nav aria-label="Report sections">
+              <ul>
+                <li>
+                  <a href="#drawer-test-heading" data-drawer-close
+                    >Report overview</a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </dialog>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
