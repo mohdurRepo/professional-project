@@ -30,6 +30,39 @@ function emit(drawer, event) {
   );
 }
 
+function respectMotionPreference(drawer, animation) {
+  const doc = drawer.ownerDocument;
+  const view = doc.defaultView;
+  const events = new view.AbortController();
+  const reducedMotion = view.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function finishIfReduced() {
+    if (
+      reducedMotion.matches ||
+      doc.documentElement.dataset.motionPreference === "reduce"
+    ) {
+      animation.finish();
+    }
+  }
+
+  reducedMotion.addEventListener("change", finishIfReduced, {
+    signal: events.signal,
+  });
+  const observer = new view.MutationObserver(finishIfReduced);
+  observer.observe(doc.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-motion-preference"],
+  });
+
+  function dispose() {
+    events.abort();
+    observer.disconnect();
+  }
+
+  animation.finished.then(dispose, dispose);
+  finishIfReduced();
+}
+
 function playSlide(drawer, closing) {
   const view = drawer.ownerDocument.defaultView;
   const style = view.getComputedStyle(drawer);
@@ -52,6 +85,7 @@ function playSlide(drawer, closing) {
     { duration, easing: closing ? "ease-in" : "ease-out" },
   );
   animations.set(drawer, animation);
+  respectMotionPreference(drawer, animation);
   return animation;
 }
 
@@ -109,13 +143,12 @@ export function closeDrawer(
   const animation = playSlide(drawer, true);
   if (!animation) return closeDialog(drawer, { restoreFocus });
 
-  animation.finished.then(
-    () => {
-      if (animations.get(drawer) === animation)
-        closeDialog(drawer, { restoreFocus });
-    },
-    () => {},
-  );
+  function finishClose() {
+    if (animations.get(drawer) === animation)
+      closeDialog(drawer, { restoreFocus });
+  }
+
+  animation.finished.then(finishClose, finishClose);
   return true;
 }
 

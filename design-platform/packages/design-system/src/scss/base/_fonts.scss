@@ -26,9 +26,7 @@
 
 @include -face("SEFont Latin", 500, "latin/Avenir-Medium.woff2", "woff2");
 
-@include -face("SEFont Latin", 800, "latin/Avenir-heavy.woff2", "woff2");
-
-@include -face("SEFont Latin", 900, "latin/Avenir-Black.woff2", "woff2");
+@include -face("SEFont Latin", 800, "latin/Avenir-heavy.ttf", "truetype");
 
 /* ==========================================================================
    Arabic

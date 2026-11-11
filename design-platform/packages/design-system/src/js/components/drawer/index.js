@@ -70,6 +70,11 @@ export function initDrawers(scope = globalThis.document) {
       const drawer = control.closest(DRAWER_SELECTOR);
       if (!drawer) return;
 
+      if (control.matches("a[href]")) {
+        closeDrawer(drawer, { restoreFocus: false, immediate: true });
+        return;
+      }
+
       event.preventDefault();
       closeDrawer(drawer);
     },
