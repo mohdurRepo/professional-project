@@ -27,6 +27,8 @@ import { initModals } from "./js/components/modal/index.js";
 
 import { initDrawers } from "./js/components/drawer/index.js";
 
+import { initToasts } from "./js/components/toast/index.js";
+
 const disposeAlerts = initAlerts(document);
 const disposeForms = initForms(document);
 
@@ -39,6 +41,7 @@ const disposeDropdowns = initDropdowns(document);
 const disposeTooltips = initTooltips(document);
 const disposeModals = initModals(document);
 const disposeDrawers = initDrawers(document);
+const disposeToasts = initToasts(document);
 
 function disposeCustomSelects() {
   stopObservingCustomSelects(document);
@@ -52,6 +55,7 @@ function disposeCustomDates() {
 
 if (import.meta.hot) {
   import.meta.hot.dispose(() => {
+    disposeToasts();
     disposeDrawers();
     disposeModals();
     disposeTooltips();

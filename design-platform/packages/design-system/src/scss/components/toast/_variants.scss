@@ -1,0 +1,17 @@
+$toast-types: primary, success, info, attention, warning, danger;
+
+@media (forced-colors: none) {
+  @each $type in $toast-types {
+    .toast-#{$type} {
+      --toast-accent: var(--color-#{$type});
+      --toast-icon-bg: var(--color-#{$type});
+      --toast-icon-color: var(--color-on-#{$type});
+    }
+  }
+}
+
+:where(:root[data-contrast="high"]) .toast {
+  --toast-border: var(--color-border-strong);
+
+  box-shadow: none;
+}

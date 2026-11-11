@@ -2731,6 +2731,72 @@
         </div>
       </dialog>
     </section>
+    <section class="stack" aria-labelledby="toast-test-heading">
+      <h2 id="toast-test-heading">Toast test</h2>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem">
+        <button
+          class="btn"
+          type="button"
+          data-toast="primary"
+          data-toast-title="Preferences updated"
+          data-toast-message="Your report preferences were saved."
+        >
+          Primary
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          data-toast="success"
+          data-toast-title="Report exported"
+          data-toast-message="Your download is ready."
+          data-toast-duration="8000"
+        >
+          Success
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          data-toast="info"
+          data-toast-title="Scheduled update"
+          data-toast-message="Market data refreshes at 9:00 AM Riyadh time."
+        >
+          Info
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          data-toast="attention"
+          data-toast-title="Review requested"
+          data-toast-message="Two entries are waiting for your review."
+        >
+          Attention
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          data-toast="warning"
+          data-toast-title="Report data is out of date"
+          data-toast-message="Refresh the report before exporting."
+        >
+          Warning
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          data-toast="danger"
+          data-toast-title="Export failed"
+          data-toast-message="The report could not be exported. Try again."
+        >
+          Danger
+        </button>
+      </div>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

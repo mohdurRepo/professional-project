@@ -1,0 +1,104 @@
+@use "../../abstracts" as ds;
+
+.toast-container {
+  --toast-viewport-gap: var(--space-4);
+
+  position: fixed;
+  z-index: var(--z-toast);
+  inset-block-start: var(--toast-viewport-gap);
+  inset-inline-end: var(--toast-viewport-gap);
+  display: grid;
+  gap: var(--space-3);
+  inline-size: min(26.25rem, calc(100% - 2 * var(--toast-viewport-gap)));
+  pointer-events: none;
+}
+
+.toast {
+  --toast-bg: var(--color-surface);
+  --toast-color: var(--color-text);
+  --toast-muted-color: var(--color-text-muted);
+  --toast-border: var(--color-border);
+  --toast-accent: var(--color-primary);
+  --toast-icon-color: var(--color-text);
+  --toast-icon-bg: var(--color-surface-alt);
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-3);
+  min-inline-size: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--toast-border);
+  border-inline-start: var(--space-1) solid var(--toast-accent);
+  border-radius: var(--radius-md);
+  background-color: var(--toast-bg);
+  color: var(--toast-color);
+  box-shadow: var(--shadow-lg);
+  pointer-events: auto;
+}
+
+.toast-icon {
+  --icon-size: 1.125rem;
+
+  display: grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--toast-icon-bg);
+  color: var(--toast-icon-color);
+}
+
+.toast-content {
+  display: grid;
+  gap: var(--space-1);
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.toast-title,
+.toast-message {
+  margin: 0;
+}
+
+.toast-title {
+  color: var(--toast-color);
+  font-size: var(--text-sm);
+  font-weight: ds.font-weight("bold");
+  line-height: var(--line-height-tight);
+}
+
+.toast-message {
+  color: var(--toast-muted-color);
+  font-size: var(--text-sm);
+  line-height: var(--line-height-normal);
+}
+
+.toast-close {
+  justify-self: end;
+}
+
+@include ds.respond-down("sm") {
+  .toast-container {
+    --toast-viewport-gap: var(--space-2);
+  }
+
+  .toast {
+    gap: var(--space-2);
+    padding: var(--space-3);
+  }
+}
+
+@media (forced-colors: active) {
+  .toast {
+    --toast-bg: Canvas;
+    --toast-color: CanvasText;
+    --toast-muted-color: CanvasText;
+    --toast-border: CanvasText;
+    --toast-accent: Highlight;
+    --toast-icon-bg: Canvas;
+    --toast-icon-color: CanvasText;
+
+    box-shadow: none;
+  }
+}
