@@ -2315,6 +2315,70 @@
         </div>
       </div>
     </section>
+    <section class="stack" aria-labelledby="dropdown-test-heading">
+      <h2 id="dropdown-test-heading">Dropdown test</h2>
+
+      <div
+        style="
+          display: flex;
+          justify-content: flex-end;
+          overflow: hidden;
+          padding: 0.5rem;
+        "
+      >
+        <div class="dropdown dropdown--end" data-dropdown>
+          <button
+            class="btn dropdown-trigger"
+            type="button"
+            data-dropdown-trigger
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="report-actions-menu"
+          >
+            Report actions
+            <span class="has-icon icon-chevron-down" aria-hidden="true"></span>
+          </button>
+
+          <div
+            class="dropdown-menu"
+            id="report-actions-menu"
+            data-dropdown-menu
+            role="menu"
+            hidden
+          >
+            <a
+              class="dropdown-item"
+              role="menuitem"
+              href="#dropdown-test-details"
+            >
+              View report details
+            </a>
+            <button class="dropdown-item" type="button" role="menuitem">
+              Copy report link
+            </button>
+            <a
+              class="dropdown-item"
+              role="menuitem"
+              href="#dropdown-test-details"
+              aria-disabled="true"
+            >
+              Download unavailable
+            </a>
+            <hr class="dropdown-separator" role="separator" />
+            <button
+              class="dropdown-item dropdown-item--danger"
+              type="button"
+              role="menuitem"
+            >
+              Delete report
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn" type="button">Next focus target</button>
+      <p id="dropdown-test-details">Report details</p>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,29 @@
+@use "../../abstracts" as ds;
+
+.dropdown-item--danger {
+  --dropdown-menu-color: var(--color-danger);
+  --dropdown-item-hover-color: var(--color-danger);
+}
+
+@include ds.respond-down("sm") {
+  .dropdown--mobile-block {
+    display: flex;
+    inline-size: 100%;
+  }
+
+  .dropdown--mobile-block > .dropdown-trigger {
+    inline-size: 100%;
+  }
+
+  .dropdown--mobile-block > .dropdown-menu {
+    inline-size: var(--dropdown-trigger-width, var(--dropdown-min-width));
+    min-inline-size: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .dropdown-item--danger {
+    --dropdown-menu-color: ButtonText;
+    --dropdown-item-hover-color: ButtonText;
+  }
+}
