@@ -2533,7 +2533,106 @@
         </span>
       </div>
     </section>
+    <section class="stack" aria-labelledby="modal-test-heading">
+      <h2 id="modal-test-heading">Modal test</h2>
 
+      <div>
+        <button class="btn" type="button" data-modal-open="report-review-modal">
+          Review report
+        </button>
+        <button
+          class="btn"
+          type="button"
+          data-modal-open="report-confirm-modal"
+        >
+          Open static modal
+        </button>
+      </div>
+
+      <dialog
+        class="modal modal-md modal-height-sm"
+        id="report-review-modal"
+        aria-labelledby="report-review-title"
+      >
+        <header class="modal-header">
+          <div>
+            <h3
+              class="modal-title"
+              id="report-review-title"
+              tabindex="-1"
+              data-modal-initial-focus
+            >
+              Review report
+            </h3>
+            <p class="modal-subtitle">Monthly market summary</p>
+          </div>
+          <button
+            class="btn btn-icon btn-ghost modal-close has-icon icon-close-x"
+            type="button"
+            data-modal-close
+            aria-label="Close report review"
+          ></button>
+        </header>
+
+        <div class="modal-body stack">
+          <p>
+            Review the reporting period, included markets, and export settings.
+          </p>
+          <p>
+            The report covers all markets with published results for the
+            selected month.
+          </p>
+          <p>
+            Incomplete records appear in the appendix with their last available
+            update.
+          </p>
+          <p>
+            All timestamps use Riyadh local time. Values are rounded for
+            display.
+          </p>
+          <p>
+            The export includes a summary sheet and a separate sheet for each
+            market.
+          </p>
+          <label>
+            Report notes
+            <textarea class="form-control" rows="4"></textarea>
+          </label>
+          <p>End of report review.</p>
+        </div>
+
+        <footer class="modal-footer">
+          <button class="btn" type="button" data-modal-close>Done</button>
+        </footer>
+      </dialog>
+
+      <dialog
+        class="modal modal-sm"
+        id="report-confirm-modal"
+        aria-labelledby="report-confirm-title"
+        data-modal-static="true"
+      >
+        <header class="modal-header">
+          <h3 class="modal-title" id="report-confirm-title">
+            Close the report?
+          </h3>
+        </header>
+        <div class="modal-body">
+          <p>Choose an action to close this confirmation.</p>
+        </div>
+        <footer class="modal-footer modal-footer-between">
+          <button
+            class="btn"
+            type="button"
+            data-modal-close
+            data-modal-initial-focus
+          >
+            Cancel
+          </button>
+          <button class="btn" type="button" data-modal-close>Confirm</button>
+        </footer>
+      </dialog>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,122 @@
+@use "../../abstracts" as ds;
+
+dialog.modal {
+  --modal-width: 35rem;
+  --modal-max-height: 80dvh;
+  --modal-viewport-gap: var(--space-4);
+  --modal-padding: clamp(var(--space-4), 3vi, var(--space-6));
+  --modal-radius: var(--radius-xl);
+  --modal-bg: var(--color-surface);
+  --modal-color: var(--color-text);
+  --modal-border: var(--color-border);
+  --modal-backdrop-bg: var(--color-overlay);
+  --modal-shadow: var(--shadow-xl);
+
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  inline-size: min(
+    var(--modal-width),
+    calc(100dvw - 2 * var(--modal-viewport-gap))
+  );
+  max-inline-size: none;
+  max-block-size: min(
+    var(--modal-max-height),
+    calc(100dvh - 2 * var(--modal-viewport-gap))
+  );
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--modal-border);
+  border-radius: var(--modal-radius);
+  background-color: var(--modal-bg);
+  color: var(--modal-color);
+  box-shadow: var(--modal-shadow);
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &::backdrop {
+    background-color: var(--modal-backdrop-bg);
+  }
+}
+
+.modal-dialog,
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  min-block-size: 0;
+  flex: 1 1 auto;
+}
+
+.modal-header,
+.modal-footer {
+  display: flex;
+  flex: none;
+  gap: var(--space-3);
+  padding: var(--modal-padding);
+}
+
+.modal-header {
+  align-items: flex-start;
+  justify-content: space-between;
+  border-block-end: 1px solid var(--modal-border);
+
+  > :first-child {
+    min-inline-size: 0;
+  }
+}
+
+.modal-title {
+  margin: 0;
+  color: var(--color-heading);
+  font-size: var(--text-xl);
+  font-weight: ds.font-weight("bold");
+  line-height: var(--line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.modal-subtitle {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.modal-body {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  min-block-size: min(5rem, 20dvh);
+  padding: var(--modal-padding);
+  overflow: auto;
+  overscroll-behavior: contain;
+  overflow-wrap: anywhere;
+}
+
+.modal-footer {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  border-block-start: 1px solid var(--modal-border);
+}
+
+.modal-close {
+  flex: none;
+}
+
+@media (forced-colors: active) {
+  dialog.modal {
+    --modal-border: CanvasText;
+    --modal-shadow: none;
+  }
+}
+
+@media print {
+  dialog.modal[open] {
+    display: none;
+  }
+}

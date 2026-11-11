@@ -1,0 +1,64 @@
+dialog.modal-sm {
+  --modal-width: 22.5rem;
+}
+
+dialog.modal-md {
+  --modal-width: 35rem;
+}
+
+dialog.modal-lg {
+  --modal-width: 52.5rem;
+}
+
+dialog.modal-xl {
+  --modal-width: 70rem;
+}
+
+dialog.modal-height-sm {
+  --modal-max-height: 60dvh;
+}
+
+dialog.modal-height-md {
+  --modal-max-height: 80dvh;
+}
+
+dialog.modal-height-lg {
+  --modal-max-height: 90dvh;
+}
+
+dialog.modal-square {
+  --modal-radius: 0;
+}
+
+dialog.modal-rounded {
+  --modal-radius: var(--radius-xl);
+}
+
+dialog.modal-full {
+  --modal-width: 100dvw;
+  --modal-max-height: 100dvh;
+  --modal-viewport-gap: 0px;
+  --modal-radius: 0;
+
+  block-size: 100dvh;
+  border: 0;
+}
+
+.modal-footer-start {
+  justify-content: flex-start;
+}
+
+.modal-footer-center {
+  justify-content: center;
+}
+
+.modal-footer-between {
+  justify-content: space-between;
+}
+
+.modal-no-header > .modal-header,
+.modal-no-header > .modal-dialog > .modal-content > .modal-header,
+.modal-no-footer > .modal-footer,
+.modal-no-footer > .modal-dialog > .modal-content > .modal-footer {
+  display: none;
+}
