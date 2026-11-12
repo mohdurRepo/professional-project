@@ -1,0 +1,246 @@
+@use "../../../../../design-system/src/scss/abstracts" as ds;
+@use "config" as config;
+
+/* ==========================================================================
+   Mega Menu
+   ========================================================================== */
+
+/**
+ * The full-width wrapper is a positioning box only and never receives the
+ * pointer. Only the visible card is interactive, so moving the pointer to
+ * either side of the card leaves the menu and closes it.
+ */
+
+.mega-menu {
+  position: absolute;
+  z-index: var(--z-dropdown);
+
+  inset-block-start: 100%;
+  inset-inline: 0;
+
+  padding-block-start: var(--space-2);
+
+  pointer-events: none;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Card
+   ========================================================================== */
+
+.mega-menu__card {
+  display: grid;
+  grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr);
+
+  max-block-size: calc(100vh - var(--app-header-height, 5rem) - var(--space-8));
+  max-block-size: calc(100dvh - var(--app-header-height, 5rem) - var(--space-8));
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+
+  background: var(--color-surface);
+  color: var(--color-text);
+
+  box-shadow: var(--shadow-lg);
+
+  pointer-events: auto;
+
+  scrollbar-color: var(--color-border-strong) transparent;
+  scrollbar-width: thin;
+}
+
+/* ==========================================================================
+   Category Tabs
+   ========================================================================== */
+
+/* A <ul> of links (dynamic header) or a role="tablist" <div> (prototype). */
+
+.mega-menu-tabs {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
+
+  margin: 0;
+  padding: var(--space-4);
+
+  list-style: none;
+
+  border-inline-end: 1px solid var(--color-border);
+
+  background: var(--color-surface-alt);
+}
+
+.mega-menu-tab {
+  --icon-size: 1.125rem;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  inline-size: 100%;
+  padding: var(--space-3);
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+
+  background: transparent;
+  color: var(--color-text);
+
+  font: inherit;
+  text-align: start;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+
+  @include ds.transition((background-color, border-color, box-shadow), "fast");
+}
+
+.mega-menu-tab:hover {
+  background: var(--color-surface);
+}
+
+.mega-menu-tab:focus-visible {
+  @include ds.focus-ring($offset: -2px);
+}
+
+/* The selected tab lifts onto the card surface. */
+
+.mega-menu-tab.is-active,
+.mega-menu-tab[aria-selected="true"] {
+  border-color: var(--color-border);
+
+  background: var(--color-surface);
+
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   Tab Content
+   ========================================================================== */
+
+.mega-menu-tab__icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+
+  border-radius: var(--radius-md);
+
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+
+  @include ds.transition((background-color, color), "fast");
+}
+
+.mega-menu-tab.is-active .mega-menu-tab__icon,
+.mega-menu-tab[aria-selected="true"] .mega-menu-tab__icon {
+  background: var(--color-surface-selected);
+  color: var(--color-primary);
+}
+
+.mega-menu-tab__body {
+  display: grid;
+  gap: 0.125rem;
+
+  min-inline-size: 0;
+}
+
+.mega-menu-tab__title {
+  color: var(--color-heading);
+
+  font-size: var(--text-sm);
+  font-weight: ds.font-weight("medium");
+  line-height: var(--line-height-tight);
+}
+
+.mega-menu-tab.is-active .mega-menu-tab__title,
+.mega-menu-tab[aria-selected="true"] .mega-menu-tab__title {
+  color: var(--color-primary);
+}
+
+.mega-menu-tab__text {
+  color: var(--color-text-muted);
+
+  font-size: var(--text-xs);
+  line-height: var(--line-height-normal);
+}
+
+/* ==========================================================================
+   Direct Links
+   ========================================================================== */
+
+/*
+ * A Level-2 page without children has no panel to preview: a trailing
+ * chevron shows that it goes straight to its page. (The external-link
+ * icon is reserved for links that leave the site, such as Careers.)
+ */
+
+.mega-menu-tab__go {
+  --icon-size: 0.875rem;
+
+  flex: 0 0 auto;
+
+  margin-inline-start: auto;
+
+  color: var(--color-text-muted);
+
+  @include ds.transition((color, transform), "fast");
+}
+
+.mega-menu-tab--direct:hover .mega-menu-tab__go,
+.mega-menu-tab--direct:focus-visible .mega-menu-tab__go {
+  color: var(--color-primary);
+
+  transform: translateX(0.125rem);
+}
+
+html[dir="rtl"] .mega-menu-tab--direct:hover .mega-menu-tab__go,
+html[dir="rtl"] .mega-menu-tab--direct:focus-visible .mega-menu-tab__go {
+  transform: translateX(-0.125rem);
+}
+
+/* ==========================================================================
+   Constrained Desktop
+   ========================================================================== */
+
+@include ds.respond-between(config.$nav-breakpoint, "xl") {
+  .mega-menu__card {
+    grid-template-columns: minmax(13rem, 15rem) minmax(0, 1fr);
+  }
+
+  .mega-menu-tabs {
+    padding: var(--space-3);
+  }
+}
+
+/* ==========================================================================
+   High Contrast
+   ========================================================================== */
+
+html[data-contrast="high"] {
+  .mega-menu__card {
+    border-width: 2px;
+
+    box-shadow: none;
+  }
+
+  .mega-menu-tabs {
+    border-inline-end-width: 2px;
+  }
+
+  .mega-menu-tab.is-active,
+  .mega-menu-tab[aria-selected="true"] {
+    border-width: 2px;
+    border-color: currentColor;
+
+    box-shadow: none;
+  }
+}
+

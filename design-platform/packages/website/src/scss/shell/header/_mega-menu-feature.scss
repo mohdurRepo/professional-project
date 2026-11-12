@@ -1,0 +1,152 @@
+@use "../../../../../design-system/src/scss/abstracts" as ds;
+@use "config" as config;
+
+/* ==========================================================================
+   Mega Menu Feature
+   ========================================================================== */
+
+/**
+ * A quiet supporting card. The links are the purpose of the menu, so the
+ * feature uses the alternate surface instead of a filled brand colour.
+ */
+
+.mega-feature {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+
+  block-size: 100%;
+  padding: var(--space-4);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+/* ==========================================================================
+   Image
+   ========================================================================== */
+
+.mega-feature__image {
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 16 / 9;
+
+  border-radius: var(--radius-md);
+
+  /* Shown while the image loads, or if it fails. */
+  background: var(--color-surface-active);
+
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   Body
+   ========================================================================== */
+
+.mega-feature__body {
+  display: grid;
+  gap: var(--space-2);
+
+  min-inline-size: 0;
+}
+
+.mega-feature__title {
+  margin: 0;
+
+  color: var(--color-heading);
+
+  font-size: var(--text-base);
+  font-weight: ds.font-weight("heavy");
+  line-height: var(--line-height-tight);
+}
+
+.mega-feature__text {
+  margin: 0;
+
+  color: var(--color-text-muted);
+
+  font-size: var(--text-sm);
+  line-height: var(--line-height-normal);
+}
+
+.mega-feature__link {
+  justify-self: start;
+
+  margin-block-start: var(--space-1);
+
+  border-radius: var(--radius-sm);
+
+  color: var(--color-primary);
+
+  font-size: var(--text-sm);
+  font-weight: ds.font-weight("medium");
+
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+.mega-feature__link:hover {
+  text-decoration-thickness: 0.12em;
+}
+
+.mega-feature__link:focus-visible {
+  @include ds.focus-ring;
+}
+
+/* ==========================================================================
+   Horizontal Layout (constrained desktop)
+   ========================================================================== */
+
+/*
+ * Flex rather than fixed grid columns, so cards with and without an image
+ * both lay out correctly.
+ */
+
+@include ds.respond-between(config.$nav-breakpoint, "xl") {
+  .mega-feature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .mega-feature__image {
+    flex: 0 0 13rem;
+
+    inline-size: 13rem;
+  }
+
+  .mega-feature__body {
+    flex: 1 1 auto;
+  }
+}
+
+/* ==========================================================================
+   Compact Variant (mobile menu)
+   ========================================================================== */
+
+/* Applied automatically inside the mobile menu, where WCM renders the card. */
+
+.mega-feature--compact,
+.mobile-nav__feature .mega-feature {
+  gap: var(--space-3);
+
+  padding: var(--space-4);
+}
+
+.mega-feature--compact .mega-feature__title,
+.mobile-nav__feature .mega-feature__title {
+  font-size: var(--text-sm);
+}
+
+/* ==========================================================================
+   High Contrast
+   ========================================================================== */
+
+html[data-contrast="high"] .mega-feature {
+  border-width: 2px;
+}
+

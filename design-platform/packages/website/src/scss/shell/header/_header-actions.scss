@@ -1,0 +1,54 @@
+@use "../../../../../design-system/src/scss/abstracts" as ds;
+@use "config";
+
+.site-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  min-inline-size: 0;
+}
+
+.site-header__actions :is(.header-lang-switch, .header-burger) {
+  --btn-bg: transparent;
+  --btn-color: var(--site-header-color);
+  --btn-border-color: var(--site-header-border);
+  --btn-hover-bg: var(--site-header-hover);
+  --btn-hover-color: var(--site-header-color);
+  --btn-hover-border-color: var(--site-header-accent);
+}
+
+.header-lang-switch {
+  --btn-radius: var(--radius-pill);
+  --btn-padding-inline: var(--space-3);
+  white-space: nowrap;
+}
+
+.header-lang-switch__current {
+  min-inline-size: 1.5em;
+  text-align: center;
+}
+
+.header-burger {
+  --btn-radius: var(--radius-md);
+  --btn-gap: 0.25rem;
+  flex-direction: column;
+}
+
+.header-burger__line {
+  inline-size: 1.125rem;
+  block-size: 2px;
+  border-radius: var(--radius-pill);
+  background-color: currentColor;
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    background-color: ButtonText;
+  }
+}
+
+@include ds.respond-up(config.$nav-breakpoint) {
+  .header-burger {
+    display: none;
+  }
+}

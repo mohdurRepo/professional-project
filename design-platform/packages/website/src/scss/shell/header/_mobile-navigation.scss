@@ -1,0 +1,78 @@
+@use "../../../../../design-system/src/scss/abstracts" as ds;
+
+.mobile-nav .mobile-nav__list {
+  --accordion-gap: var(--space-2);
+  --accordion-padding-block: var(--space-3);
+  --accordion-padding-inline: var(--space-3);
+}
+
+.mobile-nav__list,
+.mobile-nav__links,
+.mobile-nav__sublist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobile-nav__groups,
+.mobile-nav__links,
+.mobile-nav__sublist {
+  display: grid;
+  gap: var(--space-2);
+  min-inline-size: 0;
+}
+
+.mobile-nav__group + .mobile-nav__group {
+  padding-block-start: var(--space-3);
+  border-block-start: 1px solid var(--color-border);
+}
+
+.mobile-nav__group-title {
+  margin: 0;
+  margin-block-end: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: ds.font-weight("bold");
+}
+
+.mobile-nav__sublist {
+  padding-inline-start: var(--space-3);
+}
+
+.mobile-nav :is(.mobile-nav__link, .mobile-nav__sublink) {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  min-block-size: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+
+  border-inline-start: 2px solid transparent;
+  border-radius: var(--radius-sm);
+
+  color: var(--color-text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  &:focus-visible {
+    @include ds.focus-ring($offset: -2px);
+  }
+
+  &[aria-current="page"] {
+    border-inline-start-color: currentColor;
+    background-color: var(--color-surface-selected);
+    color: var(--color-on-surface-selected);
+  }
+}
+
+.mobile-nav__link--primary {
+  font-weight: ds.font-weight("medium");
+}
+
+.mobile-nav__footer {
+  justify-content: flex-start;
+}

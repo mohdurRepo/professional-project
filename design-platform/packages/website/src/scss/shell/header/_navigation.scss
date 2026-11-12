@@ -1,0 +1,195 @@
+@use "../../../../../design-system/src/scss/abstracts" as ds;
+@use "config" as config;
+
+/* ==========================================================================
+   Desktop Navigation
+   ========================================================================== */
+
+.site-nav {
+  display: none;
+
+  min-inline-size: 0;
+}
+
+@include ds.respond-up(config.$nav-breakpoint) {
+  .site-nav {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/*
+ * Always one row, never overlapping the logo or the actions. See the
+ * label rule below for how long labels behave when space runs out.
+ */
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--space-1);
+
+  inline-size: 100%;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+/*
+ * Static (the default) on purpose: the mega menu positions itself against
+ * the sticky header, so it spans the full header width.
+ */
+
+/* Shrink each item so its label can wrap inside the navigation row. */
+
+.site-nav__item {
+  display: flex;
+  flex: 0 1 auto;
+  min-inline-size: 0;
+}
+
+/* ==========================================================================
+   Triggers and Links
+   ========================================================================== */
+
+.site-nav__trigger,
+.site-nav__link {
+  --icon-size: 0.75rem;
+
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+
+  min-inline-size: 0;
+  min-block-size: 2.75rem;
+  padding-block: 0;
+  padding-inline: var(--space-3);
+
+  border: 0;
+
+  background: transparent;
+  color: var(--site-header-color);
+
+  font-size: var(--text-sm);
+  font-weight: ds.font-weight("medium");
+  line-height: var(--line-height-tight);
+
+  text-align: center;
+  text-decoration: none;
+}
+
+/*
+ * One line whenever the bar has room. Only when space genuinely runs out
+ * do items shrink (long labels most, short ones barely), and a label then
+ * wraps between words inside its own item. Because an item shrinks only as
+ * much as needed, its box stays tight around the text, so the text stays
+ * centred and the chevron stays close. Never truncated, never split
+ * inside a word.
+ */
+
+.site-nav__label {
+  min-inline-size: 0;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.site-nav__trigger:focus-visible,
+.site-nav__link:focus-visible {
+  @include ds.focus-ring($offset: -2px);
+}
+
+/* ==========================================================================
+   Chevron
+   ========================================================================== */
+
+/* Never shrinks, so it can not be pushed into the text. */
+
+.site-nav__chevron {
+  flex: 0 0 auto;
+
+  @include ds.transition(transform, "fast");
+}
+
+.site-nav__trigger[aria-expanded="true"] .site-nav__chevron {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   Indicator
+   ========================================================================== */
+
+/*
+ * One bar marks state. Hover shows it at half strength; an open menu or the
+ * current section shows it at full strength.
+ */
+
+.site-nav__trigger::after,
+.site-nav__link::after {
+  content: "";
+
+  position: absolute;
+
+  inset-inline: var(--space-3);
+  inset-block-end: 0;
+
+  block-size: 2px;
+
+  border-radius: var(--radius-pill);
+
+  background: var(--site-header-accent);
+
+  opacity: 0;
+
+  @include ds.transition(opacity, "fast");
+}
+
+.site-nav__trigger:hover::after,
+.site-nav__link:hover::after {
+  opacity: 0.5;
+}
+
+.site-nav__trigger[aria-expanded="true"]::after,
+.site-nav__trigger.is-current::after,
+.site-nav__link.is-current::after,
+.site-nav__link[aria-current="page"]::after {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Constrained Desktop
+   ========================================================================== */
+
+@include ds.respond-between(config.$nav-breakpoint, "xl") {
+  .site-nav__list {
+    gap: 0;
+  }
+
+  .site-nav__trigger,
+  .site-nav__link {
+    padding-inline: var(--space-2);
+
+    font-size: var(--text-xs);
+  }
+
+  .site-nav__trigger::after,
+  .site-nav__link::after {
+    inset-inline: var(--space-2);
+  }
+}
+
+/* ==========================================================================
+   High Contrast
+   ========================================================================== */
+
+html[data-contrast="high"] {
+  .site-nav__trigger::after,
+  .site-nav__link::after {
+    block-size: 4px;
+  }
+}
