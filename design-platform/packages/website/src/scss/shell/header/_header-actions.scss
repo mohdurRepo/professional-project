@@ -3,13 +3,14 @@
 
 .site-header__actions {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: flex-end;
   align-items: center;
-  gap: var(--space-2);
+  gap: clamp(0.125rem, 0.5vw, var(--space-2));
   min-inline-size: 0;
 }
 
-.site-header__actions :is(.header-lang-switch, .header-burger) {
+.site-header__actions :is(.header-lang-switch, .header-tool, .header-burger) {
+  --focus-ring: var(--site-header-focus);
   --btn-bg: transparent;
   --btn-color: var(--site-header-color);
   --btn-border-color: var(--site-header-border);
@@ -49,6 +50,27 @@
 
 @include ds.respond-up(config.$nav-breakpoint) {
   .header-burger {
+    display: none;
+  }
+}
+
+.site-header__actions .header-tool {
+  --btn-border-color: transparent;
+  --btn-hover-border-color: transparent;
+}
+
+.header-tool.btn.has-icon {
+  --icon-size: 1.375rem;
+  flex: none;
+}
+
+@include ds.respond-down("sm") {
+  .header-lang-switch {
+    --btn-padding-inline: var(--space-2);
+    --btn-gap: 0;
+  }
+
+  .header-lang-switch__icon {
     display: none;
   }
 }

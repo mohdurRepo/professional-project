@@ -1,0 +1,50 @@
+.page-tools {
+  --page-tool-size: 2.75rem;
+
+  position: fixed;
+  inset-inline-end: var(--space-3);
+  inset-block-end: calc(
+    var(--market-ticker-block-size, 0px) +
+      max(var(--space-3), env(safe-area-inset-bottom))
+  );
+  z-index: var(--z-sticky);
+
+  display: grid;
+  grid-template-rows: repeat(2, var(--page-tool-size));
+  gap: var(--space-2);
+}
+
+.page-tools__button.btn {
+  --icon-size: 1.25rem;
+  --btn-min-size: var(--page-tool-size);
+  --btn-radius: var(--radius-pill);
+  --btn-bg: var(--color-surface);
+  --btn-border-color: var(--color-border-control);
+
+  inline-size: var(--page-tool-size);
+  block-size: var(--page-tool-size);
+  padding: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.page-tools__button[aria-expanded="true"] {
+  --btn-bg: var(--color-surface-selected);
+  --btn-color: var(--color-on-surface-selected);
+}
+
+.page-tools__button[hidden] {
+  display: none;
+}
+
+@media (forced-colors: active) {
+  .page-tools__button.btn {
+    border-color: ButtonText;
+    box-shadow: none;
+  }
+}
+
+@media print {
+  .page-tools {
+    display: none;
+  }
+}
